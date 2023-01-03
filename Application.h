@@ -1,13 +1,9 @@
 #pragma once
-#include "utils/Log.h"
-#include "Patient.h"
 
 class Application
 {
 public:
-    // No constructor until we find a reason for it
-
-    ~Application();
+    // No constructor or destructor until we find a reason for it
 
     // Initialize anything that needs to be initialized in here
     void init();
@@ -22,4 +18,4 @@ public:
     void run();
 private:
     bool m_Running;
-};
+}
