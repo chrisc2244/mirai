@@ -18,4 +18,4 @@ public:
     void run();
 private:
     bool m_Running;
-}
+};
