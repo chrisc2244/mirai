@@ -6,12 +6,12 @@ class Patient
 {
 public:
 
-	Patient(const int ID, int age, char gender, std::string imageFile);
+	Patient(const int ID, const int age, const char gender, const std::string imageFile);
 
 	int getID() const;
 	int getAge() const;
 	char getGender() const;
-	std::string getImageFile();
+	std::string getImageFile() const;
 
 private:
 

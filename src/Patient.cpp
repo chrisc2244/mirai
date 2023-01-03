@@ -1,6 +1,6 @@
 #include "Patient.h"
 
-Patient::Patient(const int ID, int age, char gender, std::string imageFile)
+Patient::Patient(const int ID, const int age, const char gender, const std::string imageFile)
 {
 	m_ID = ID;
 	m_age = age;
@@ -25,7 +25,7 @@ char Patient::getGender() const
 	return m_gender;
 }
 
-std::string Patient::getImageFile()
+std::string Patient::getImageFile() const
 {
 	return m_imageFile;
 }

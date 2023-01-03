@@ -1,6 +1,7 @@
 #include "Application.h"
 
-int main()
+//change this back to main, changed it so i could run main() in another file
+int coolmain()
 {
     Application app;
     app.run();
