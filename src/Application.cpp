@@ -5,6 +5,10 @@ void Application::init()
     // Create a Log
     MIR::Log::create("V.0.1", "mirai_log.txt");
     MIR::Log::writeInfo("Application->init()", "Log created successfully");
+
+    // Patient Population:
+    m_PatientHandler.load("res/test-data/test.csv");
+
     m_Running = true;
 }
 

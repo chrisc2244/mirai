@@ -1,6 +1,6 @@
 #pragma once
 #include "utils/Log.h"
-#include "Patient.h"
+#include "PatientHandler.h"
 
 class Application
 {
@@ -22,4 +22,5 @@ public:
     void run();
 private:
     bool m_Running;
+    PatientHandler m_PatientHandler;
 };

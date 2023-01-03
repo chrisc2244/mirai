@@ -80,7 +80,11 @@ public:
 	*/
 	double getElementDouble(const uint32_t row, const uint32_t column);
 
+	const uint32_t getWidth() const;
+	const uint32_t getHeight() const;
+
 private:
 	std::vector<std::vector<std::string>> m_Table;
+	uint32_t m_Width, m_Height;
 };
 

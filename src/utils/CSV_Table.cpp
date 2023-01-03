@@ -83,3 +83,15 @@ double CSV_Table::getElementDouble(const uint32_t row, const uint32_t column)
     }
     return num;
 }
+
+const uint32_t CSV_Table::getWidth() const
+{
+    return m_Table.size();
+}
+
+const uint32_t CSV_Table::getHeight() const
+{
+    if (getWidth() >= 1)
+        return m_Table[0].size();
+    return 0;
+}
