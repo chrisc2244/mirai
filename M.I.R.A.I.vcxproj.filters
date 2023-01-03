@@ -33,6 +33,9 @@
     <ClCompile Include="src\utils\CSV_Util.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
+    <ClCompile Include="src\utils\Log.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h">
@@ -42,6 +45,9 @@
       <Filter>Header Files\utils</Filter>
     </ClInclude>
     <ClInclude Include="src\utils\CSV_Util.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\Log.h">
       <Filter>Header Files\utils</Filter>
     </ClInclude>
   </ItemGroup>
