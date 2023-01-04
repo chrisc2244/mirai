@@ -11,8 +11,6 @@ struct pixel
 	uint8_t g; //0 -> 255 green
 	uint8_t b; //0 -> 255 blue
 	uint8_t a; //alpha channel... decode returns values from 0 -> 255, google says alpha channel has values from 0 -> 1 though???
-
-
 };
 
 std::ostream& operator<<(std::ostream& stream, const pixel& pixeltoprint);

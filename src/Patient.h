@@ -8,6 +8,7 @@ class Patient
 {
 public:
 
+	Patient();
 	Patient(const uint16_t ID, const uint8_t age, const char gender, const Image image, std::vector<std::string> diagnoses);
 
 	uint16_t getID() const;

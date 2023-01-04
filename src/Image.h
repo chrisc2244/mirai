@@ -15,11 +15,8 @@ class Image
 public:
 
 	Image();
-
 	Image(const std::string filename);
-
 	Image(const std::string filename, const std::vector<pixel> pixelvector, uint16_t width, uint16_t height);
-	//maybe could include the correct diagnosis at some point
 
 	std::string getFilename() const;
 	std::vector<pixel>  getPixelVector() const;

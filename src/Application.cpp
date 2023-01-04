@@ -7,7 +7,10 @@ void Application::init()
     MIR::Log::writeInfo("Application->init()", "Log created successfully");
 
     // Patient Population:
-    m_PatientHandler.load("res/test-data/test.csv");
+    if (!m_PatientHandler.load("res/test-data/test.csv"))
+    {
+        exitFailure();
+    }
 
     m_Running = true;
 }
@@ -40,4 +43,12 @@ void Application::run()
         update();
         render();
     }
+}
+
+void Application::exitFailure()
+{
+    // Clean up the log if possible
+    MIR::Log::close();
+
+    exit(EXIT_FAILURE);
 }

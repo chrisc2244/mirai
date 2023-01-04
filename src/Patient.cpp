@@ -1,5 +1,7 @@
 #include "Patient.h"
 
+Patient::Patient() : m_ID(0), m_age(0), m_gender(0) { }
+
 Patient::Patient(const uint16_t ID, const uint8_t age, const char gender, const Image image, std::vector<std::string> diagnoses)
 {
 	m_ID = ID;
@@ -9,12 +11,10 @@ Patient::Patient(const uint16_t ID, const uint8_t age, const char gender, const 
 	m_diagnoses = diagnoses;
 }
 
-
 uint16_t Patient::getID() const
 {
 	return m_ID;
 }
-
 
 uint8_t Patient::getAge() const
 {

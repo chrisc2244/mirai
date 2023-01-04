@@ -20,6 +20,9 @@ public:
 
     // Contains main program loop and calls update and render each frame
     void run();
+
+    // Call to terminate the application
+    void exitFailure();
 private:
     bool m_Running;
     PatientHandler m_PatientHandler;
