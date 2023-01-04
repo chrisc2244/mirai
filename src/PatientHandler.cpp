@@ -64,5 +64,5 @@ void PatientHandler::populatePatients()
 
 bool PatientHandler::hasPatients()
 {
-    return m_patientTable.getTable().size() >= 1;
+    return m_patientTable.getWidth() >= 1;
 }

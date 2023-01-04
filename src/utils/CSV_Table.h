@@ -8,6 +8,10 @@
 class CSV_Table
 {
 public:
+
+	CSV_Table();
+
+
 	// Returns a reference to the raw table
 	std::vector<std::vector<std::string>>& getTable();
 
@@ -80,8 +84,8 @@ public:
 	*/
 	double getElementDouble(const uint32_t row, const uint32_t column);
 
-	const uint32_t getWidth() const;
-	const uint32_t getHeight() const;
+	const size_t getWidth() const;
+	const size_t getHeight() const;
 
 private:
 	std::vector<std::vector<std::string>> m_Table;
