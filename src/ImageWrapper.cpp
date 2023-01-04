@@ -52,8 +52,15 @@ std::ostream& operator<<(std::ostream& stream, const pixel& pixel)
 
 
 
+/*
+* I was using this main function to test the new methods. I suppose
+* this can serve as an example on how to use them. 
+* 
+* TODO: use the filename and pixel vector to create Image objects
+*/
 
 
+/*
 int main()
 {
 
@@ -68,3 +75,4 @@ int main()
 		std::cout << awesomePixelVectorIcanSleep.at(i) << std::endl;
 	}
 }
+*/

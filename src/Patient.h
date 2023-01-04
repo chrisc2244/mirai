@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <vector>
+#include "Image.h"
 
 class Patient
 
@@ -19,6 +21,7 @@ private:
 	int m_age;
 	char m_gender;
 	std::string m_imageFile;
+	std::vector<pixel> m_decodedpixels;
 };
 
 

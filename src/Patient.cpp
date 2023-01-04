@@ -1,11 +1,14 @@
 #include "Patient.h"
+#include "Image.h"
+#include <vector>
 
-Patient::Patient(const int ID, const int age, const char gender, const std::string imageFile)
+Patient::Patient(const int ID, const int age, const char gender, const Image image, const std::vector<std::string> diagnoses)
 {
 	m_ID = ID;
 	m_age = age;
 	m_gender = gender;
-	m_imageFile = imageFile;
+	m_image = image;
+	m_diagnoses = diagnoses;
 }
 
 
@@ -25,7 +28,12 @@ char Patient::getGender() const
 	return m_gender;
 }
 
-std::string Patient::getImageFile() const
+Image Patient::getImage() const
 {
-	return m_imageFile;
+	return m_image;
+}
+
+std::vector<std::string> Patient::getDiagnoses() const
+{
+	return m_diagnoses;
 }

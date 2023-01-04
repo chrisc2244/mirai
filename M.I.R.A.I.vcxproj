@@ -19,10 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Image.cpp" />
-    <ClCompile Include="ImageWrapper.cpp" />
-    <ClCompile Include="lodepng.cpp" />
     <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\Image.cpp" />
+    <ClCompile Include="src\ImageWrapper.cpp" />
+    <ClCompile Include="src\lodepng.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Patient.cpp" />
     <ClCompile Include="src\PatientHandler.cpp" />
@@ -31,10 +31,10 @@
     <ClCompile Include="src\utils\Log.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Image.h" />
-    <ClInclude Include="ImageWrapper.h" />
-    <ClInclude Include="lodepng.h" />
     <ClInclude Include="src\Application.h" />
+    <ClInclude Include="src\Image.h" />
+    <ClInclude Include="src\ImageWrapper.h" />
+    <ClInclude Include="src\lodepng.h" />
     <ClInclude Include="src\Patient.h" />
     <ClInclude Include="src\PatientHandler.h" />
     <ClInclude Include="src\utils\CSV_Table.h" />
@@ -42,7 +42,14 @@
     <ClInclude Include="src\utils\Log.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitattributes" />
+    <None Include=".gitignore" />
+    <None Include="README.md" />
     <None Include="res\test-data\test.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="LICENSE.txt" />
+    <Text Include="mirai_log.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
