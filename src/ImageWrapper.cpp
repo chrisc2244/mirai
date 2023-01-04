@@ -2,23 +2,27 @@
 #include <vector>
 #include <iostream>
 #include "ImageWrapper.h"
-//#include "Log.h" idk why but this isnt working
+#include "utils/Log.h" 
+#include "Image.h"
 
 
 
 
-std::vector<unsigned char> ImageWrapper::decodeImageToRGBAVector(const char* filename) 
+std::vector<uint8_t> ImageWrapper::decodeImageToRGBAVector(const char* filename) 
 {
 
-	std::vector<unsigned char> imagepixels;
-	 //the raw pixels, size: 8 bits, range: 0 -> 255
+	//the raw pixels, size: 8 bits, range: 0 -> 255
+	//decode method doesn't offer an overloaded method with uint16_t width/height, must stay unsigned int
+	//doing uint16_t width, height throws back error in lodepng decode method
 	unsigned int width, height;
 
 	//decode
+	//decode method doesn't offer an overloaded method with uint16_t width/height
+	std::vector<uint8_t> imagepixels;
 	unsigned error = lodepng::decode(imagepixels, width, height, filename);
 
 	//if there's an error, display it
-	if (error) std::cout << "decoder error " << error << ": " << lodepng_error_text(error) << std::endl;
+	if (error) MIR::Log::writeEr("ImageWrapper->decodeImageToRGBAVector()", lodepng_error_text(error));
 
 	return imagepixels;
 }
@@ -27,7 +31,7 @@ std::vector<unsigned char> ImageWrapper::decodeImageToRGBAVector(const char* fil
 //increments by 4 through RGBAVector to fill out pixel struct, then adds to pixelVectorToReturn then returns it.
 //maybe some optimization here somehow through pointers/refs, i should definitely not pass
 //an entire copy of RGBAVector
-std::vector<pixel> ImageWrapper::convertRGBAVectorToPixelVector(std::vector<unsigned char>& RGBAVector)
+std::vector<pixel> ImageWrapper::convertRGBAVectorToPixelVector(const std::vector<unsigned char>& RGBAVector)
 {
 	std::vector<pixel> pixelVectorToReturn;
 
@@ -43,36 +47,15 @@ std::vector<pixel> ImageWrapper::convertRGBAVectorToPixelVector(std::vector<unsi
 	return pixelVectorToReturn;
 }
 
+Image ImageWrapper::createImage(const std::string filename, const std::vector<pixel> pixelvector, uint16_t width, uint16_t height)
+{
+	Image imageToMake = Image(filename, pixelvector, width, height);
+	return imageToMake;
+}
+
 
 std::ostream& operator<<(std::ostream& stream, const pixel& pixel)
 {
 	stream << "R:" << pixel.r << " " << "G:" << pixel.g << " " << "B:" << pixel.b << " " << "A:" << pixel.a << " " << std::endl;
 	return stream;
 }
-
-
-
-/*
-* I was using this main function to test the new methods. I suppose
-* this can serve as an example on how to use them. 
-* 
-* TODO: use the filename and pixel vector to create Image objects
-*/
-
-
-/*
-int main()
-{
-
-	std::vector<unsigned char> cool = ImageWrapper::decodeImageToRGBAVector("D:\\Downloads\\DatasetMirai\\00000001_001.png");
-	std::cout << cool.size() << std::endl;
-
-	std::cout << "Trying out convertRGBA method" << std::endl;
-	std::vector<pixel> awesomePixelVectorIcanSleep = ImageWrapper::convertRGBAVectorToPixelVector(cool);
-	std::cout << awesomePixelVectorIcanSleep.size() << std::endl;
-
-	for (int i = 0; i < 10; i++) {
-		std::cout << awesomePixelVectorIcanSleep.at(i) << std::endl;
-	}
-}
-*/

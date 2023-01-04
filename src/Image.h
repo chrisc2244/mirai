@@ -14,12 +14,19 @@ class Image
 
 public:
 
-	Image(const std::string filename, const std::vector<pixel> pixelvector);
-	//Image(const std::string filename, const std::vector<pixel> decodedpixels, std::string correctDiagnosis);
+	Image() {}
+
+
+	Image(const std::string filename, const std::vector<pixel> pixelvector, uint16_t width, uint16_t height);
 	//maybe could include the correct diagnosis at some point
+
 
 	std::string getFilename() const;
 	std::vector<pixel>  getPixelVector() const;
+	std::vector<uint8_t> getRGBAVector() const;
+	void setRGBAVector(std::vector<uint8_t> RGBAVector);
+	uint16_t getWidth() const;
+	uint16_t getHeight() const;
 
 
 
@@ -27,8 +34,10 @@ public:
 private:
 
 	std::string m_filename;
-	std::vector<pixel> m_decodedpixels;
-	//std::string m_correctDiagnosis; 
+	std::vector<pixel> m_pixels;
+	std::vector<uint8_t> m_rgba;
+	uint16_t m_height;
+	uint16_t m_width;
 
 	
 
