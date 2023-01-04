@@ -1,3 +1,12 @@
+/***************************************
+*                                      *
+*            Author: Jon C.            *
+*         Last Modified 1/4/23         *
+*  Description: Utility class to load  *
+*  and access elements from .csv file  *
+*                                      *
+***************************************/
+
 #pragma once
 
 #include <iostream>

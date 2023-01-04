@@ -1,3 +1,13 @@
+/****************************
+*                           *
+*      Author: Jon C.       *
+*   Last Modified 1/4/23    *
+*  Description: Class that  *
+*  represents a CSV table   *
+*                           *
+****************************/
+
+
 #pragma once
 #include <vector>
 #include <string>
