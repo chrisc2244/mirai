@@ -1,4 +1,10 @@
 #pragma once
+
+#include "vendor/lodepng.h"
+#include <vector>
+#include <iostream>
+#include "utils/Log.h" 
+
 struct pixel
 {
 	uint8_t r; //0 -> 255 red

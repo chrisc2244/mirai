@@ -1,8 +1,5 @@
-#include "lodepng.h"
-#include <vector>
-#include <iostream>
 #include "ImageWrapper.h"
-#include "utils/Log.h" 
+
 
 std::vector<uint8_t> ImageWrapper::decodeImageToRGBAVector(const char* filename, uint16_t& width, uint16_t& height) 
 {

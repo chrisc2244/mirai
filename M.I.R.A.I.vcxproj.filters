@@ -19,6 +19,12 @@
     <Filter Include="Source Files\utils">
       <UniqueIdentifier>{6088c1bc-b90b-4c9d-9491-95a204953060}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\vendor">
+      <UniqueIdentifier>{12e7055f-fc48-48be-b351-4f5bdcf28154}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\vendor">
+      <UniqueIdentifier>{2f542213-50ba-46e5-84ee-a8e7d9f5c275}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -48,8 +54,8 @@
     <ClCompile Include="src\Image.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\lodepng.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\vendor\lodepng.cpp">
+      <Filter>Source Files\vendor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,8 +83,8 @@
     <ClInclude Include="src\ImageWrapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\lodepng.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\vendor\lodepng.h">
+      <Filter>Header Files\vendor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
