@@ -5,7 +5,7 @@
 class Application
 {
 public:
-    // No constructor until we find a reason for it
+    Application();
 
     ~Application();
 
@@ -23,7 +23,11 @@ public:
 
     // Call to terminate the application
     void exitFailure();
+
+    static Application* getInstance();
 private:
     bool m_Running;
     PatientHandler m_PatientHandler;
+
+    static Application* m_Instance;
 };

@@ -1,5 +1,17 @@
 #include "Application.h"
 
+Application* Application::m_Instance = nullptr;
+
+Application::Application() : m_Running(false)
+{
+    Application::m_Instance = this;
+}
+
+Application::~Application() {
+    // Close the Log when the application ends
+    MIR::Log::close();
+}
+
 void Application::init()
 {
     // Create a Log
@@ -13,11 +25,6 @@ void Application::init()
     }
 
     m_Running = true;
-}
-
-Application::~Application() {
-    // Close the Log when the application ends
-    MIR::Log::close();
 }
 
 void Application::update()
@@ -51,4 +58,9 @@ void Application::exitFailure()
     MIR::Log::close();
 
     exit(EXIT_FAILURE);
+}
+
+Application* Application::getInstance()
+{
+    return Application::m_Instance;
 }
