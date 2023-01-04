@@ -59,7 +59,7 @@ void PatientHandler::populatePatients()
 
         m_Patients.push_back(Patient(id, age, gender, Image(image), diagnoses));
     }
-
+    MIR::Log::writefInfo("PatientHandler->populatePatients()", "Successfully created %d patient objects!", m_Patients.size());
 }
 
 bool PatientHandler::hasPatients()

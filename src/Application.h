@@ -24,6 +24,7 @@ public:
     // Call to terminate the application
     void exitFailure();
 
+    // Returns a pointer to the application 
     static Application* getInstance();
 private:
     bool m_Running;
