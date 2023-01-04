@@ -94,8 +94,8 @@ public:
 	*/
 	double getElementDouble(const uint32_t row, const uint32_t column);
 
-	const size_t getWidth() const;
-	const size_t getHeight() const;
+	const size_t sizeRows() const;
+	const size_t sizeColumns() const;
 
 private:
 	std::vector<std::vector<std::string>> m_Table;

@@ -28,7 +28,7 @@ void PatientHandler::populatePatients()
         throw std::runtime_error(m_Error);
     }
 
-    for (int i = 1; i < m_patientTable.getWidth(); i++) {
+    for (int i = 1; i < m_patientTable.sizeRows(); i++) {
         std::string image = m_patientTable.getElement(i, 0);
         uint16_t id = m_patientTable.getElementInt(i, 3);
         uint8_t age = m_patientTable.getElementInt(i, 4);
@@ -64,5 +64,5 @@ void PatientHandler::populatePatients()
 
 bool PatientHandler::hasPatients()
 {
-    return m_patientTable.getWidth() >= 1;
+    return m_patientTable.sizeRows() >= 1;
 }

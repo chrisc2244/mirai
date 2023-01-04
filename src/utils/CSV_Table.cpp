@@ -86,14 +86,14 @@ double CSV_Table::getElementDouble(const uint32_t row, const uint32_t column)
     return num;
 }
 
-const size_t CSV_Table::getWidth() const
+const size_t CSV_Table::sizeRows() const
 {
     return m_Table.size();
 }
 
-const size_t CSV_Table::getHeight() const
+const size_t CSV_Table::sizeColumns() const
 {
-    if (getWidth() >= 1)
+    if (sizeRows() >= 1)
         return m_Table[0].size();
     return 0;
 }
