@@ -1,6 +1,4 @@
 #pragma once
-#include "Image.h"
-
 struct pixel
 {
 	uint8_t r; //0 -> 255 red
@@ -30,13 +28,8 @@ public:
 	//std::vector<uint8_t> rgbavalues = ImageWrapper::decodeImageToRGBAVector(filename);
 	//std::vector<pixel> pixelvector = ImageWrapper::convertRGBAVectorToPixelVector(rgbvalues);
 	//Image finalImageObject = createImage(filename, pixelvector, width, height);
-	static std::vector<uint8_t> decodeImageToRGBAVector(const char* filename);
+	static std::vector<uint8_t> decodeImageToRGBAVector(const char* filename, uint16_t& width, uint16_t& height);
 
 	//takes an rgba vector [R, G, B, A, R, G, B, A] and returns a pixel vector [Pixel, Pixel]
 	static std::vector<pixel> convertRGBAVectorToPixelVector(const std::vector<unsigned char>&);
-
-	//creates and returns an Image object, need (filename, pixelvector, width, height);
-	static Image createImage(const std::string filename, const std::vector<pixel> pixelvector, uint16_t width, uint16_t height);
-
-
 };

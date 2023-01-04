@@ -14,12 +14,12 @@ class Image
 
 public:
 
-	Image() {}
+	Image();
 
+	Image(const std::string filename);
 
 	Image(const std::string filename, const std::vector<pixel> pixelvector, uint16_t width, uint16_t height);
 	//maybe could include the correct diagnosis at some point
-
 
 	std::string getFilename() const;
 	std::vector<pixel>  getPixelVector() const;
@@ -28,9 +28,6 @@ public:
 	uint16_t getWidth() const;
 	uint16_t getHeight() const;
 
-
-
-
 private:
 
 	std::string m_filename;
@@ -38,7 +35,5 @@ private:
 	std::vector<uint8_t> m_rgba;
 	uint16_t m_height;
 	uint16_t m_width;
-
-	
-
+	bool m_loaded;
 };

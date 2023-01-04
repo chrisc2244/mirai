@@ -8,18 +8,18 @@ class Patient
 {
 public:
 
-	Patient(const int ID, const int age, const char gender, const Image image, const std::vector<std::string> diagnoses);
+	Patient(const uint16_t ID, const uint8_t age, const char gender, const Image image, std::vector<std::string> diagnoses);
 
-	int getID() const;
-	int getAge() const;
+	uint16_t getID() const;
+	uint8_t getAge() const;
 	char getGender() const;
 	Image getImage() const;
 	std::vector<std::string> getDiagnoses() const;
 
 private:
 
-	int m_ID;
-	int m_age;
+	uint16_t m_ID;
+	uint8_t m_age;
 	char m_gender;
 	Image m_image;
 	std::vector<std::string> m_diagnoses;

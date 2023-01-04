@@ -3,26 +3,28 @@
 #include <iostream>
 #include "ImageWrapper.h"
 #include "utils/Log.h" 
-#include "Image.h"
 
-
-
-
-std::vector<uint8_t> ImageWrapper::decodeImageToRGBAVector(const char* filename) 
+std::vector<uint8_t> ImageWrapper::decodeImageToRGBAVector(const char* filename, uint16_t& width, uint16_t& height) 
 {
 
 	//the raw pixels, size: 8 bits, range: 0 -> 255
 	//decode method doesn't offer an overloaded method with uint16_t width/height, must stay unsigned int
 	//doing uint16_t width, height throws back error in lodepng decode method
-	unsigned int width, height;
+	unsigned int w, h;
 
 	//decode
 	//decode method doesn't offer an overloaded method with uint16_t width/height
 	std::vector<uint8_t> imagepixels;
-	unsigned error = lodepng::decode(imagepixels, width, height, filename);
-
+	unsigned error = lodepng::decode(imagepixels, w, h, filename);
 	//if there's an error, display it
-	if (error) MIR::Log::writeEr("ImageWrapper->decodeImageToRGBAVector()", lodepng_error_text(error));
+	if (error) 
+		MIR::Log::writeEr("ImageWrapper->decodeImageToRGBAVector()", lodepng_error_text(error));
+	else
+	{
+		width = w;
+		height = h;
+		std::cout << w << std::endl;
+	}
 
 	return imagepixels;
 }
@@ -35,7 +37,7 @@ std::vector<pixel> ImageWrapper::convertRGBAVectorToPixelVector(const std::vecto
 {
 	std::vector<pixel> pixelVectorToReturn;
 
-	for (int i = 0; i < RGBAVector.size(); i+=4) {
+	for (int i = 0; i < RGBAVector.size(); i += 4) {
 		struct pixel p;
 		p.r = RGBAVector.at(i);
 		p.g = RGBAVector.at(i + 1);
@@ -45,12 +47,6 @@ std::vector<pixel> ImageWrapper::convertRGBAVectorToPixelVector(const std::vecto
 	}
 
 	return pixelVectorToReturn;
-}
-
-Image ImageWrapper::createImage(const std::string filename, const std::vector<pixel> pixelvector, uint16_t width, uint16_t height)
-{
-	Image imageToMake = Image(filename, pixelvector, width, height);
-	return imageToMake;
 }
 
 

@@ -1,6 +1,12 @@
 #include "Image.h"
-#include "ImageWrapper.h"
 
+Image::Image() : m_width(0), m_height(0), m_loaded(false), m_filename("") { }
+
+Image::Image(const std::string filename)
+	: m_width(0), m_height(0), m_loaded(false)
+{
+	m_filename = filename;
+}
 
 
 Image::Image(const std::string filename, const std::vector<pixel> pixelvector, uint16_t width, uint16_t height)

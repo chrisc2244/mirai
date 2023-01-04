@@ -2,7 +2,7 @@
 #include "Image.h"
 #include <vector>
 
-Patient::Patient(const int ID, const int age, const char gender, const Image image, const std::vector<std::string> diagnoses)
+Patient::Patient(const uint16_t ID, const uint8_t age, const char gender, const Image image, std::vector<std::string> diagnoses)
 {
 	m_ID = ID;
 	m_age = age;
@@ -12,13 +12,13 @@ Patient::Patient(const int ID, const int age, const char gender, const Image ima
 }
 
 
-int Patient::getID() const
+uint16_t Patient::getID() const
 {
 	return m_ID;
 }
 
 
-int Patient::getAge() const
+uint8_t Patient::getAge() const
 {
 	return m_age;
 }
