@@ -23,6 +23,7 @@
     <ClCompile Include="src\Image.cpp" />
     <ClCompile Include="src\ImageWrapper.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Node.cpp" />
     <ClCompile Include="src\Patient.cpp" />
     <ClCompile Include="src\PatientHandler.cpp" />
     <ClCompile Include="src\utils\CSV_Table.cpp" />
@@ -34,6 +35,7 @@
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Image.h" />
     <ClInclude Include="src\ImageWrapper.h" />
+    <ClInclude Include="src\Node.h" />
     <ClInclude Include="src\Patient.h" />
     <ClInclude Include="src\PatientHandler.h" />
     <ClInclude Include="src\utils\CSV_Table.h" />
