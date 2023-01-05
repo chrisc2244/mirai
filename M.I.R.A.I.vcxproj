@@ -22,6 +22,7 @@
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Image.cpp" />
     <ClCompile Include="src\ImageWrapper.cpp" />
+    <ClCompile Include="src\Layer.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Node.cpp" />
     <ClCompile Include="src\Patient.cpp" />
@@ -35,6 +36,7 @@
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Image.h" />
     <ClInclude Include="src\ImageWrapper.h" />
+    <ClInclude Include="src\Layer.h" />
     <ClInclude Include="src\Node.h" />
     <ClInclude Include="src\Patient.h" />
     <ClInclude Include="src\PatientHandler.h" />
