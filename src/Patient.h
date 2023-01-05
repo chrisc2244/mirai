@@ -1,24 +1,29 @@
 #pragma once
 #include <string>
+#include <vector>
+#include "Image.h"
 
 class Patient
 
 {
 public:
 
-	Patient(const int ID, int age, char gender, std::string imageFile);
+	Patient();
+	Patient(const uint16_t ID, const uint8_t age, const char gender, const Image image, std::vector<std::string> diagnoses);
 
-	int getID() const;
-	int getAge() const;
+	uint16_t getID() const;
+	uint8_t getAge() const;
 	char getGender() const;
-	std::string getImageFile();
+	Image getImage() const;
+	std::vector<std::string> getDiagnoses() const;
 
 private:
 
-	int m_ID;
-	int m_age;
+	uint16_t m_ID;
+	uint8_t m_age;
 	char m_gender;
-	std::string m_imageFile;
+	Image m_image;
+	std::vector<std::string> m_diagnoses;
 };
 
 

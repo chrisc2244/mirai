@@ -5,7 +5,7 @@
 class Application
 {
 public:
-    // No constructor until we find a reason for it
+    Application();
 
     ~Application();
 
@@ -20,7 +20,15 @@ public:
 
     // Contains main program loop and calls update and render each frame
     void run();
+
+    // Call to terminate the application
+    void exitFailure();
+
+    // Returns a pointer to the application 
+    static Application* getInstance();
 private:
     bool m_Running;
     PatientHandler m_PatientHandler;
+
+    static Application* m_Instance;
 };

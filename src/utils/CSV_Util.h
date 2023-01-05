@@ -1,3 +1,12 @@
+/***************************************
+*                                      *
+*            Author: Jon C.            *
+*         Last Modified 1/4/23         *
+*  Description: Utility class to load  *
+*  and access elements from .csv file  *
+*                                      *
+***************************************/
+
 #pragma once
 
 #include <iostream>
@@ -31,7 +40,7 @@ public:
 
 	static float strToFloat(const std::string element);
 
-	static float strToDouble(const std::string element);
+	static double strToDouble(const std::string element);
 	
 private:
 	// Contains the error string describing failed operation

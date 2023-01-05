@@ -1,5 +1,7 @@
 #include "CSV_Table.h"
 
+CSV_Table::CSV_Table() : m_Width(0), m_Height(0) { } 
+
 std::vector<std::vector<std::string>>& CSV_Table::getTable()
 {
     return m_Table;
@@ -46,7 +48,7 @@ int CSV_Table::getElementInt(const uint32_t row, const uint32_t column)
     {
         num = std::stoi(getElement(row, column));
     }
-    catch (std::exception& err)
+    catch (...)
     {
         std::exception_ptr eptr = std::current_exception();
         std::rethrow_exception(eptr);
@@ -61,7 +63,7 @@ float CSV_Table::getElementFloat(const uint32_t row, const uint32_t column)
     {
         num = std::stof(getElement(row, column));
     }
-    catch (std::exception& err)
+    catch (...)
     {
         std::exception_ptr eptr = std::current_exception();
         std::rethrow_exception(eptr);
@@ -76,7 +78,7 @@ double CSV_Table::getElementDouble(const uint32_t row, const uint32_t column)
     {
         num = std::stod(getElement(row, column));
     }
-    catch (std::exception& err)
+    catch (...)
     {
         std::exception_ptr eptr = std::current_exception();
         std::rethrow_exception(eptr);
@@ -84,14 +86,14 @@ double CSV_Table::getElementDouble(const uint32_t row, const uint32_t column)
     return num;
 }
 
-const uint32_t CSV_Table::getWidth() const
+const size_t CSV_Table::sizeRows() const
 {
     return m_Table.size();
 }
 
-const uint32_t CSV_Table::getHeight() const
+const size_t CSV_Table::sizeColumns() const
 {
-    if (getWidth() >= 1)
+    if (sizeRows() >= 1)
         return m_Table[0].size();
     return 0;
 }

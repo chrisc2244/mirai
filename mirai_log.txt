@@ -1,0 +1,6 @@
+Log for "V.0.1" File: "mirai_log.txt"
+0.[15:41:44] INFO @ Log::Log(): Logging initialized
+1.[15:41:44] INFO @ Application->init(): Log created successfully
+2.[15:41:56] INFO @ PatientHandler::load(): Successfully loaded patient data!
+3.[15:42:00] INFO @ PatientHandler->populatePatients(): Successfully created 112120 patient objects!
+Program executed with 0 warnings and 0 errors

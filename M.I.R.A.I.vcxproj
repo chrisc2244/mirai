@@ -20,23 +20,36 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\Image.cpp" />
+    <ClCompile Include="src\ImageWrapper.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Patient.cpp" />
     <ClCompile Include="src\PatientHandler.cpp" />
     <ClCompile Include="src\utils\CSV_Table.cpp" />
     <ClCompile Include="src\utils\CSV_Util.cpp" />
     <ClCompile Include="src\utils\Log.cpp" />
+    <ClCompile Include="src\vendor\lodepng.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
+    <ClInclude Include="src\Image.h" />
+    <ClInclude Include="src\ImageWrapper.h" />
     <ClInclude Include="src\Patient.h" />
     <ClInclude Include="src\PatientHandler.h" />
     <ClInclude Include="src\utils\CSV_Table.h" />
     <ClInclude Include="src\utils\CSV_Util.h" />
     <ClInclude Include="src\utils\Log.h" />
+    <ClInclude Include="src\vendor\lodepng.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitattributes" />
+    <None Include=".gitignore" />
+    <None Include="README.md" />
     <None Include="res\test-data\test.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="LICENSE.txt" />
+    <Text Include="mirai_log.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -124,6 +137,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,6 +152,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

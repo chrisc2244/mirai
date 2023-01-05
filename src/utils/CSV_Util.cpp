@@ -25,7 +25,7 @@ int CSV_Util::read(const std::string filename, CSV_Table& content)
 	}
 	else // If the file failed to open, save error, throw exception, retrieve with CSV_Util::getError()
 	{
-		m_Error = "Error @ CSV_Util.read(): Could not open file: \"" + filename; +"\"";
+		m_Error = "Error @ CSV_Util.read(): Could not open file: \"" + filename +"\"";
 		throw std::invalid_argument(m_Error);
 		return -1;
 	}
@@ -72,7 +72,7 @@ float CSV_Util::strToFloat(const std::string element)
 	return num;
 }
 
-float CSV_Util::strToDouble(const std::string element)
+double CSV_Util::strToDouble(const std::string element)
 {
 	double num = 0.0;
 	try

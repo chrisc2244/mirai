@@ -28,17 +28,41 @@ void PatientHandler::populatePatients()
         throw std::runtime_error(m_Error);
     }
 
-    for (int i = 1; i < m_patientTable.getWidth(); i++) {
+    for (int i = 1; i < m_patientTable.sizeRows(); i++) {
         std::string image = m_patientTable.getElement(i, 0);
         uint16_t id = m_patientTable.getElementInt(i, 3);
-        uint16_t age = m_patientTable.getElementInt(i, 4);
+        uint8_t age = m_patientTable.getElementInt(i, 4);
         char gender = m_patientTable.getElement(i, 5)[0];
 
-        m_Patients.push_back(Patient(id, age, gender, image));
+        std::vector<std::string> diagnoses;
+
+        // Get the full diagnoses string (delimited by '|')
+        std::string full_diag = m_patientTable.getElement(i, 1);
+
+        // Split diagnoses into multiple strings (If applicable)
+        std::string delimiter = "|";
+
+        size_t pos = 0;
+        std::string token;
+        if (((pos = full_diag.find(delimiter)) != std::string::npos))
+        {
+            while ((pos = full_diag.find(delimiter)) != std::string::npos) {
+                token = full_diag.substr(0, pos);
+                full_diag.erase(0, pos + delimiter.length());
+                diagnoses.push_back(token);
+            }
+            // Get the last substr after the final '|'
+            diagnoses.push_back(full_diag);
+        }
+        else
+            diagnoses.push_back(full_diag);
+
+        m_Patients.push_back(Patient(id, age, gender, Image(image), diagnoses));
     }
+    MIR::Log::writefInfo("PatientHandler->populatePatients()", "Successfully created %d patient objects!", m_Patients.size());
 }
 
 bool PatientHandler::hasPatients()
 {
-    return m_patientTable.getTable().size() >= 1;
+    return m_patientTable.sizeRows() >= 1;
 }
