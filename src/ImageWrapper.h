@@ -27,11 +27,6 @@ class ImageWrapper
 
 public:
 
-	//example usage: 
-	// std::string filename = "D:\\Downloads\\DatasetMirai\\00000001_001.png"
-	//std::vector<uint8_t> rgbavalues = ImageWrapper::decodeImageToRGBAVector(filename);
-	//std::vector<pixel> pixelvector = ImageWrapper::convertRGBAVectorToPixelVector(rgbvalues);
-	//Image finalImageObject = createImage(filename, pixelvector, width, height);
 	static std::vector<uint8_t> decodeImageToRGBAVector(const char* filename, uint16_t& width, uint16_t& height);
 
 	//takes an rgba vector [R, G, B, A, R, G, B, A] and returns a pixel vector [Pixel, Pixel]

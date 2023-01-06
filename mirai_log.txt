@@ -1,0 +1,3 @@
+Log for "V.0.1" File: "mirai_log.txt"
+0.[00:55:50] INFO @ Log::Log(): Logging initialized
+1.[00:55:50] INFO @ Application->init(): Log created successfully

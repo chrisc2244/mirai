@@ -20,7 +20,7 @@ std::vector<uint8_t> ImageWrapper::decodeImageToRGBAVector(const char* filename,
 	{
 		width = w;
 		height = h;
-		std::cout << w << std::endl;
+		//std::cout << w << std::endl;
 	}
 
 	return imagepixels;
@@ -49,6 +49,7 @@ std::vector<pixel> ImageWrapper::convertRGBAVectorToPixelVector(const std::vecto
 
 std::ostream& operator<<(std::ostream& stream, const pixel& pixel)
 {
-	stream << "R:" << pixel.r << " " << "G:" << pixel.g << " " << "B:" << pixel.b << " " << "A:" << pixel.a << " " << std::endl;
+	stream << "[" << "R:" << static_cast<int>(pixel.r) << " " << "G:" << static_cast<int>(pixel.g)
+		<< " " << "B:" << static_cast<int>(pixel.b) << " " << "A:" << static_cast<int>(pixel.a) << "]";
 	return stream;
 }
