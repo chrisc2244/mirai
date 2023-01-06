@@ -16,12 +16,6 @@ struct pixel
 std::ostream& operator<<(std::ostream& stream, const pixel& pixeltoprint);
 
 
-/* I'm not really sure if this needed to be a class tbh. Maybe my brain is just defaulting to everything being a class since 
-* I'm coming from Java. Anyways, the idea is that we can iterate through the directory containing the dataset photos. We can then call
-* ImageWrapper::decodeImagetoRGBAVector() on the PNG's to get our RGBA vector, then call convertRGBAVectorToPixelVector() to get our organized
-* vector of pixels, then use that vector to construct our Image objects. 
-*/
-
 class ImageWrapper
 {
 
@@ -31,4 +25,9 @@ public:
 
 	//takes an rgba vector [R, G, B, A, R, G, B, A] and returns a pixel vector [Pixel, Pixel]
 	static std::vector<pixel> convertRGBAVectorToPixelVector(const std::vector<unsigned char>&);
+
+	//takes pixel vector [pixel, pixel] converts to greyscale vector [0.71221, 0.23211]
+	static double convertPixelToGreyscale(pixel pixel);
+
+	static std::vector<double> convertPixelVectorToGreyscaleVector(const std::vector<pixel>& pixels);
 };

@@ -3,15 +3,16 @@
 
 
 //constructors
-matrix::matrix() : m_rows(0), m_columns(0), m_input_pixel_vector(0) {}
+matrix::matrix() : m_rows(0), m_columns(0), m_input_pixel_vector(0), m_size(0) {}
 
 matrix::matrix(const uint8_t rows, const uint8_t columns, const std::vector<pixel>& pixels)
 {
 	m_rows = rows;
 	m_columns = columns;
 	m_input_pixel_vector = pixels;
+	m_size = rows * columns;
 
-	pixel* this_matrix = new pixel[rows * columns];
+	pixel* this_matrix = new pixel[m_size];
 
 
 	//fills matrix with [rows * columns] pixels, not a 2d array, still a regular 1d array.
@@ -49,13 +50,14 @@ uint8_t matrix::get_column_amount() const
 	return m_columns;
 }
 
-std::vector<pixel> matrix::get_column_at(uint8_t row, uint8_t column)
+std::vector<pixel> matrix::get_column_at( uint8_t column)
 {
 	//TODO: add logic here for returning column at specific index of matrix
+
 	return std::vector<pixel>();
 }
 
-std::vector<pixel> matrix::get_row_at(uint8_t row, uint8_t column)
+std::vector<pixel> matrix::get_row_at(uint8_t column)
 {
 	//TODO: add logic here for returning row at specific index of matrix
 	return std::vector<pixel>();
@@ -67,7 +69,13 @@ std::vector<pixel> matrix::get_row_at(uint8_t row, uint8_t column)
 matrix matrix::operator+ (const matrix& other_matrix)
 {
 	//TODO: the actual thing
+
+	for (int i = 0; i < m_size; i++)
+	{
+		return matrix();
+	}
 	return matrix();
+	
 }
 
 matrix matrix::operator-(const matrix& other_matrix)
