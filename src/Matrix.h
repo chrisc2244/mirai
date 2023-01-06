@@ -11,6 +11,7 @@ public:
 	//constructors
 	matrix();
 	matrix(const uint8_t rows, const uint8_t columns, const std::vector<pixel>& pixels);
+	matrix(const uint8_t rows, const uint8_t columns, std::vector<double> greyscalevalues);
 
 
 	//operations
@@ -31,5 +32,6 @@ private:
 	uint8_t m_columns;
 	std::vector<pixel> m_input_pixel_vector;
 	int m_size;
+	std::vector<double> m_greyscale_values;
 
 };

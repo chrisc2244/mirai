@@ -2,9 +2,43 @@
 #include "ImageWrapper.h"
 
 
+//should probably convert this to a template somehow
+
 //constructors
 matrix::matrix() : m_rows(0), m_columns(0), m_input_pixel_vector(0), m_size(0) {}
 
+
+//double vector version for greyscale values
+matrix::matrix(const uint8_t rows, const uint8_t columns, std::vector<double> greyscalevalues)
+{
+	m_rows = rows;
+	m_columns = columns;
+	m_size = rows * columns;
+	m_greyscale_values = greyscalevalues;
+
+	double* this_matrix = new double[m_size];
+
+	for (int r = 0; r < rows; r++)
+	{
+		for (int c = 0; c < columns; c++)
+		{
+			this_matrix[c + r * columns] = greyscalevalues.at(c + r * columns);
+		}
+	}
+
+	for (int i = 0; i < rows * columns; i++)
+	{
+		std::cout << "[" << this_matrix[i] << "]";
+		if ((i + 1) % columns == 0)
+		{
+			std::cout << std::endl;
+		}
+	}
+	delete[](this_matrix);
+}
+
+
+//pixel vector version 
 matrix::matrix(const uint8_t rows, const uint8_t columns, const std::vector<pixel>& pixels)
 {
 	m_rows = rows;
