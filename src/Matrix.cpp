@@ -17,6 +17,7 @@ matrix::matrix(const uint8_t rows, const uint8_t columns, std::vector<double> gr
 	m_greyscale_values = greyscalevalues;
 
 	double* this_matrix = new double[m_size];
+	m_ptr_double = this_matrix;
 
 	for (int r = 0; r < rows; r++)
 	{
@@ -34,7 +35,6 @@ matrix::matrix(const uint8_t rows, const uint8_t columns, std::vector<double> gr
 			std::cout << std::endl;
 		}
 	}
-	delete[](this_matrix);
 }
 
 
@@ -47,7 +47,7 @@ matrix::matrix(const uint8_t rows, const uint8_t columns, const std::vector<pixe
 	m_size = rows * columns;
 
 	pixel* this_matrix = new pixel[m_size];
-
+	m_ptr_pixel = this_matrix;
 
 	//fills matrix with [rows * columns] pixels, not a 2d array, still a regular 1d array.
 	//every r (row) increment jumps column (the width) elements forward, equivalent to moving down a row.
@@ -98,16 +98,13 @@ std::vector<pixel> matrix::get_row_at(uint8_t column)
 }
 
 
-
 //operators
+
+//prints pixels in matrix,		[0.4213] [0.4213] [0.4213]			[0.4213] [0.4213] [0.4213] 
+//2x4 example, 8 pixels total	[0.4213] [0.4213] [0.4213]			[0.4213] [0.4213] [0.4213] 
 matrix matrix::operator+ (const matrix& other_matrix)
 {
-	//TODO: the actual thing
-
-	for (int i = 0; i < m_size; i++)
-	{
-		return matrix();
-	}
+	matrix cool = this[0];
 	return matrix();
 	
 }
@@ -122,4 +119,13 @@ matrix matrix::operator*(const matrix& other_matrix)
 {
 	//TODO: the actual thing
 	return matrix();
+}
+
+double& matrix::operator[](int index) const
+{
+	if (index >= m_size || index < m_size)
+	{
+		std::cout << "Array index: [" << index << "] is out of bounds." << std::endl;
+	}
+	return m_ptr_double[index];
 }

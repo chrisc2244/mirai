@@ -24,6 +24,7 @@ public:
 	matrix operator+(const matrix& other_matrix);
 	matrix operator-(const matrix& other_matrix);
 	matrix operator*(const matrix& other_matrix);
+	double& operator[](int index) const;
 
 
 private:
@@ -33,5 +34,6 @@ private:
 	std::vector<pixel> m_input_pixel_vector;
 	int m_size;
 	std::vector<double> m_greyscale_values;
-
+	double* m_ptr_double;
+	pixel* m_ptr_pixel;
 };

@@ -20,7 +20,6 @@ int main()
 
     matrix currMatrix = matrix(3, 3, testgreyscalevec);
 
-
-
-    return 0;
+    double cool = currMatrix[0];
+    std::cout << cool << std::endl;
 }
