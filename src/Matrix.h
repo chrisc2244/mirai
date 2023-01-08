@@ -31,14 +31,13 @@ public:
 	//operators
 	matrix operator+(const matrix& other_matrix) const;
 
-	//yet to be implemented
 	matrix operator-(const matrix& other_matrix);
 
 	//yet to be implemented
 	matrix operator*(const matrix& other_matrix);
 
-	//access element in matrix at index
-	double& operator[](const int index) const;
+	//access element in matrix[index]
+	double& operator[](int index) const;
 
 	//access element in matrix in (row, col) form
 	double& operator() (int row, int col) const;

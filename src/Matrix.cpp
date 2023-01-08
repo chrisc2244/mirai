@@ -167,9 +167,15 @@ double& matrix::operator[](const int index) const
 }
 
 double& matrix::operator() (const int row, const int col) const
-{	
-	int row_fixed = row - 1;
-	int col_fixed = col - 1;
-	return m_ptr_double[col_fixed + row_fixed * col_fixed];
+{
+	if (row > 0 && col > 0 && col <= m_columns && row <= m_rows)
+	{
+		int row_of_element = row - 1;
+		int col_of_element = col - 1;
+		std::cout << "row: " << row << " col: " << col << std::endl;
+		return m_ptr_double[row_of_element * m_columns + col_of_element];
+	}
+	std::cout << "row: " << row << " col: " << col << std::endl;
+	throw std::out_of_range("Invalid matrix index");
 }
 

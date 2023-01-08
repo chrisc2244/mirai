@@ -11,17 +11,17 @@ int main()
     uint16_t width = 0;
     uint16_t height = 0;
     static std::vector<uint8_t> testrgbvec =
-        ImageWrapper::decodeImageToRGBAVector("C:\\Users\\Chris\\Downloads\\DatasetMirai\\00000001_000.png", width, height);
-     // ImageWrapper::decodeImageToRGBAVector("D:\\Downloads\\DatasetMirai\\00000001_000.png", width, height);
+        //ImageWrapper::decodeImageToRGBAVector("C:\\Users\\Chris\\Downloads\\DatasetMirai\\00000001_000.png", width, height);
+        ImageWrapper::decodeImageToRGBAVector("D:\\Downloads\\DatasetMirai\\00000001_000.png", width, height);
 
     static std::vector<pixel> testpixelvec =
         ImageWrapper::convertRGBAVectorToPixelVector(testrgbvec);
 
     static std::vector<double> testgreyscalevec = ImageWrapper::convertPixelVectorToGreyscaleVector(testpixelvec);
 
-    matrix currMatrix = matrix(3, 3, testgreyscalevec);
-    matrix matrix_to_add = matrix(3, 3, testgreyscalevec);
-    matrix matrix_to_subtract = matrix(3, 3, testgreyscalevec);
+    matrix currMatrix = matrix(5, 5, testgreyscalevec);
+    matrix matrix_to_add = matrix(5, 5, testgreyscalevec);
+    matrix matrix_to_subtract = matrix(5, 5, testgreyscalevec);
 
     double element_in_matrix = currMatrix[1];
     std::cout << element_in_matrix << std::endl;
@@ -53,10 +53,24 @@ int main()
     matrix::print(subtracted_matrix);
     std::cout << std::endl;
 
-    std::cout << "Getting value of (1, 1) in matrix below: ";
-    std::cout << std::endl;
     matrix::print(currMatrix);
+    std::cout << std::endl;
     std::cout << currMatrix(1, 1);
+    std::cout << std::endl;
+    std::cout << currMatrix(2, 1);
+    std::cout << std::endl;
+    std::cout << currMatrix(3, 1);
+    std::cout << std::endl;
+    std::cout << currMatrix(1, 2);
+    std::cout << std::endl;
+    std::cout << currMatrix(1, 4);
+    std::cout << std::endl;
+    std::cout << currMatrix(1, 5);
+    std::cout << std::endl;
+    std::cout << currMatrix(3, 2);
+    std::cout << std::endl;
+    std::cout << currMatrix(2, 4);
+    std::cout << std::endl;
 
 
 
