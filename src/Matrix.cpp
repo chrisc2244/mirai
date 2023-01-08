@@ -92,7 +92,7 @@ void matrix::print(const matrix& matrix_to_print)
 //2x4 example, 8 pixels total	[0.4213] [0.4213] [0.4213]			[0.4213] [0.4213] [0.4213]
 matrix matrix::operator+ (const matrix& other_matrix) const
 {	
-	if (other_matrix.size == this->size)
+	if (other_matrix.size == this->size && other_matrix.m_columns == this->m_columns && other_matrix.m_rows == this->m_rows)
 	{	
 		std::vector<double> new_values;
 
@@ -112,7 +112,7 @@ matrix matrix::operator+ (const matrix& other_matrix) const
 
 matrix matrix::operator-(const matrix& other_matrix)
 {
-	if (other_matrix.size == this->size)
+	if (other_matrix.size == this->size && other_matrix.m_columns == this->m_columns && other_matrix.m_rows == this->m_rows)
 	{
 		std::vector<double> new_values;
 
