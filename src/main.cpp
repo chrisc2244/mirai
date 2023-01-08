@@ -19,7 +19,18 @@ int main()
     static std::vector<double> testgreyscalevec = ImageWrapper::convertPixelVectorToGreyscaleVector(testpixelvec);
 
     matrix currMatrix = matrix(3, 3, testgreyscalevec);
+    matrix matrix_to_add = matrix(3, 3, testgreyscalevec);
 
-    double cool = currMatrix[0];
-    std::cout << cool << std::endl;
+    double element_in_matrix = currMatrix[10];
+    std::cout << element_in_matrix << std::endl;
+    std::cout << std::endl;
+
+    std::cout << currMatrix.size << std::endl;
+    std::cout << std::endl;
+
+    matrix::print(currMatrix);
+    std::cout << std::endl;
+
+    matrix added_matrix = matrix_to_add + currMatrix;
+    matrix::print(added_matrix);
 }

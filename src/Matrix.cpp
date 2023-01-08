@@ -2,20 +2,21 @@
 #include "ImageWrapper.h"
 
 
-//should probably convert this to a template somehow
+//should probably convert this to a template
 
-//constructors
-matrix::matrix() : m_rows(0), m_columns(0), m_input_pixel_vector(0), m_size(0) {}
+matrix::matrix() : size(0), p_columns(0), p_rows(0), m_rows(0), m_columns(0), m_input_pixel_vector(0),
+m_size(0), m_ptr_double(nullptr) {}
 
-
-//double vector version for greyscale values
-matrix::matrix(const uint8_t rows, const uint8_t columns, std::vector<double> greyscalevalues)
+matrix::matrix(const uint8_t rows, const uint8_t columns, const std::vector<double> &greyscalevalues)
 {
 	m_rows = rows;
 	m_columns = columns;
 	m_size = rows * columns;
+	size = m_size;
+	p_columns = m_columns;
+	p_rows = m_rows;
 	m_greyscale_values = greyscalevalues;
-
+	
 	double* this_matrix = new double[m_size];
 	m_ptr_double = this_matrix;
 
@@ -26,18 +27,9 @@ matrix::matrix(const uint8_t rows, const uint8_t columns, std::vector<double> gr
 			this_matrix[c + r * columns] = greyscalevalues.at(c + r * columns);
 		}
 	}
-
-	for (int i = 0; i < rows * columns; i++)
-	{
-		std::cout << "[" << this_matrix[i] << "]";
-		if ((i + 1) % columns == 0)
-		{
-			std::cout << std::endl;
-		}
-	}
 }
 
-
+/*
 //pixel vector version 
 matrix::matrix(const uint8_t rows, const uint8_t columns, const std::vector<pixel>& pixels)
 {
@@ -69,11 +61,10 @@ matrix::matrix(const uint8_t rows, const uint8_t columns, const std::vector<pixe
 			std::cout << std::endl;
 		}
 	}
-	delete[](this_matrix);
 }
+*/
 
 
-//operations
 uint8_t matrix::get_row_amount() const
 {
 	return m_rows;
@@ -84,30 +75,40 @@ uint8_t matrix::get_column_amount() const
 	return m_columns;
 }
 
-std::vector<pixel> matrix::get_column_at( uint8_t column)
+void matrix::print(const matrix& matrix_to_print)
 {
-	//TODO: add logic here for returning column at specific index of matrix
-
-	return std::vector<pixel>();
+	for (int i = 0; i < matrix_to_print.size; i++)
+	{
+		std::cout << "[" << matrix_to_print[i] << "]";
+		if ((i + 1) % matrix_to_print.p_columns == 0)
+		{
+			std::cout << std::endl;
+		}
+	}
 }
 
-std::vector<pixel> matrix::get_row_at(uint8_t column)
-{
-	//TODO: add logic here for returning row at specific index of matrix
-	return std::vector<pixel>();
-}
-
-
-//operators
 
 //prints pixels in matrix,		[0.4213] [0.4213] [0.4213]			[0.4213] [0.4213] [0.4213] 
-//2x4 example, 8 pixels total	[0.4213] [0.4213] [0.4213]			[0.4213] [0.4213] [0.4213] 
-matrix matrix::operator+ (const matrix& other_matrix)
-{
-	matrix cool = this[0];
-	return matrix();
-	
+//2x4 example, 8 pixels total	[0.4213] [0.4213] [0.4213]			[0.4213] [0.4213] [0.4213]
+matrix matrix::operator+ (const matrix& other_matrix) const
+{	
+	if (other_matrix.size == this->size)
+	{	
+		std::vector<double> new_values;
+
+		for (int i = 0; i < other_matrix.size; i++)
+		{
+			double added_value = other_matrix[i] + (*this)[0];
+			new_values.push_back(added_value);
+		}
+
+		matrix matrix_to_return(other_matrix.m_rows, other_matrix.m_columns, new_values);
+		return matrix_to_return;
+
+	}
+		throw std::invalid_argument("Cannot add matrices of different sizes.");
 }
+
 
 matrix matrix::operator-(const matrix& other_matrix)
 {
@@ -121,11 +122,21 @@ matrix matrix::operator*(const matrix& other_matrix)
 	return matrix();
 }
 
-double& matrix::operator[](int index) const
+//all this reference means is that the type at this address is *presumed* to be the type we give it.
+//the pointer is still just an address to a specific byte.
+double& matrix::operator[](const int index) const
 {
-	if (index >= m_size || index < m_size)
+	
+	if (index >= m_size || index < 0)
 	{
-		std::cout << "Array index: [" << index << "] is out of bounds." << std::endl;
+		std::cout << "Matrix index: [" << index << "] is out of bounds. Size of matrix: " << m_size << std::endl;
+		throw std::invalid_argument("");
 	}
 	return m_ptr_double[index];
 }
+
+double& matrix::operator() (const int row, const int col) const
+{
+	return m_ptr_double[col + row * col];
+}
+
