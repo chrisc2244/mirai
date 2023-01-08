@@ -38,16 +38,26 @@ int main()
     std::cout << std::endl;
 
     std::cout << "First matrix - ";
+    std::cout << std::endl;
     matrix::print(currMatrix);
     std::cout << std::endl;
 
     std::cout << "Second matrix ";
+    std::cout << std::endl;
     matrix::print(matrix_to_subtract);
     std::cout << std::endl;
 
     std::cout << "Subtracted matrix = ";
+    std::cout << std::endl;
     matrix subtracted_matrix = currMatrix - matrix_to_subtract;
     matrix::print(subtracted_matrix);
+    std::cout << std::endl;
+
+    std::cout << "Getting value of (1, 1) in matrix below: ";
+    std::cout << std::endl;
+    matrix::print(currMatrix);
+    std::cout << currMatrix(1, 1);
+
 
 
 

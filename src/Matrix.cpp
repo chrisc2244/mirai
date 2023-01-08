@@ -106,6 +106,7 @@ matrix matrix::operator+ (const matrix& other_matrix) const
 		return matrix_to_return;
 
 	}
+		std::cout << "Left Matrix: " << this->m_size << " Right matrix: " << other_matrix.m_size << std::endl;
 		throw std::invalid_argument("Cannot add matrices of different sizes.");
 }
 
@@ -126,16 +127,30 @@ matrix matrix::operator-(const matrix& other_matrix)
 		return matrix_to_return;
 
 	}
+	std::cout << "Left Matrix: " << this->m_size << " Right matrix: " << other_matrix.m_size << std::endl;
 	throw std::invalid_argument("Cannot subtract matrices of different sizes.");
 }
 
 matrix matrix::operator*(const matrix& other_matrix)
 {
-	//TODO: the actual thing
+	if (this->m_columns == other_matrix.m_rows) 
+	{
+		std::vector<double> new_values;
+		int rows_of_new_matrix = this->m_rows;
+		int columns_of_new_matrix = m_columns;
+		int new_matrix_size = rows_of_new_matrix * columns_of_new_matrix;
 
+		for (int i = 0; i < new_matrix_size; i++) 
+		{
 
+		}
 
-	return matrix();
+		//fill this matrix out with right constructor
+		matrix matrix_to_return;
+		return matrix_to_return;
+	}
+	std::cout << "Left matrix columns: " << this->m_columns << "Right matrix rows: " << other_matrix.m_rows;
+	throw std::invalid_argument("Columns of left matrix must = rows of right matrix.");
 }
 
 //all this reference means is that the type at this address is *presumed* to be the type we give it.
@@ -152,7 +167,9 @@ double& matrix::operator[](const int index) const
 }
 
 double& matrix::operator() (const int row, const int col) const
-{
-	return m_ptr_double[col + row * col];
+{	
+	int row_fixed = row - 1;
+	int col_fixed = col - 1;
+	return m_ptr_double[col_fixed + row_fixed * col_fixed];
 }
 
