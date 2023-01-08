@@ -11,7 +11,8 @@ int main()
     uint16_t width = 0;
     uint16_t height = 0;
     static std::vector<uint8_t> testrgbvec =
-        ImageWrapper::decodeImageToRGBAVector("D:\\Downloads\\DatasetMirai\\00000001_000.png", width, height);
+        ImageWrapper::decodeImageToRGBAVector("C:\\Users\\Chris\\Downloads\\DatasetMirai\\00000001_000.png", width, height);
+     // ImageWrapper::decodeImageToRGBAVector("D:\\Downloads\\DatasetMirai\\00000001_000.png", width, height);
 
     static std::vector<pixel> testpixelvec =
         ImageWrapper::convertRGBAVectorToPixelVector(testrgbvec);
@@ -20,8 +21,9 @@ int main()
 
     matrix currMatrix = matrix(3, 3, testgreyscalevec);
     matrix matrix_to_add = matrix(3, 3, testgreyscalevec);
+    matrix matrix_to_subtract = matrix(3, 3, testgreyscalevec);
 
-    double element_in_matrix = currMatrix[10];
+    double element_in_matrix = currMatrix[1];
     std::cout << element_in_matrix << std::endl;
     std::cout << std::endl;
 
@@ -33,4 +35,17 @@ int main()
 
     matrix added_matrix = matrix_to_add + currMatrix;
     matrix::print(added_matrix);
+    std::cout << std::endl;
+
+    std::cout << "First matrix - ";
+    matrix::print(currMatrix);
+    std::cout << std::endl;
+
+    std::cout << "Second matrix ";
+    matrix::print(matrix_to_subtract);
+    std::cout << std::endl;
+
+    std::cout << "Subtracted matrix = ";
+    matrix subtracted_matrix = currMatrix - matrix_to_subtract;
+    matrix::print(subtracted_matrix);
 }

@@ -98,7 +98,7 @@ matrix matrix::operator+ (const matrix& other_matrix) const
 
 		for (int i = 0; i < other_matrix.size; i++)
 		{
-			double added_value = other_matrix[i] + (*this)[0];
+			double added_value = other_matrix[i] + (*this)[i];
 			new_values.push_back(added_value);
 		}
 
@@ -112,13 +112,29 @@ matrix matrix::operator+ (const matrix& other_matrix) const
 
 matrix matrix::operator-(const matrix& other_matrix)
 {
-	//TODO: the actual thing
-	return matrix();
+	if (other_matrix.size == this->size)
+	{
+		std::vector<double> new_values;
+
+		for (int i = 0; i < other_matrix.size; i++)
+		{
+			double subtracted_value = (*this)[i] - other_matrix[i];
+			new_values.push_back(subtracted_value);
+		}
+
+		matrix matrix_to_return(other_matrix.m_rows, other_matrix.m_columns, new_values);
+		return matrix_to_return;
+
+	}
+	throw std::invalid_argument("Cannot subtract matrices of different sizes.");
 }
 
 matrix matrix::operator*(const matrix& other_matrix)
 {
 	//TODO: the actual thing
+
+
+
 	return matrix();
 }
 
