@@ -10,7 +10,9 @@ public:
 	matrix();
 
 	//takes in rows, columns, and double vector obtianed from convertPixelVectorToGreyscaleVector() method
-	matrix(const uint8_t rows, const uint8_t columns, const std::vector<double> &greyscalevalues);
+	matrix(const uint8_t rows, const uint8_t columns, const std::vector<double> &values);
+
+	matrix(const uint8_t rows, const uint8_t columns, double* arrPtr);
 
 
 	//operations
@@ -23,7 +25,8 @@ public:
 	//returns size of matrix
 	uint8_t getSize() const;
 
-	//prints the given matrix in terminal
+	//prints values in matrix		[0.4213][0.4213][0.4213]
+	//3x3 example, 6 values total	[0.4213][0.4213][0.4213]
 	static void print(const matrix& matrix_to_print);
 
 

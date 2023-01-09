@@ -27,7 +27,7 @@ int main()
     std::cout << element_in_matrix << std::endl;
     std::cout << std::endl;
 
-    std::cout << currMatrix.getSize() << std::endl;
+    std::cout << +currMatrix.getSize() << std::endl;
     std::cout << std::endl;
 
     matrix::print(currMatrix);

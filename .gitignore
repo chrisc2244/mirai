@@ -364,3 +364,4 @@ FodyWeavers.xsd
 
 # Ignore the image dataset
 res/images/
+*.claudiaideconfig

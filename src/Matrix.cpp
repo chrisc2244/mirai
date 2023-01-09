@@ -24,6 +24,14 @@ matrix::matrix(const uint8_t rows, const uint8_t columns, const std::vector<doub
 	}
 }
 
+matrix::matrix(const uint8_t rows, const uint8_t columns, double* arrPtr)
+{
+	m_rows = rows;
+	m_columns = columns;
+	m_size = rows * columns;
+	m_ptr_double = arrPtr;
+}
+
 
 uint8_t matrix::getRowAmount() const
 {
@@ -52,55 +60,47 @@ void matrix::print(const matrix& matrix_to_print)
 	}
 }
 
-
-//prints values in matrix		[0.4213] [0.4213] [0.4213]
-//3x3 example, 6 values total	[0.4213] [0.4213] [0.4213]
 matrix matrix::operator+ (const matrix& other_matrix) const
 {	
 	if (other_matrix.m_size == this->m_size && other_matrix.m_columns == this->m_columns && other_matrix.m_rows == this->m_rows)
 	{	
-		std::vector<double> new_values;
+		auto* ptrToReturn = new double[m_size];
 
 		for (int i = 0; i < other_matrix.m_size; i++)
 		{
-			double added_value = other_matrix[i] + (*this)[i];
-			new_values.push_back(added_value);
+			ptrToReturn[i] = other_matrix[i] + (*this)[i];
 		}
 
-		matrix matrix_to_return(other_matrix.m_rows, other_matrix.m_columns, new_values);
+		matrix matrix_to_return(other_matrix.m_rows, other_matrix.m_columns, ptrToReturn);
 		return matrix_to_return;
-
 	}
-		std::cout << "Left Matrix: " << this->m_size << " Right matrix: " << other_matrix.m_size << std::endl;
+		std::cout << "Left Matrix size: " << this->m_size << " Right matrix size: " << other_matrix.m_size << std::endl;
 		throw std::invalid_argument("Cannot add matrices of different sizes.");
 }
-
 
 matrix matrix::operator-(const matrix& other_matrix) const
 {
 	if (other_matrix.m_size == this->m_size && other_matrix.m_columns == this->m_columns && other_matrix.m_rows == this->m_rows)
 	{
-		std::vector<double> new_values;
+		auto* ptrToReturn = new double[m_size];
 
 		for (int i = 0; i < other_matrix.m_size; i++)
 		{
-			double subtracted_value = (*this)[i] - other_matrix[i];
-			new_values.push_back(subtracted_value);
+			ptrToReturn[i] = other_matrix[i] - (*this)[i];
 		}
 
-		matrix matrix_to_return(other_matrix.m_rows, other_matrix.m_columns, new_values);
+		matrix matrix_to_return(other_matrix.m_rows, other_matrix.m_columns, ptrToReturn);
 		return matrix_to_return;
-
 	}
-	std::cout << "Left Matrix: " << this->m_size << " Right matrix: " << other_matrix.m_size << std::endl;
+	std::cout << "Left Matrix size: " << this->m_size << " Right matrix size: " << other_matrix.m_size << std::endl;
 	throw std::invalid_argument("Cannot subtract matrices of different sizes.");
 }
 
+//TODO: Finish operator* 
 matrix matrix::operator*(const matrix& other_matrix) const
-{
+{	
 	if (this->m_columns == other_matrix.m_rows) 
 	{
-		std::vector<double> new_values;
 		const uint8_t rows_of_new_matrix = this->m_rows;
 		const uint8_t columns_of_new_matrix = m_columns;
 		const uint8_t new_matrix_size = rows_of_new_matrix * columns_of_new_matrix;
@@ -118,8 +118,6 @@ matrix matrix::operator*(const matrix& other_matrix) const
 	throw std::invalid_argument("Columns of left matrix must = rows of right matrix.");
 }
 
-//all this reference means is that the type at this address is *presumed* to be the type we give it.
-//the pointer is still just an address to a specific byte.
 double& matrix::operator[](const int index) const
 {
 	
