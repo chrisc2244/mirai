@@ -46,73 +46,79 @@ uint8_t matrix::getSize() const
 	return m_size;
 }
 
-void matrix::print(const matrix& matrix_to_print)
+void matrix::print(const matrix& matrixToPrint)
 {
-	for (int i = 0; i < matrix_to_print.m_size; i++)
+	for (int i = 0; i < matrixToPrint.m_size; i++)
 	{
-		std::cout << "[" << matrix_to_print[i] << "]";
-		if ((i + 1) % matrix_to_print.m_columns == 0)
+		std::cout << "[" << matrixToPrint[i] << "]";
+		if ((i + 1) % matrixToPrint.m_columns == 0)
 		{
 			std::cout << std::endl;
 		}
 	}
 }
 
-matrix matrix::operator+ (const matrix& other_matrix) const
+matrix matrix::operator+ (const matrix& otherMatrix) const
 {	
-	if (other_matrix.m_size == this->m_size && other_matrix.m_columns == this->m_columns && other_matrix.m_rows == this->m_rows)
+	if (otherMatrix.m_size == this->m_size && otherMatrix.m_columns == this->m_columns && otherMatrix.m_rows == this->m_rows)
 	{	
 		auto* ptrToReturn = new double[m_size];
 
-		for (int i = 0; i < other_matrix.m_size; i++)
+		for (int i = 0; i < otherMatrix.m_size; i++)
 		{
-			ptrToReturn[i] = other_matrix[i] + (*this)[i];
+			ptrToReturn[i] = otherMatrix[i] + (*this)[i];
 		}
 
-		matrix matrix_to_return(other_matrix.m_rows, other_matrix.m_columns, ptrToReturn);
+		matrix matrix_to_return(otherMatrix.m_rows, otherMatrix.m_columns, ptrToReturn);
 		return matrix_to_return;
 	}
-		std::cout << "Left Matrix size: " << this->m_size << " Right matrix size: " << other_matrix.m_size << std::endl;
+		std::cout << "Left Matrix size: " << this->m_size << " Right matrix size: " << otherMatrix.m_size << std::endl;
 		throw std::invalid_argument("Cannot add matrices of different sizes.");
 }
 
-matrix matrix::operator-(const matrix& other_matrix) const
+matrix matrix::operator-(const matrix& otherMatrix) const
 {
-	if (other_matrix.m_size == this->m_size && other_matrix.m_columns == this->m_columns && other_matrix.m_rows == this->m_rows)
+	if (otherMatrix.m_size == this->m_size && otherMatrix.m_columns == this->m_columns && otherMatrix.m_rows == this->m_rows)
 	{
 		auto* ptrToReturn = new double[m_size];
 
-		for (int i = 0; i < other_matrix.m_size; i++)
+		for (int i = 0; i < otherMatrix.m_size; i++)
 		{
-			ptrToReturn[i] = other_matrix[i] - (*this)[i];
+			ptrToReturn[i] = otherMatrix[i] - (*this)[i];
 		}
 
-		matrix matrix_to_return(other_matrix.m_rows, other_matrix.m_columns, ptrToReturn);
+		matrix matrix_to_return(otherMatrix.m_rows, otherMatrix.m_columns, ptrToReturn);
 		return matrix_to_return;
 	}
-	std::cout << "Left Matrix size: " << this->m_size << " Right matrix size: " << other_matrix.m_size << std::endl;
+	std::cout << "Left Matrix size: " << this->m_size << " Right matrix size: " << otherMatrix.m_size << std::endl;
 	throw std::invalid_argument("Cannot subtract matrices of different sizes.");
 }
 
-//TODO: Finish operator* 
-matrix matrix::operator*(const matrix& other_matrix) const
-{	
-	if (this->m_columns == other_matrix.m_rows) 
+matrix matrix::operator*(const matrix& otherMatrix) const
+{
+	if (this->m_columns == otherMatrix.m_rows)
 	{
-		const uint8_t rows_of_new_matrix = this->m_rows;
-		const uint8_t columns_of_new_matrix = m_columns;
-		const uint8_t new_matrix_size = rows_of_new_matrix * columns_of_new_matrix;
+		const uint8_t rowsOfNewMatrix = this->m_rows;
+		const uint8_t columnsOfNewMatrix = otherMatrix.m_columns;
+		const uint8_t newMatrixSize = rowsOfNewMatrix * columnsOfNewMatrix;
+		auto* ptrToReturn = new double[newMatrixSize];
+		matrix matrixToReturn(rowsOfNewMatrix, columnsOfNewMatrix, ptrToReturn);
 
-		for (int i = 0; i < new_matrix_size; i++) 
+		for (int i = 0; i < this->m_rows; i++)
 		{
-
+			for (int j = 0; j < otherMatrix.m_columns; j++)
+			{
+				double x = 0;
+				for (int k = 0; k < this->m_columns; k++)
+				{
+					x += this->operator()(i, k) * otherMatrix(k, j);
+				}
+				matrixToReturn(i, j) = x;
+			}
 		}
-
-		//fill this matrix out with right constructor
-		matrix matrix_to_return;
-		return matrix_to_return;
+		return matrix(rowsOfNewMatrix, columnsOfNewMatrix, ptrToReturn);
 	}
-	std::cout << "Left matrix columns: " << this->m_columns << "Right matrix rows: " << other_matrix.m_rows;
+	std::cout << "Left matrix columns: " << +this->m_columns << "Right matrix rows: " << +otherMatrix.m_rows;
 	throw std::invalid_argument("Columns of left matrix must = rows of right matrix.");
 }
 
@@ -131,10 +137,9 @@ double& matrix::operator() (const int row, const int col) const
 {
 	if (row >= 0 && col >= 0 && col <= m_columns && row <= m_rows)
 	{
-		int row_of_element = row;
-		int col_of_element = col;
-		std::cout << "row: " << row << " col: " << col << std::endl;
-		return m_ptr_double[row_of_element * m_columns + col_of_element];
+		int rowOfElement = row;
+		int colOfElement = col;
+		return m_ptr_double[rowOfElement * m_columns + colOfElement];
 	}
 	std::cout << "row: " << row << " col: " << col << std::endl;
 	throw std::out_of_range("Invalid matrix index");

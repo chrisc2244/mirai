@@ -27,16 +27,16 @@ public:
 
 	//prints values in matrix		[0.4213][0.4213][0.4213]
 	//3x3 example, 6 values total	[0.4213][0.4213][0.4213]
-	static void print(const matrix& matrix_to_print);
+	static void print(const matrix& matrixToPrint);
 
 
 	//operators
-	matrix operator+(const matrix& other_matrix) const;
+	matrix operator+(const matrix& otherMatrix) const;
 
-	matrix operator-(const matrix& other_matrix) const;
+	matrix operator-(const matrix& otherMatrix) const;
 
 	//yet to be implemented
-	matrix operator*(const matrix& other_matrix) const;
+	matrix operator*(const matrix& otherMatrix) const;
 
 	//access element in matrix[index]
 	double& operator[](int index) const;
