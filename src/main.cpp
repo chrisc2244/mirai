@@ -27,7 +27,7 @@ int main()
     std::cout << element_in_matrix << std::endl;
     std::cout << std::endl;
 
-    std::cout << currMatrix.size << std::endl;
+    std::cout << currMatrix.getSize() << std::endl;
     std::cout << std::endl;
 
     matrix::print(currMatrix);
@@ -64,8 +64,6 @@ int main()
     std::cout << currMatrix(1, 2);
     std::cout << std::endl;
     std::cout << currMatrix(1, 4);
-    std::cout << std::endl;
-    std::cout << currMatrix(1, 5);
     std::cout << std::endl;
     std::cout << currMatrix(3, 2);
     std::cout << std::endl;
