@@ -131,10 +131,10 @@ double& matrix::operator[](const int index) const
 
 double& matrix::operator() (const int row, const int col) const
 {
-	if (row > 0 && col > 0 && col <= m_columns && row <= m_rows)
+	if (row >= 0 && col >= 0 && col <= m_columns && row <= m_rows)
 	{
-		int row_of_element = row - 1;
-		int col_of_element = col - 1;
+		int row_of_element = row;
+		int col_of_element = col;
 		std::cout << "row: " << row << " col: " << col << std::endl;
 		return m_ptr_double[row_of_element * m_columns + col_of_element];
 	}

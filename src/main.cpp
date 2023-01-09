@@ -11,8 +11,8 @@ int main()
     uint16_t width = 0;
     uint16_t height = 0;
     static std::vector<uint8_t> testrgbvec =
-        //ImageWrapper::decodeImageToRGBAVector("C:\\Users\\Chris\\Downloads\\DatasetMirai\\00000001_000.png", width, height);
-        ImageWrapper::decodeImageToRGBAVector("D:\\Downloads\\DatasetMirai\\00000001_000.png", width, height);
+        ImageWrapper::decodeImageToRGBAVector("C:\\Users\\Chris\\Downloads\\DatasetMirai\\00000001_000.png", width, height);
+        //ImageWrapper::decodeImageToRGBAVector("D:\\Downloads\\DatasetMirai\\00000001_000.png", width, height);
 
     static std::vector<pixel> testpixelvec =
         ImageWrapper::convertRGBAVectorToPixelVector(testrgbvec);
@@ -55,11 +55,11 @@ int main()
 
     matrix::print(currMatrix);
     std::cout << std::endl;
-    std::cout << currMatrix(1, 1);
+    std::cout << currMatrix(0, 0);
     std::cout << std::endl;
-    std::cout << currMatrix(2, 1);
+    std::cout << currMatrix(0, 1);
     std::cout << std::endl;
-    std::cout << currMatrix(3, 1);
+    std::cout << currMatrix(0, 2);
     std::cout << std::endl;
     std::cout << currMatrix(1, 2);
     std::cout << std::endl;

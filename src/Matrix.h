@@ -41,7 +41,7 @@ public:
 	//access element in matrix[index]
 	double& operator[](int index) const;
 
-	//access element in matrix in (row, col) form
+	//access element in matrix in (row, col) form starting at (0,0) for first element
 	double& operator() (int row, int col) const;
 
 private:
