@@ -71,6 +71,6 @@ int main()
     std::cout << std::endl;
 
 
-
+    std::cout << "Testing multiplying matrices: " << std::endl;
 
 }

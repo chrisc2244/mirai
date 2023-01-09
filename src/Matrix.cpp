@@ -3,7 +3,6 @@
 
 
 //should probably convert this to a template
-
 matrix::matrix() : m_rows(0), m_columns(0),m_size(0), m_ptr_double(nullptr) {}
 
 matrix::matrix(const uint8_t rows, const uint8_t columns, const std::vector<double> &values)
@@ -31,7 +30,6 @@ matrix::matrix(const uint8_t rows, const uint8_t columns, double* arrPtr)
 	m_size = rows * columns;
 	m_ptr_double = arrPtr;
 }
-
 
 uint8_t matrix::getRowAmount() const
 {
