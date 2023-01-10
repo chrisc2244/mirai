@@ -83,7 +83,6 @@ std::string Matrix::toString(const Matrix& MatrixToPrint)
 
 double Matrix::mutliplyMatricesIndexByIndexThenDivideBySize(const Matrix& matrixToMultiply)
 {
-	
 	if (this->m_columns == matrixToMultiply.m_columns && this->m_rows == matrixToMultiply.m_rows)
 	{
 		double sum = 0.0;
@@ -98,6 +97,26 @@ double Matrix::mutliplyMatricesIndexByIndexThenDivideBySize(const Matrix& matrix
 	}
 	throw std::invalid_argument("Matrices must be equal columns and rows");
 }
+
+
+Matrix Matrix::getSubMatrix(uint16_t start_row, uint16_t start_col, uint16_t window_rows, uint16_t window_cols)
+{
+	uint16_t windowSize = window_rows * window_cols;
+	auto* extractedWindowValues = new double[windowSize];
+
+	int i = 0;
+	for (uint16_t r = start_row; r < start_row + window_rows; ++r) {
+		for (uint16_t c = start_col; c < start_col + window_cols; ++c) {
+			extractedWindowValues[i] = (*this)(r, c);
+			i++;
+
+		}
+	}
+	return Matrix(window_rows, window_cols, extractedWindowValues);
+}
+
+
+
 
 Matrix Matrix::operator+ (const Matrix& otherMatrix) const
 {	
