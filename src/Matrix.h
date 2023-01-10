@@ -44,11 +44,15 @@ public:
 	//dot product
 	Matrix operator*(const Matrix& otherMatrix) const;
 
+	void operator=(const Matrix& otherMatrix);
+
 	//access element in Matrix[index]
 	double& operator[](uint16_t index) const;
 
 	//access element in Matrix in (row, col) form starting at (0,0) for first element
 	double& operator() (uint16_t row, uint16_t col) const;
+
+	
 
 private:
 
