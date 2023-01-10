@@ -17,6 +17,7 @@ public:
 
 	~Matrix();
 
+
 	//operations
 	//returns m_rows
 	uint16_t getRowAmount() const;
@@ -32,6 +33,8 @@ public:
 	static void print(const Matrix& MatrixToPrint);
 	
 	static std::string toString(const Matrix& MatrixToPrint);
+
+	double mutliplyMatricesIndexByIndexThenDivideBySize(const Matrix& matrixToMultiply);
 
 	//operators
 	Matrix operator+(const Matrix& otherMatrix) const;

@@ -2,7 +2,7 @@
 
 layer::layer() = default;
 
-layer::layer(const uint8_t number_of_nodes, const std::vector<node>& nodes)
+layer::layer(const uint8_t number_of_nodes, const std::vector<Node>& nodes)
 {
 	m_number_of_nodes_in_layer = number_of_nodes;
 	m_nodes = nodes;

@@ -1,28 +1,29 @@
 #pragma once
 #include <vector>
+#include "Matrix.h"
 
-class node
+
+class Node
 {
 
 public:
 
-	node();
-	node(const std::vector<double>& weights, double* ptrToInputDoubleArray);
+	Node();
+	Node(Matrix& weights, const std::vector<double>& inputGreyscaleValues);
 
-	std::vector<double> getWeights() const;
-	double* getPtrToInputDoubleArray() const;
-	void setPtrToOutputDoubleArray(double* ptrToOutputDoubleArray);
-	double* getPtrToOutputDoubleArray() const;
+
+	Matrix getWeights() const;
 	void setBias(uint8_t bias);
 	uint8_t getBias() const;
+	void applyFilterToInputVector();
 
 
 private:
 
-	std::vector<double> m_weights;
-	double* m_ptrToInputDoubleArray;
-	double* m_ptrToOutputDoubleArray;
+	Matrix m_weights;
+	std::vector<double> m_inputGreyscaleValues;
 	uint8_t m_bias;
+
 
 
 };

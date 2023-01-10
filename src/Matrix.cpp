@@ -82,6 +82,24 @@ std::string Matrix::toString(const Matrix& MatrixToPrint)
 	return str;
 }
 
+double Matrix::mutliplyMatricesIndexByIndexThenDivideBySize(const Matrix& matrixToMultiply)
+{
+	
+	if (this->m_columns == matrixToMultiply.m_columns && this->m_rows == matrixToMultiply.m_rows)
+	{
+		double sum = 0.0;
+		for (int r = 0; r < m_rows; r++)
+		{
+			for (int c = 0; c < m_columns; c++)
+			{
+				sum += (*this)[c + r * m_columns] * matrixToMultiply[c + r * m_columns];
+			}
+		}
+		return sum / m_size;
+	}
+	throw std::invalid_argument("Matrices must be equal columns and rows");
+}
+
 Matrix Matrix::operator+ (const Matrix& otherMatrix) const
 {	
 	if (otherMatrix.m_size == this->m_size && otherMatrix.m_columns == this->m_columns && otherMatrix.m_rows == this->m_rows)
