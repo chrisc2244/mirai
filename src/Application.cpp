@@ -32,6 +32,25 @@ void Application::update()
     // Update program logic here
     // Just set running to false to close the program for now
     m_Running = false;
+
+    // Test Image Wrapper
+    uint16_t width = 0;
+    uint16_t height = 0;
+
+    std::vector<unsigned char> vec = ImageWrapper::decodeImageToRGBAVector("res/images/00000001_000.png", width, height);
+    std::vector<pixel> pix = ImageWrapper::convertRGBAVectorToPixelVector(vec);
+    std::vector<double> doubs = ImageWrapper::convertPixelVectorToGreyscaleVector(pix);
+
+    std::cout << std::endl;
+
+    // Test Matrix
+    Matrix a(3, 3, doubs);
+    Matrix b(3, 3, doubs);
+    MIR::Log::writef("\na = \n%s\n", Matrix::toString(a).c_str());
+    MIR::Log::writef("b = \n%s\n", Matrix::toString(b).c_str());
+    MIR::Log::writeRaw("a dot b = \n");
+    Matrix c = a * b;
+    MIR::Log::writef("%s\n", Matrix::toString(c).c_str());
 }
 
 void Application::render()

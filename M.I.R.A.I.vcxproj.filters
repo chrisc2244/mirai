@@ -57,6 +57,15 @@
     <ClCompile Include="src\vendor\lodepng.cpp">
       <Filter>Source Files\vendor</Filter>
     </ClCompile>
+    <ClCompile Include="src\Node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Layer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Matrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h">
@@ -85,6 +94,15 @@
     </ClInclude>
     <ClInclude Include="src\vendor\lodepng.h">
       <Filter>Header Files\vendor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Layer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Matrix.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

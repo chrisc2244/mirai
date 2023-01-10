@@ -20,7 +20,7 @@ std::vector<uint8_t> ImageWrapper::decodeImageToRGBAVector(const char* filename,
 	{
 		width = w;
 		height = h;
-		std::cout << w << std::endl;
+		//std::cout << w << std::endl;
 	}
 
 	return imagepixels;
@@ -46,9 +46,31 @@ std::vector<pixel> ImageWrapper::convertRGBAVectorToPixelVector(const std::vecto
 	return pixelVectorToReturn;
 }
 
+//0 represents black, 1 represents white
+double ImageWrapper::convertPixelToGreyscale(pixel pixel)
+{
+	return (0.2126 * pixel.r + 0.7152 * pixel.g + 0.0722 * pixel.b) / 255.0;
+}
+
+
+std::vector<double> ImageWrapper::convertPixelVectorToGreyscaleVector(const std::vector<pixel>& pixels)
+{
+	std::vector<double> doubleVectorToReturn;
+
+	for (int i = 0; i < pixels.size(); i++)
+	{
+		double convertedPixel = convertPixelToGreyscale(pixels.at(i));
+		doubleVectorToReturn.push_back(convertedPixel);
+	}
+	return doubleVectorToReturn;
+}
+
+
+
 
 std::ostream& operator<<(std::ostream& stream, const pixel& pixel)
 {
-	stream << "R:" << pixel.r << " " << "G:" << pixel.g << " " << "B:" << pixel.b << " " << "A:" << pixel.a << " " << std::endl;
+	stream << "[" << "R:" << static_cast<int>(pixel.r) << " " << "G:" << static_cast<int>(pixel.g)
+		<< " " << "B:" << static_cast<int>(pixel.b) << " " << "A:" << static_cast<int>(pixel.a) << "]";
 	return stream;
 }

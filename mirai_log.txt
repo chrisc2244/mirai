@@ -1,6 +1,22 @@
 Log for "V.0.1" File: "mirai_log.txt"
-0.[15:41:44] INFO @ Log::Log(): Logging initialized
-1.[15:41:44] INFO @ Application->init(): Log created successfully
-2.[15:41:56] INFO @ PatientHandler::load(): Successfully loaded patient data!
-3.[15:42:00] INFO @ PatientHandler->populatePatients(): Successfully created 112120 patient objects!
+0.[23:44:41] INFO @ Log::Log(): Logging initialized
+1.[23:44:41] INFO @ Application->init(): Log created successfully
+2.[23:44:47] INFO @ PatientHandler::load(): Successfully loaded patient data!
+3.[23:44:50] INFO @ PatientHandler->populatePatients(): Successfully created 112120 patient objects!
+
+a = 
+[0.792157][0.780392][0.764706]
+[0.756863][0.764706][0.760784]
+[0.756863][0.752941][0.721569]
+
+b = 
+[0.792157][0.780392][0.764706]
+[0.756863][0.764706][0.760784]
+[0.756863][0.752941][0.721569]
+
+a dot b = 
+[1.796940][1.790742][1.751265]
+[1.754141][1.748251][1.709512]
+[1.715556][1.709727][1.672265]
+
 Program executed with 0 warnings and 0 errors
