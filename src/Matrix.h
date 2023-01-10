@@ -41,12 +41,15 @@ public:
 
 	//returns matrix of specified window. Remember, (0,0) is first element
 	//so getSubMatrix(3, 3, 2, 2) returns 2x2 window starting at (kinda) 4th row, 4th column
-	void getThenSetOutsideSubMatrix(Matrix* currentWindow, uint16_t startRow, uint16_t startCol, uint16_t windowRows, uint16_t windowCols);
+	
 
 
+	//same as below but returns a filled vector instead of a new matrix object
+	std::vector<double> getSubMatrixVector(uint16_t start_row, uint16_t start_col, uint16_t window_rows, uint16_t window_cols);
 
 
-
+	//returns matrix of specified window. Remember, (0,0) is first element
+	//so getSubMatrix(3, 3, 2, 2) returns 2x2 window starting at (kinda) 4th row, 4th column
 	//ignore this, I want it later
 	Matrix getSubMatrix(uint16_t start_row, uint16_t start_col, uint16_t window_rows, uint16_t window_cols);
 

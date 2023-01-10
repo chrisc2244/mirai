@@ -115,6 +115,21 @@ Matrix Matrix::getSubMatrix(uint16_t start_row, uint16_t start_col, uint16_t win
 	return Matrix(window_rows, window_cols, extractedWindowValues);
 }
 
+std::vector<double> Matrix::getSubMatrixVector(uint16_t start_row, uint16_t start_col, uint16_t window_rows, uint16_t window_cols)
+{
+	uint16_t windowSize = window_rows * window_cols;
+	std::vector<double> vectorToReturn;
+
+	int i = 0;
+	for (uint16_t r = start_row; r < start_row + window_rows; ++r) {
+		for (uint16_t c = start_col; c < start_col + window_cols; ++c) {
+			vectorToReturn.push_back((*this)(r, c));
+			i++;
+
+		}
+	}
+	return vectorToReturn;
+}
 
 
 
