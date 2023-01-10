@@ -48,8 +48,15 @@ void Application::update()
     Matrix b(3, 3, doubs);
     MIR::Log::writef("\na = \n%s\n", Matrix::toString(a).c_str());
     MIR::Log::writef("b = \n%s\n", Matrix::toString(b).c_str());
-    MIR::Log::writeRaw("a dot b = \n");
+    MIR::Log::writeRaw("c = a * b = \n");
     Matrix c = a * b;
+    MIR::Log::writef("%s\n", Matrix::toString(c).c_str());
+    MIR::Log::writefInfo("Application->Update()", "Testing Matrix Reassignment: ");
+    MIR::Log::writeRaw("c = a - b = \n");
+    c = a - b;
+    MIR::Log::writef("%s\n", Matrix::toString(c).c_str());
+    MIR::Log::writeRaw("c = a + b = \n");
+    c = a + b;
     MIR::Log::writef("%s\n", Matrix::toString(c).c_str());
 }
 

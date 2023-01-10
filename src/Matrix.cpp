@@ -34,7 +34,6 @@ Matrix::Matrix(const uint16_t rows, const uint16_t columns, double* arrPtr)
 
 Matrix::~Matrix()
 {
-
 	delete[] m_ptr_double;
 }
 
@@ -141,6 +140,22 @@ Matrix Matrix::operator*(const Matrix& otherMatrix) const
 		return MatrixToReturn;
 	}
 	throw std::invalid_argument("Columns of left Matrix must = rows of right Matrix.");
+}
+
+void Matrix::operator=(const Matrix& otherMatrix)
+{
+	this->m_columns = otherMatrix.m_columns;
+	this->m_rows = otherMatrix.m_rows;
+	this->m_size = otherMatrix.m_size;
+	delete[] this->m_ptr_double;
+	this->m_ptr_double = new double[this->m_size];
+	for (int i = 0; i < this->m_rows; i++)
+	{
+		for (int j = 0; j < otherMatrix.m_columns; j++)
+		{
+			m_ptr_double[i * this->m_columns + j] = otherMatrix(i,j);
+		}
+	}	
 }
 
 double& Matrix::operator[](const uint16_t index) const
