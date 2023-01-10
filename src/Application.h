@@ -1,6 +1,9 @@
 #pragma once
 #include "utils/Log.h"
 #include "PatientHandler.h"
+#include "Matrix.h"
+#include "ImageWrapper.h"
+#include "Image.h"
 
 class Application
 {

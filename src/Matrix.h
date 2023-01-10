@@ -1,53 +1,56 @@
 #pragma once
 #include <vector>
+#include <string>
 
-class matrix
+class Matrix
 {
 
 public:
 
 	//constructors
-	matrix();
+	Matrix();
 
 	//takes in rows, columns, and double vector obtianed from convertPixelVectorToGreyscaleVector() method
-	matrix(const uint8_t rows, const uint8_t columns, const std::vector<double> &values);
+	Matrix(const uint16_t rows, const uint16_t columns, const std::vector<double> &values);
 
-	matrix(const uint8_t rows, const uint8_t columns, double* arrPtr);
+	Matrix(const uint16_t rows, const uint16_t columns, double* arrPtr);
 
+	~Matrix();
 
 	//operations
 	//returns m_rows
-	uint8_t getRowAmount() const;
+	uint16_t getRowAmount() const;
 
 	//returns m_columns
-	uint8_t getColumnAmount() const;
+	uint16_t getColumnAmount() const;
 
-	//returns size of matrix
-	uint8_t getSize() const;
+	//returns size of Matrix
+	uint16_t getSize() const;
 
-	//prints values in matrix		[0.4213][0.4213][0.4213]
+	//prints values in Matrix		[0.4213][0.4213][0.4213]
 	//3x3 example, 6 values total	[0.4213][0.4213][0.4213]
-	static void print(const matrix& matrixToPrint);
-
+	static void print(const Matrix& MatrixToPrint);
+	
+	static std::string toString(const Matrix& MatrixToPrint);
 
 	//operators
-	matrix operator+(const matrix& otherMatrix) const;
+	Matrix operator+(const Matrix& otherMatrix) const;
 
-	matrix operator-(const matrix& otherMatrix) const;
+	Matrix operator-(const Matrix& otherMatrix) const;
 
-	//yet to be implemented
-	matrix operator*(const matrix& otherMatrix) const;
+	//dot product
+	Matrix operator*(const Matrix& otherMatrix) const;
 
-	//access element in matrix[index]
-	double& operator[](int index) const;
+	//access element in Matrix[index]
+	double& operator[](uint16_t index) const;
 
-	//access element in matrix in (row, col) form starting at (0,0) for first element
-	double& operator() (int row, int col) const;
+	//access element in Matrix in (row, col) form starting at (0,0) for first element
+	double& operator() (uint16_t row, uint16_t col) const;
 
 private:
 
-	uint8_t m_rows;
-	uint8_t m_columns;
-	uint8_t m_size;
+	uint16_t m_rows;
+	uint16_t m_columns;
+	uint16_t m_size;
 	double* m_ptr_double;
 };

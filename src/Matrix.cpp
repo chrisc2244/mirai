@@ -3,27 +3,27 @@
 
 
 //should probably convert this to a template
-matrix::matrix() : m_rows(0), m_columns(0),m_size(0), m_ptr_double(nullptr) {}
+Matrix::Matrix() : m_rows(0), m_columns(0),m_size(0), m_ptr_double(nullptr) {}
 
-matrix::matrix(const uint8_t rows, const uint8_t columns, const std::vector<double> &values)
+Matrix::Matrix(const uint16_t rows, const uint16_t columns, const std::vector<double> &values)
 {
 	m_rows = rows;
 	m_columns = columns;
 	m_size = rows * columns;
 	
-	auto* this_matrix = new double[m_size];
-	m_ptr_double = this_matrix;
+	auto* this_Matrix = new double[m_size];
+	m_ptr_double = this_Matrix;
 
-	for (int r = 0; r < rows; r++)
+	for (uint16_t r = 0; r < rows; r++)
 	{
-		for (int c = 0; c < columns; c++)
+		for (uint16_t c = 0; c < columns; c++)
 		{
-			this_matrix[c + r * columns] = values.at(c + r * columns);
+			this_Matrix[c + r * columns] = values.at(c + r * columns);
 		}
 	}
 }
 
-matrix::matrix(const uint8_t rows, const uint8_t columns, double* arrPtr)
+Matrix::Matrix(const uint16_t rows, const uint16_t columns, double* arrPtr)
 {
 	m_rows = rows;
 	m_columns = columns;
@@ -31,34 +31,58 @@ matrix::matrix(const uint8_t rows, const uint8_t columns, double* arrPtr)
 	m_ptr_double = arrPtr;
 }
 
-uint8_t matrix::getRowAmount() const
+
+Matrix::~Matrix()
+{
+
+	delete[] m_ptr_double;
+}
+
+uint16_t Matrix::getRowAmount() const
 {
 	return m_rows;
 }
 
-uint8_t matrix::getColumnAmount() const
+uint16_t Matrix::getColumnAmount() const
 {
 	return m_columns;
 }
 
-uint8_t matrix::getSize() const
+uint16_t Matrix::getSize() const
 {
 	return m_size;
 }
 
-void matrix::print(const matrix& matrixToPrint)
+void Matrix::print(const Matrix& MatrixToPrint)
 {
-	for (int i = 0; i < matrixToPrint.m_size; i++)
+	for (int i = 0; i < MatrixToPrint.m_size; i++)
 	{
-		std::cout << "[" << matrixToPrint[i] << "]";
-		if ((i + 1) % matrixToPrint.m_columns == 0)
+		std::cout << "[" << MatrixToPrint[i] << "]";
+		if ((i + 1) % MatrixToPrint.m_columns == 0)
 		{
 			std::cout << std::endl;
 		}
 	}
 }
 
-matrix matrix::operator+ (const matrix& otherMatrix) const
+std::string Matrix::toString(const Matrix& MatrixToPrint)
+{
+	std::string str = "";
+
+	for (int i = 0; i < MatrixToPrint.m_size; i++)
+	{
+		str.append("[");
+		str.append(std::to_string(MatrixToPrint[i]));
+		str.append("]");
+		if ((i + 1) % MatrixToPrint.m_columns == 0)
+		{
+			str.append("\n");
+		}
+	}
+	return str;
+}
+
+Matrix Matrix::operator+ (const Matrix& otherMatrix) const
 {	
 	if (otherMatrix.m_size == this->m_size && otherMatrix.m_columns == this->m_columns && otherMatrix.m_rows == this->m_rows)
 	{	
@@ -69,14 +93,13 @@ matrix matrix::operator+ (const matrix& otherMatrix) const
 			ptrToReturn[i] = otherMatrix[i] + (*this)[i];
 		}
 
-		matrix matrix_to_return(otherMatrix.m_rows, otherMatrix.m_columns, ptrToReturn);
+		Matrix matrix_to_return(otherMatrix.m_rows, otherMatrix.m_columns, ptrToReturn);
 		return matrix_to_return;
 	}
-		std::cout << "Left Matrix size: " << this->m_size << " Right matrix size: " << otherMatrix.m_size << std::endl;
 		throw std::invalid_argument("Cannot add matrices of different sizes.");
 }
 
-matrix matrix::operator-(const matrix& otherMatrix) const
+Matrix Matrix::operator-(const Matrix& otherMatrix) const
 {
 	if (otherMatrix.m_size == this->m_size && otherMatrix.m_columns == this->m_columns && otherMatrix.m_rows == this->m_rows)
 	{
@@ -87,22 +110,21 @@ matrix matrix::operator-(const matrix& otherMatrix) const
 			ptrToReturn[i] = otherMatrix[i] - (*this)[i];
 		}
 
-		matrix matrix_to_return(otherMatrix.m_rows, otherMatrix.m_columns, ptrToReturn);
+		Matrix matrix_to_return(otherMatrix.m_rows, otherMatrix.m_columns, ptrToReturn);
 		return matrix_to_return;
 	}
-	std::cout << "Left Matrix size: " << this->m_size << " Right matrix size: " << otherMatrix.m_size << std::endl;
 	throw std::invalid_argument("Cannot subtract matrices of different sizes.");
 }
 
-matrix matrix::operator*(const matrix& otherMatrix) const
+Matrix Matrix::operator*(const Matrix& otherMatrix) const
 {
 	if (this->m_columns == otherMatrix.m_rows)
 	{
-		const uint8_t rowsOfNewMatrix = this->m_rows;
-		const uint8_t columnsOfNewMatrix = otherMatrix.m_columns;
-		const uint8_t newMatrixSize = rowsOfNewMatrix * columnsOfNewMatrix;
+		const uint16_t rowsOfNewMatrix = this->m_rows;
+		const uint16_t columnsOfNewMatrix = otherMatrix.m_columns;
+		const uint16_t newMatrixSize = rowsOfNewMatrix * columnsOfNewMatrix;
 		auto* ptrToReturn = new double[newMatrixSize];
-		matrix matrixToReturn(rowsOfNewMatrix, columnsOfNewMatrix, ptrToReturn);
+		Matrix MatrixToReturn(rowsOfNewMatrix, columnsOfNewMatrix, ptrToReturn);
 
 		for (int i = 0; i < this->m_rows; i++)
 		{
@@ -113,35 +135,32 @@ matrix matrix::operator*(const matrix& otherMatrix) const
 				{
 					x += this->operator()(i, k) * otherMatrix(k, j);
 				}
-				matrixToReturn(i, j) = x;
+				MatrixToReturn(i, j) = x;
 			}
 		}
-		return matrix(rowsOfNewMatrix, columnsOfNewMatrix, ptrToReturn);
+		return MatrixToReturn;
 	}
-	std::cout << "Left matrix columns: " << +this->m_columns << "Right matrix rows: " << +otherMatrix.m_rows;
-	throw std::invalid_argument("Columns of left matrix must = rows of right matrix.");
+	throw std::invalid_argument("Columns of left Matrix must = rows of right Matrix.");
 }
 
-double& matrix::operator[](const int index) const
+double& Matrix::operator[](const uint16_t index) const
 {
 	
 	if (index >= m_size || index < 0)
 	{
-		std::cout << "Matrix index: [" << index << "] is out of bounds. Size of matrix: " << m_size << std::endl;
-		throw std::invalid_argument("");
+		throw std::invalid_argument("Matrix index out of bounds");
 	}
 	return m_ptr_double[index];
 }
 
-double& matrix::operator() (const int row, const int col) const
+double& Matrix::operator() (const uint16_t row, const uint16_t col) const
 {
 	if (row >= 0 && col >= 0 && col <= m_columns && row <= m_rows)
 	{
-		int rowOfElement = row;
-		int colOfElement = col;
+		uint16_t rowOfElement = row;
+		uint16_t colOfElement = col;
 		return m_ptr_double[rowOfElement * m_columns + colOfElement];
 	}
-	std::cout << "row: " << row << " col: " << col << std::endl;
-	throw std::out_of_range("Invalid matrix index");
+	throw std::out_of_range("Invalid Matrix index");
 }
 
