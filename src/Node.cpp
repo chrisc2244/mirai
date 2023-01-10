@@ -1,40 +1,41 @@
 #include "Node.h"
 
-node::node() = default;
+node::node() : m_weights(0), m_ptrToInputDoubleArray(nullptr), m_ptrToOutputDoubleArray(nullptr), m_bias(0) {}
 
-node::node(const std::vector<float>& weights, const std::vector<float>& input_float_vec)
+node::node(const std::vector<double>& weights, double* inputDoubleArray)
 {
 	m_weights = weights;
-	m_input_float_vec = input_float_vec;
-	m_bias = 0; //not included in constructor, just setting to 0 for now in case we want it later
+	m_ptrToInputDoubleArray = inputDoubleArray;
+	m_ptrToOutputDoubleArray = nullptr;
+	m_bias = 0;
 }
 
-std::vector<float> node::get_weights() 
+std::vector<double> node::getWeights() const
 {
 	return m_weights;
 }
 
-std::vector<float> node::get_input_float_vec() 
+double* node::getPtrToInputDoubleArray() const
 {
-	return m_input_float_vec;
+	return m_ptrToInputDoubleArray;
 }
 
-void node::set_output_vec(const std::vector<float>& output_float_vec)
+void node::setPtrToOutputDoubleArray(double* ptrToOutputDoubleArray)
 {
-	m_output_float_vec = output_float_vec;
+	m_ptrToOutputDoubleArray = ptrToOutputDoubleArray;
 }
 
-std::vector<float> node::get_output_float_vec()
+double* node::getPtrToOutputDoubleArray() const
 {
-	return m_output_float_vec;
+	return m_ptrToOutputDoubleArray;
 }
 
-void node::set_bias(const uint8_t bias)
+void node::setBias(const uint8_t bias)
 {
 	m_bias = bias;
 }
 
-uint8_t node::get_bias()
+uint8_t node::getBias() const
 {
 	return m_bias;
 }

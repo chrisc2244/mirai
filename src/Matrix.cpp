@@ -155,7 +155,7 @@ double& Matrix::operator[](const uint16_t index) const
 
 double& Matrix::operator() (const uint16_t row, const uint16_t col) const
 {
-	if (row >= 0 && col >= 0 && col <= m_columns && row <= m_rows)
+	if (col <= m_columns && row <= m_rows)
 	{
 		uint16_t rowOfElement = row;
 		uint16_t colOfElement = col;

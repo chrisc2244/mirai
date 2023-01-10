@@ -4,25 +4,24 @@
 class node
 {
 
-
 public:
 
 	node();
-	node(const std::vector<float>& weights, const std::vector<float>& input_float_vec);
+	node(const std::vector<double>& weights, double* ptrToInputDoubleArray);
 
-	std::vector<float> get_weights();
-	std::vector<float> get_input_float_vec();
-	void set_output_vec(const std::vector<float>& output_float_vec);
-	std::vector<float> get_output_float_vec();
-	void set_bias(uint8_t bias);
-	uint8_t get_bias();
+	std::vector<double> getWeights() const;
+	double* getPtrToInputDoubleArray() const;
+	void setPtrToOutputDoubleArray(double* ptrToOutputDoubleArray);
+	double* getPtrToOutputDoubleArray() const;
+	void setBias(uint8_t bias);
+	uint8_t getBias() const;
 
 
 private:
 
-	std::vector<float> m_weights;
-	std::vector<float> m_input_float_vec;
-	std::vector<float> m_output_float_vec;
+	std::vector<double> m_weights;
+	double* m_ptrToInputDoubleArray;
+	double* m_ptrToOutputDoubleArray;
 	uint8_t m_bias;
 
 
