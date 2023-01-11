@@ -1,35 +1,40 @@
 #include "Layer.h"
 
-layer::layer() = default;
+Layer::Layer() = default;
 
-layer::layer(const uint8_t number_of_nodes, const std::vector<Node>& nodes)
+Layer::Layer(const uint8_t numberOfNodes, const std::vector<Node>& nodes)
 {
-	m_number_of_nodes_in_layer = number_of_nodes;
+	m_number_of_nodes_in_layer = numberOfNodes;
 	m_nodes = nodes;
 }
 
 
-void layer::forward_propagate() 
+void Layer::forwardPropagate() 
 {
 
 }
 
-void layer::backward_propagate()
-{
-	
-}
-
-void layer::apply_activation_function()
+void Layer::backwardPropagate()
 {
 	
 }
 
-std::vector<std::vector<float>> layer::get_full_layer_output()
+void Layer::applyActivationFunction()
+{
+	
+}
+
+std::vector<std::vector<float>> Layer::getFullLayerOutput()
 {
 	return m_full_layer_output;
 }
 
-std::vector<std::vector<float>> layer::get_full_layer_input()
+std::vector<std::vector<float>> Layer::getFullLayerInput()
 {
 	return m_full_layer_input;
+}
+
+void Layer::slideWindowThroughInputMatrix()
+{
+
 }

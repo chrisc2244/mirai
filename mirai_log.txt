@@ -1,6 +1,6 @@
 Log for "V.0.1" File: "mirai_log.txt"
-0.[07:25:16] INFO @ Log::Log(): Logging initialized
-1.[07:25:16] INFO @ Application->init(): Log created successfully
+0.[08:00:50] INFO @ Log::Log(): Logging initialized
+1.[08:00:50] INFO @ Application->init(): Log created successfully
 
 a = 
 [0.792157][0.780392][0.764706][0.756863][0.764706]
@@ -22,7 +22,7 @@ New Sub Matrix b =
 [0.309804][0.266667][0.223529]
 
 Getting sub matrix at (4, 4)
-2.[07:25:16] WARNING @ Application::update()->putSubMatrix(): TESTING: putSubmatrix failure : Invalid Matrix index or size
+2.[08:00:51] WARNING @ Application::update()->putSubMatrix(): TESTING: putSubmatrix failure : Invalid Matrix index or size
 Program executed with 1 warnings and 0 errors
 Warnings:
 	1: TESTING: putSubmatrix failure : Invalid Matrix index or size @ Application::update()->putSubMatrix()

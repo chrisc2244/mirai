@@ -2,21 +2,21 @@
 #include "Node.h"
 #include <vector>
 
-class layer
+class Layer
 
 {
 
 public:
 
-	layer();
-	layer(const uint8_t number_of_nodes, const std::vector<Node>& nodes);
+	Layer();
+	Layer(const uint8_t numberOfNodes, const std::vector<Node>& nodes);
 
-	static void forward_propagate();
-	static void backward_propagate();
-	static void apply_activation_function();
-	std::vector<std::vector<float>> get_full_layer_output();
-	std::vector<std::vector<float>> get_full_layer_input();
-
+	static void forwardPropagate();
+	static void backwardPropagate();
+	static void applyActivationFunction();
+	std::vector<std::vector<float>> getFullLayerOutput();
+	std::vector<std::vector<float>> getFullLayerInput();
+	void slideWindowThroughInputMatrix();
 
 private:
 
