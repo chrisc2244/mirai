@@ -19,10 +19,10 @@ void Application::init()
     MIR::Log::writeInfo("Application->init()", "Log created successfully");
 
     // Patient Population:
-    if (!m_PatientHandler.load("res/test-data/test.csv"))
+    /*if (!m_PatientHandler.load("res/test-data/test.csv"))
     {
         exitFailure();
-    }
+    }*/
 
     m_Running = true;
 }
@@ -43,21 +43,39 @@ void Application::update()
 
     std::cout << std::endl;
 
-    // Test Matrix
-    Matrix a(3, 3, doubs);
-    Matrix b(3, 3, doubs);
+    // Test Matrix that contains the image data
+    Matrix a(5, 5, doubs);
+    
+    // Matrix we want to contain a submatrix of the image data
+    Matrix b(3, 3);
+
+    // Logging and printing stuff
     MIR::Log::writef("\na = \n%s\n", Matrix::toString(a).c_str());
-    MIR::Log::writef("b = \n%s\n", Matrix::toString(b).c_str());
-    MIR::Log::writeRaw("c = a * b = \n");
-    Matrix c = a * b;
-    MIR::Log::writef("%s\n", Matrix::toString(c).c_str());
-    MIR::Log::writefInfo("Application->Update()", "Testing Matrix Reassignment: ");
-    MIR::Log::writeRaw("c = a - b = \n");
-    c = a - b;
-    MIR::Log::writef("%s\n", Matrix::toString(c).c_str());
-    MIR::Log::writeRaw("c = a + b = \n");
-    c = a + b;
-    MIR::Log::writef("%s\n", Matrix::toString(c).c_str());
+    MIR::Log::writef("Before Putting Sub Matrix b = \n%s\n", Matrix::toString(b).c_str());
+    MIR::Log::writeRaw("Getting sub matrix at (2, 2)\n");
+
+    // Trying to get a matrix that is in bounds
+    try
+    {
+        a.putSubMatrix(2, 2, b); // It puts the submatrix of a into b
+        MIR::Log::writef("\nNew Sub Matrix b = \n%s\n", Matrix::toString(b).c_str());
+    }
+    catch (std::out_of_range e)
+    {
+        MIR::Log::writefEr("Application::update()->putSubMatrix()", "putSubmatrix failure : %s", e.what());
+    }
+    
+    MIR::Log::writeRaw("Getting sub matrix at (4, 4)\n");
+    // Trying to put submatrix that doesn't exits at (4,4)
+    try
+    {
+        a.putSubMatrix(4, 4, b); // It puts the submatrix of a into b
+        MIR::Log::writef("\nNew Sub Matrix b = \n%s\n", Matrix::toString(b).c_str());
+    }
+    catch (std::out_of_range e)
+    {
+        MIR::Log::writefWarn("Application::update()->putSubMatrix()", "TESTING: putSubmatrix failure : %s", e.what());
+    }
 }
 
 void Application::render()
