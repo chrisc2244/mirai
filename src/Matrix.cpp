@@ -31,6 +31,24 @@ Matrix::Matrix(const uint16_t rows, const uint16_t columns, double* arrPtr)
 	m_ptr_double = arrPtr;
 }
 
+Matrix::Matrix(const uint16_t rows, const uint16_t columns, double default_value)
+{
+	m_rows = rows;
+	m_columns = columns;
+	m_size = rows * columns;
+
+	auto* this_Matrix = new double[m_size];
+	m_ptr_double = this_Matrix;
+
+	for (uint16_t r = 0; r < rows; r++)
+	{
+		for (uint16_t c = 0; c < columns; c++)
+		{
+			this_Matrix[c + r * columns] = default_value;
+		}
+	}
+}
+
 
 Matrix::~Matrix()
 {
@@ -177,5 +195,21 @@ double& Matrix::operator() (const uint16_t row, const uint16_t col) const
 		return m_ptr_double[rowOfElement * m_columns + colOfElement];
 	}
 	throw std::out_of_range("Invalid Matrix index");
+}
+
+void Matrix::putSubMatrix(uint16_t startcol, uint16_t startrow, Matrix& destination)
+{
+
+	// Do error checking here to make sure that indexes are in range with width and height
+	if (startcol + destination.getColumnAmount() > m_columns ||
+		startrow + destination.getRowAmount() > m_rows)
+	{
+		throw std::out_of_range("Invalid Matrix index or size");
+	}
+	for (uint16_t r = startrow; r < startrow + destination.getRowAmount(); r++) {
+		for (uint16_t c = startcol; c < startcol + destination.getColumnAmount(); c++) {
+			destination(r-startrow, c-startcol) = (*this)(r, c);
+		}
+	}
 }
 

@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <string>
-
+#include <stdexcept>
 class Matrix
 {
 
@@ -14,6 +14,9 @@ public:
 	Matrix(const uint16_t rows, const uint16_t columns, const std::vector<double> &values);
 
 	Matrix(const uint16_t rows, const uint16_t columns, double* arrPtr);
+
+	// Constructs a matrix of columns x rows size, and initializes every value to default_value param
+	Matrix(const uint16_t rows, const uint16_t columns, double default_value = 0);
 
 	~Matrix();
 
@@ -49,7 +52,17 @@ public:
 	//access element in Matrix in (row, col) form starting at (0,0) for first element
 	double& operator() (uint16_t row, uint16_t col) const;
 
-	
+	/**
+	* Places a submatrix of the CALLING object into the destination matrix, note that destination matrix
+	* must have a width and height in columns for this function to work.
+	*
+	* @param startcol - The column (x index) of the first element to put in the submatrix
+	* @param startrow - The row (y index) of the first element to put in the submatrix
+	* @param destination - A reference to an intialized matrix in which the put the submatrix
+	*
+	* @throws out_of_bounds exceptions if startcol, startrow, or that index + destination columns and rows is out of bounds.
+	*/
+	void putSubMatrix(uint16_t startcol, uint16_t startrow, Matrix& destination);
 
 private:
 
