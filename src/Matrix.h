@@ -54,7 +54,7 @@ public:
 
 	/**
 	* Places a submatrix of the CALLING object into the destination matrix, note that destination matrix
-	* must have a width and height in columns for this function to work.
+	* must have a width and height in columns and rows for this function to work.
 	*
 	* @param startcol - The column (x index) of the first element to put in the submatrix
 	* @param startrow - The row (y index) of the first element to put in the submatrix
