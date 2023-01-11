@@ -29,6 +29,8 @@ public:
 
     // Returns a pointer to the application 
     static Application* getInstance();
+
+    static void quit();
 private:
     bool m_Running;
     PatientHandler m_PatientHandler;

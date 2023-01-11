@@ -1,29 +1,8 @@
 Log for "V.0.1" File: "mirai_log.txt"
-0.[08:00:50] INFO @ Log::Log(): Logging initialized
-1.[08:00:50] INFO @ Application->init(): Log created successfully
-
-a = 
-[0.792157][0.780392][0.764706][0.756863][0.764706]
-[0.760784][0.756863][0.752941][0.721569][0.717647]
-[0.721569][0.705882][0.701961][0.690196][0.658824]
-[0.647059][0.615686][0.556863][0.513725][0.462745]
-[0.411765][0.360784][0.309804][0.266667][0.223529]
-
-Before Putting Sub Matrix b = 
-[0.000000][0.000000][0.000000]
-[0.000000][0.000000][0.000000]
-[0.000000][0.000000][0.000000]
-
-Getting sub matrix at (2, 2)
-
-New Sub Matrix b = 
-[0.701961][0.690196][0.658824]
-[0.556863][0.513725][0.462745]
-[0.309804][0.266667][0.223529]
-
-Getting sub matrix at (4, 4)
-2.[08:00:51] WARNING @ Application::update()->putSubMatrix(): TESTING: putSubmatrix failure : Invalid Matrix index or size
+0.[16:27:30] INFO @ Log::Log(): Logging initialized
+1.[16:27:30] INFO @ Application->init(): Log created successfully
+2.[16:27:30] WARNING @ Application->init(): Patient Loading disabled, to renable set LOAD_PATIENTS to 1 in Application.cpp
 Program executed with 1 warnings and 0 errors
 Warnings:
-	1: TESTING: putSubmatrix failure : Invalid Matrix index or size @ Application::update()->putSubMatrix()
+	1: Patient Loading disabled, to renable set LOAD_PATIENTS to 1 in Application.cpp @ Application->init()
 		 See Log Line #: 2
