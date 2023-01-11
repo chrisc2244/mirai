@@ -7,21 +7,20 @@ class Node
 {
 
 public:
-
 	Node();
-	Node(Matrix& weights, const std::vector<double>& inputGreyscaleValues);
+	Node(Matrix* weights, int bias);
 
 
 	Matrix getWeights() const;
 	void setBias(uint8_t bias);
-	uint8_t getBias() const;
-	void applyFilterToInputVector();
+	int getBias() const;
+	void applyFilter(Matrix& currentWindow);
 
+	void printProcessedResults();
 
 private:
 
-	Matrix m_weights;
-	std::vector<double> m_inputGreyscaleValues;
+	Matrix m_filter;
 	uint8_t m_bias;
 	std::vector<double> m_processedResults;
 
