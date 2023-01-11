@@ -1,4 +1,5 @@
 #include "Node.h"
+#include "Matrix.h"
 
 Node::Node() : m_weights(), m_inputGreyscaleValues(), m_bias(0) {}
 

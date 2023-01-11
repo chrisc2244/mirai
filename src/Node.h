@@ -23,7 +23,7 @@ private:
 	Matrix m_weights;
 	std::vector<double> m_inputGreyscaleValues;
 	uint8_t m_bias;
-
+	std::vector<double> m_processedResults;
 
 
 };
