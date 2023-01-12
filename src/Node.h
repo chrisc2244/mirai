@@ -15,7 +15,7 @@ public:
 	void setBias(uint8_t bias);
 	int getBias() const;
 	void applyFilter(Matrix& currentWindow);
-
+	void setFilter(Matrix& weights);
 	void printProcessedResults();
 
 

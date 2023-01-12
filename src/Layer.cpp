@@ -21,33 +21,26 @@ void Layer::init(Matrix& inputMatrix)
 {
 	m_inputMatrix = inputMatrix;
 
+	//creates empty 4x4 matrix to be used as window
 	Matrix window(4, 4);
 	m_window = window;
 
-	//fill m_window with first window at (0,0)
+	//populate m_window with first 4x4 window of input at (0,0)
 	m_inputMatrix.putSubMatrix(m_currentWindowCol, m_currentWindowRow, m_window);
-
-	/*
-	std::cout << "Layer.cpp line 39, checking Layer::m_window filled correctly (GOOD): " << std::endl;
-	Matrix::print(m_window);
-	std::cout << std::endl;
-	*/
 
 	/*
 	 * Initialize Nodes with their weights, eventually we'll need to initialize these weight matrices
 	 * with the previous batch's data from a txt file
 	 */
+
 	Matrix weights1(4, 4, 0.25);
-	Node node1(weights1, 1);
-	m_node1 = node1;
+	m_node1.setFilter(weights1);
 
 	Matrix weights2(4, 4, 0.5);
-	Node node2(weights2, 1);
-	m_node2 = node2;
+	m_node2.setFilter(weights2);
 
 	Matrix weights3(4, 4, 0.75);
-	Node node3(weights3, 1);
-	m_node3 = node3;
+	m_node3.setFilter(weights3);
 }
 
 
@@ -78,35 +71,50 @@ std::vector<std::vector<double>> Layer::getFullLayerInput()
 
 void Layer::convolve()
 {
-	//update window here BEFORE applying filter!!
-	m_inputMatrix;
 
-	//matrix to update
-	//std::cout << "printing m_window at ln 95, Layer.cpp: " << std::endl;
-	//Matrix::print(m_window);
+	Matrix nextWindow = m_inputMatrix.getSubMatrix(m_currentWindowRow, m_currentWindowCol,
+		m_window.getRowAmount(), m_window.getColumnAmount());
 
-
-
-
+	//to update this every frame, window starts at 0,0
+	nextWindow.putSubMatrix(0, 0, m_window);
 
 	m_node1.applyFilter(m_window);
-	//m_node1.printProcessedResults();
-
 	m_node2.applyFilter(m_window);
-	//m_node2.printProcessedResults();
-
 	m_node3.applyFilter(m_window);
-	//m_node3.printProcessedResults();
+
+	//TODO: scuffed af bounds checking, fix this later
+	//this doesnt work lol, out of bounds around 1022
+	if (m_currentWindowCol < m_inputMatrix.getColumnAmount())
+	{
+		m_currentWindowCol++;
+
+	}
+	else if (m_currentWindowRow < m_inputMatrix.getRowAmount()) {
+		m_currentWindowCol = 0;
+		m_currentWindowRow++;
+	}
+	else
+	{
+		throw std::out_of_range("m_currentWindowCol or m_currentWindowRow attempting to go out of bounds of m_window");
+	}
+
+	m_count++;
+	std::cout << m_count << std::endl;
 }
 
 void Layer::getOutputOfNodes()
 {
-
-
+	//TODO: this stuff below
+	//fill storage matrix here for each node each tick
+	// need to figure out? how big output matrix for each node needs to be...
+	//then initialize that and fill it index by index here 
 
 	double node1Result = m_node1.getProcessedResult();
+	std::cout << node1Result << std::endl;
 	double node2Result = m_node2.getProcessedResult();
+	std::cout << node2Result << std::endl;
 	double node3Result = m_node3.getProcessedResult();
+	std::cout << node3Result << std::endl;
 }
 
 void Layer::step()

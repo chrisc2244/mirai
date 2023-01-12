@@ -64,7 +64,7 @@ void Application::update()
 
 
     // Just set running to false to close the program for now
-    quit();
+    //quit();
 }
 
 void Application::render()

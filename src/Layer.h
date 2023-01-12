@@ -59,4 +59,7 @@ private:
 	Node m_node2;
 	Node m_node3;
 
+	//using this to test ignoire it
+	int m_count;
+
 };

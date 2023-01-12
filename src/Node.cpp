@@ -49,11 +49,15 @@ void Node::applyFilter(Matrix& currentWindow)
 	*/
 
 	double valueOfFilterAtCurrentWindow = currentWindow.mutliplyMatricesIndexByIndexThenDivideBySize(m_filter);
-
-
+	m_processedResult = valueOfFilterAtCurrentWindow;
 
 	//std::cout << "testing valueOfFilterAtCurrentWindow: Line 49 Node.cpp: " << valueOfFilterAtCurrentWindow << std::endl;
 	m_processedResults.push_back(valueOfFilterAtCurrentWindow);
+}
+
+void Node::setFilter(Matrix& weights)
+{
+	m_filter = weights;
 }
 
 void Node::printProcessedResults()
