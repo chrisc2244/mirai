@@ -21,9 +21,10 @@ void Application::init()
     MIR::Log::writeInfo("Application->init()", "Log created successfully");
 
 
+    // Initialize Patient Handler 
 #if LOAD_PATIENTS 
     MIR::Log::writeInfo("Application->init()", "Attempting to load patient data...");
-    // Patient Population:
+    // Load and Construct Patient Population:
     if (!m_PatientHandler.load("res/test-data/test.csv"))
     {
         MIR::Log::writeEr("Application->init()", "Patient Loading failed, terminating program...");
@@ -33,6 +34,7 @@ void Application::init()
     MIR::Log::writeWarn("Application->init()", "Patient Loading disabled, to renable set LOAD_PATIENTS to 1 in Application.cpp");
 #endif
 
+    // Start the main application loop
     m_Running = true;
 }
 
@@ -57,12 +59,13 @@ void Application::run()
     while(m_Running)
     {
         update();
-        //render();
+        //render(); No rendering currently
     }
 }
 
-void Application::exitFailure()
+void Application::exitFailure(const char* err)
 {
+    MIR::Log::writefEr("Application::exitFailure()", "%s", err);
     // Clean up the log if possible
     MIR::Log::close();
 

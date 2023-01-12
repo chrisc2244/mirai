@@ -55,21 +55,6 @@ Matrix::~Matrix()
 	delete[] m_ptr_double;
 }
 
-uint16_t Matrix::getRowAmount() const
-{
-	return m_rows;
-}
-
-uint16_t Matrix::getColumnAmount() const
-{
-	return m_columns;
-}
-
-uint16_t Matrix::getSize() const
-{
-	return m_size;
-}
-
 void Matrix::print(const Matrix& MatrixToPrint)
 {
 	for (int i = 0; i < MatrixToPrint.m_size; i++)
@@ -82,16 +67,16 @@ void Matrix::print(const Matrix& MatrixToPrint)
 	}
 }
 
-std::string Matrix::toString(const Matrix& MatrixToPrint)
+std::string Matrix::toString(const Matrix& matrix)
 {
 	std::string str = "";
 
-	for (int i = 0; i < MatrixToPrint.m_size; i++)
+	for (int i = 0; i < matrix.m_size; i++)
 	{
 		str.append("[");
-		str.append(std::to_string(MatrixToPrint[i]));
+		str.append(std::to_string(matrix[i]));
 		str.append("]");
-		if ((i + 1) % MatrixToPrint.m_columns == 0)
+		if ((i + 1) % matrix.m_columns == 0)
 		{
 			str.append("\n");
 		}
