@@ -9,14 +9,20 @@ class Layer
 public:
 
 	Layer();
-	Layer(const uint8_t numberOfNodes, const std::vector<Node>& nodes);
+	Layer(const Matrix& inputMatrix);
+	Layer(const uint8_t numberOfNodes, const std::vector<Node>& nodes, Matrix& inputMatrix);
+
+	void init();
 
 	//none of this block implemented yet
 	static void forwardPropagate();
 	static void backwardPropagate();
 	static void applyActivationFunction();
-	std::vector<std::vector<double>> getFullLayerOutput();
+	std::vector<std::vector<Matrix>> getFullLayerOutput();
 	std::vector<std::vector<double>> getFullLayerInput();
+	void convolve();
+	void getOutputs();
+	void step();
 
 
 
@@ -42,9 +48,11 @@ private:
 
 
 	uint16_t m_numberOfNodesInLayer;
-	std::vector<std::vector<double>> m_fullLayerOutput;
+	std::vector<std::vector<Matrix>> m_fullLayerOutput;
 	std::vector<std::vector<double>> m_fullLayerInput;
-	std::vector<Node> m_listOfNodes;
+	std::vector<Node> m_vectorOfCurrentNodes;
+	Matrix m_window;
+	Matrix m_inputMatrix;
 	Node m_node1;
 	Node m_node2;
 	Node m_node3;

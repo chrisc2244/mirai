@@ -9,10 +9,11 @@ Application::Application() : m_Running(false)
     Application::m_Instance = this;
 }
 
-Application::~Application() {
+Application::~Application()
+{
     // Close the Log when the application ends
     MIR::Log::close();
-}
+} 
 
 void Application::init()
 {
@@ -21,6 +22,21 @@ void Application::init()
     MIR::Log::writeInfo("Application->init()", "Log created successfully");
 
 
+    //TODO: MOVE THIS STUFF INTO NETWORK
+    //image setup, doubs is image data input ready for processing/iteration
+    uint16_t width = 0;
+    uint16_t height = 0;
+    std::vector<unsigned char> vec = ImageWrapper::decodeImageToRGBAVector("res/images/00000001_000.png", width, height);
+    std::vector<pixel> pix = ImageWrapper::convertRGBAVectorToPixelVector(vec);
+    std::vector<double> doubs = ImageWrapper::convertPixelVectorToGreyscaleVector(pix);
+	Matrix firstInputMatrix(1024, 1024, doubs);
+
+    //initialize layer with it's nodes vector
+    Layer layer1(firstInputMatrix);
+    layer1.init();
+
+
+    
     // Initialize Patient Handler 
 #if LOAD_PATIENTS 
     MIR::Log::writeInfo("Application->init()", "Attempting to load patient data...");
@@ -37,10 +53,16 @@ void Application::init()
     // Start the main application loop
     m_Running = true;
 }
-
+	
 void Application::update()
 {
-    // Update program logic here
+	// Update program logic here
+
+
+
+
+
+
     // Just set running to false to close the program for now
     quit();
 }
@@ -59,6 +81,7 @@ void Application::run()
     while(m_Running)
     {
         update();
+        
         //render(); No rendering currently
     }
 }

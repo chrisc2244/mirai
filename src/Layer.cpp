@@ -7,12 +7,44 @@ Layer::Layer() : m_numberOfNodesInLayer(0) {}
 //m_currentColumnPos(0), m_currentRowPos(0) 
 
 //not using this yet, dunno how I wanna set this up yet, need more research
-Layer::Layer(const uint8_t numberOfNodes, const std::vector<Node>& nodes)
+Layer::Layer(const uint8_t numberOfNodes, const std::vector<Node>& nodes, Matrix& inputMatrix)
 {
-	//m_currentColumnPos = 0;
-	//m_currentRowPos = 0;
+	m_vectorOfCurrentNodes = nodes;
 	m_numberOfNodesInLayer = numberOfNodes;
+	m_inputMatrix = inputMatrix;
 	
+}
+
+Layer::Layer(const Matrix& inputMatrix)
+{
+	m_inputMatrix = inputMatrix;
+	m_numberOfNodesInLayer = 0;
+}
+
+void Layer::init()
+{
+	//create window that will be passed to nodes each iteration
+	auto* windowPointer = new double[16];
+	Matrix window(4, 4, windowPointer);
+	m_window = window;
+
+	/*
+	 * Initialize Nodes with their weights, eventually we'll need to initialize these weight matrices
+	 * with the previous epoch's data from a txt file
+	 */
+	Matrix weights1(4, 4, 0.25);
+	Node node1(&weights1, 1);
+	m_node1 = node1;
+
+	Matrix weights2(4, 4, 0.5);
+	Node node2(&weights2, 1);
+	m_node2 = node2;
+
+	Matrix weights3(4, 4, 0.75);
+	Node node3(&weights3, 1);
+	m_node3 = node3;
+
+
 }
 
 
@@ -31,7 +63,7 @@ void Layer::applyActivationFunction()
 	
 }
 
-std::vector<std::vector<double>> Layer::getFullLayerOutput()
+std::vector<std::vector<Matrix>> Layer::getFullLayerOutput()
 {
 	return m_fullLayerOutput;
 }
@@ -39,6 +71,21 @@ std::vector<std::vector<double>> Layer::getFullLayerOutput()
 std::vector<std::vector<double>> Layer::getFullLayerInput()
 {
 	return m_fullLayerInput;
+}
+
+void Layer::convolve()
+{
+
+}
+
+void Layer::getOutputs()
+{
+}
+
+void Layer::step()
+{
+	convolve();
+	getOutputs();
 }
 
 /*

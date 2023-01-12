@@ -4,6 +4,9 @@
 #include "Matrix.h"
 #include "ImageWrapper.h"
 #include "Image.h"
+#include "Layer.h"
+#include "Node.h"
+#include "Network.h"
 
 class Application
 {
@@ -37,4 +40,8 @@ private:
     PatientHandler m_PatientHandler;
 
     static Application* m_Instance;
+
+    Layer m_layer1;
+    Layer m_layer2;
+    Layer m_layer3;
 };

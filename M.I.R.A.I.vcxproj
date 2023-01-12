@@ -25,6 +25,7 @@
     <ClCompile Include="src\Layer.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Matrix.cpp" />
+    <ClCompile Include="src\Network.cpp" />
     <ClCompile Include="src\Node.cpp" />
     <ClCompile Include="src\Patient.cpp" />
     <ClCompile Include="src\PatientHandler.cpp" />
@@ -39,6 +40,7 @@
     <ClInclude Include="src\ImageWrapper.h" />
     <ClInclude Include="src\Layer.h" />
     <ClInclude Include="src\Matrix.h" />
+    <ClInclude Include="src\Network.h" />
     <ClInclude Include="src\Node.h" />
     <ClInclude Include="src\Patient.h" />
     <ClInclude Include="src\PatientHandler.h" />
