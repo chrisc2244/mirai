@@ -82,24 +82,25 @@ void Layer::convolve()
 	m_node2.applyFilter(m_window);
 	m_node3.applyFilter(m_window);
 
-	//TODO: scuffed af bounds checking, fix this later
-	//this doesnt work lol, out of bounds around 1022
-	if (m_currentWindowCol < m_inputMatrix.getColumnAmount())
+	//TODO: scuffed af bounds checking but it works... maybe fix it later :D
+	if (m_count != 1042440)
 	{
-		m_currentWindowCol++;
+		if (m_currentWindowCol < m_inputMatrix.getColumnAmount() - m_window.getColumnAmount())
+		{
+			m_currentWindowCol++;
 
+		}
+		else if (m_currentWindowRow < m_inputMatrix.getRowAmount() - m_window.getRowAmount())
+		{
+			m_currentWindowCol = 0;
+			m_currentWindowRow++;
+		}
+		else
+		{
+			throw std::out_of_range("m_currentWindowCol or m_currentWindowRow attempting to go out of bounds of m_window");
+		}
+		m_count++;
 	}
-	else if (m_currentWindowRow < m_inputMatrix.getRowAmount()) {
-		m_currentWindowCol = 0;
-		m_currentWindowRow++;
-	}
-	else
-	{
-		throw std::out_of_range("m_currentWindowCol or m_currentWindowRow attempting to go out of bounds of m_window");
-	}
-
-	m_count++;
-	std::cout << m_count << std::endl;
 }
 
 void Layer::getOutputOfNodes()
@@ -110,11 +111,11 @@ void Layer::getOutputOfNodes()
 	//then initialize that and fill it index by index here 
 
 	double node1Result = m_node1.getProcessedResult();
-	std::cout << node1Result << std::endl;
+	//std::cout << node1Result << std::endl;
 	double node2Result = m_node2.getProcessedResult();
-	std::cout << node2Result << std::endl;
+	//std::cout << node2Result << std::endl;
 	double node3Result = m_node3.getProcessedResult();
-	std::cout << node3Result << std::endl;
+	//std::cout << node3Result << std::endl;
 }
 
 void Layer::step()

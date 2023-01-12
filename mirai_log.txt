@@ -1,4 +1,0 @@
-Log for "V.0.1" File: "mirai_log.txt"
-0.[18:01:07] INFO @ Log::Log(): Logging initialized
-1.[18:01:07] INFO @ Application->init(): Log created successfully
-2.[18:01:08] WARNING @ Application->init(): Patient Loading disabled, to renable set LOAD_PATIENTS to 1 in Application.cpp
