@@ -59,46 +59,49 @@ namespace MIR
 	{
 		if (DEBUG)
 		{
-			//Print the summary of warnings and errors 
-			std::string finalMessage = "Program executed with " + std::to_string(m_Warnings.size()) + " warnings and " + std::to_string(m_Errors.size()) + " errors\n";
-			writeRaw(finalMessage.c_str());
-
-			if (m_Warnings.size() > 0)
+			if(m_Created)
 			{
-				//Warnings
-				writeRaw("Warnings:\n");
-				int count = 1;
-				std::string line = "\t";
-				for (logInfo linfo : m_Warnings)
-				{
-					line = "\t";
-					std::string msg(linfo.logMessage);
-					std::string loc(linfo.codeLocation);
-					line += std::to_string(count) + ": " + msg + " @ " + loc + "\n\t\t See Log Line #: " + std::to_string(linfo.logLine) + "\n";
-					writeRaw(line.c_str());
-					count++;
-				}
-			}
+				//Print the summary of warnings and errors 
+				std::string finalMessage = "Program executed with " + std::to_string(m_Warnings.size()) + " warnings and " + std::to_string(m_Errors.size()) + " errors\n";
+				writeRaw(finalMessage.c_str());
 
-			if (m_Errors.size() > 0)
-			{
-				//Errors
-				writeRaw("Errors:\n");
-				int count = 1;
-				std::string line = "\t";
-				for (logInfo linfo : m_Errors)
+				if (m_Warnings.size() > 0)
 				{
-					line = "\t";
-					std::string msg(linfo.logMessage);
-					std::string loc(linfo.codeLocation);
-					line += std::to_string(count) + ": " + msg + " @ " + loc + "\n\t\t See Log Line #: " + std::to_string(linfo.logLine) + "\n";
-					writeRaw(line.c_str());
-					count++;
+					//Warnings
+					writeRaw("Warnings:\n");
+					int count = 1;
+					std::string line = "\t";
+					for (logInfo linfo : m_Warnings)
+					{
+						line = "\t";
+						std::string msg(linfo.logMessage);
+						std::string loc(linfo.codeLocation);
+						line += std::to_string(count) + ": " + msg + " @ " + loc + "\n\t\t See Log Line #: " + std::to_string(linfo.logLine) + "\n";
+						writeRaw(line.c_str());
+						count++;
+					}
 				}
-			}
 
-			m_file.close();
-			m_Created = false;
+				if (m_Errors.size() > 0)
+				{
+					//Errors
+					writeRaw("Errors:\n");
+					int count = 1;
+					std::string line = "\t";
+					for (logInfo linfo : m_Errors)
+					{
+						line = "\t";
+						std::string msg(linfo.logMessage);
+						std::string loc(linfo.codeLocation);
+						line += std::to_string(count) + ": " + msg + " @ " + loc + "\n\t\t See Log Line #: " + std::to_string(linfo.logLine) + "\n";
+						writeRaw(line.c_str());
+						count++;
+					}
+				}
+
+				m_file.close();
+				m_Created = false;
+			}
 		}
 	}
 

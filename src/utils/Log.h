@@ -68,6 +68,9 @@ namespace MIR
 
 		//Variadic print function that works like printf but also writes the string to the log file for errors
 		static void writefEr(const char* location, const char* fmt...);
+
+		//Check if log has been created
+		inline static bool isOpen() { return m_Created; }
 	
 		static inline std::ofstream& get() { return m_file; }
 
