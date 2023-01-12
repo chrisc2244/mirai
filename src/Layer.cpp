@@ -3,8 +3,7 @@
 #include <vector>
 #include "Matrix.h"
 
-Layer::Layer() : m_numberOfNodesInLayer(0) {}
-//m_currentColumnPos(0), m_currentRowPos(0) 
+Layer::Layer() = default;
 
 //not using this yet, dunno how I wanna set this up yet, need more research
 Layer::Layer(const uint8_t numberOfNodes, const std::vector<Node>& nodes, Matrix& inputMatrix)
@@ -12,39 +11,43 @@ Layer::Layer(const uint8_t numberOfNodes, const std::vector<Node>& nodes, Matrix
 	m_vectorOfCurrentNodes = nodes;
 	m_numberOfNodesInLayer = numberOfNodes;
 	m_inputMatrix = inputMatrix;
+	m_currentWindowCol = 0;
+	m_currentWindowRow = 0;
+	m_windowPtr = nullptr;
 	
 }
 
-Layer::Layer(const Matrix& inputMatrix)
+void Layer::init(Matrix& inputMatrix)
 {
 	m_inputMatrix = inputMatrix;
-	m_numberOfNodesInLayer = 0;
-}
 
-void Layer::init()
-{
-	//create window that will be passed to nodes each iteration
-	auto* windowPointer = new double[16];
-	Matrix window(4, 4, windowPointer);
+	Matrix window(4, 4);
 	m_window = window;
+
+	//fill m_window with first window at (0,0)
+	m_inputMatrix.putSubMatrix(m_currentWindowCol, m_currentWindowRow, m_window);
+
+	/*
+	std::cout << "Layer.cpp line 39, checking Layer::m_window filled correctly (GOOD): " << std::endl;
+	Matrix::print(m_window);
+	std::cout << std::endl;
+	*/
 
 	/*
 	 * Initialize Nodes with their weights, eventually we'll need to initialize these weight matrices
-	 * with the previous epoch's data from a txt file
+	 * with the previous batch's data from a txt file
 	 */
 	Matrix weights1(4, 4, 0.25);
-	Node node1(&weights1, 1);
+	Node node1(weights1, 1);
 	m_node1 = node1;
 
 	Matrix weights2(4, 4, 0.5);
-	Node node2(&weights2, 1);
+	Node node2(weights2, 1);
 	m_node2 = node2;
 
 	Matrix weights3(4, 4, 0.75);
-	Node node3(&weights3, 1);
+	Node node3(weights3, 1);
 	m_node3 = node3;
-
-
 }
 
 
@@ -75,17 +78,41 @@ std::vector<std::vector<double>> Layer::getFullLayerInput()
 
 void Layer::convolve()
 {
+	//update window here BEFORE applying filter!!
+	m_inputMatrix;
 
+	//matrix to update
+	//std::cout << "printing m_window at ln 95, Layer.cpp: " << std::endl;
+	//Matrix::print(m_window);
+
+
+
+
+
+	m_node1.applyFilter(m_window);
+	//m_node1.printProcessedResults();
+
+	m_node2.applyFilter(m_window);
+	//m_node2.printProcessedResults();
+
+	m_node3.applyFilter(m_window);
+	//m_node3.printProcessedResults();
 }
 
-void Layer::getOutputs()
+void Layer::getOutputOfNodes()
 {
+
+
+
+	double node1Result = m_node1.getProcessedResult();
+	double node2Result = m_node2.getProcessedResult();
+	double node3Result = m_node3.getProcessedResult();
 }
 
 void Layer::step()
 {
 	convolve();
-	getOutputs();
+	getOutputOfNodes();
 }
 
 /*
@@ -105,6 +132,7 @@ void Layer::slideWindow(Matrix& inputMatrix, Matrix& windowHolder, uint8_t step,
 }
 */
 
+//processes the entire input matrix... need to do it one by one.
 void Layer::processInputMatrix(Matrix& inputMatrix) {
 	//Node m_filter and windowHolder matrix rows/cols must match or invalid argument exception will be thrown
 	//from multiplyMatrices inside applyFilter node method

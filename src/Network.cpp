@@ -1,11 +1,27 @@
 #include "Network.h"
 #include "Layer.h"
 
-Network::Network()
+
+
+Network::Network() = default;
+
+
+void Network::init(Matrix& inputMatrix)
 {
+	//layer 1 gets the input data, later layers get the previous layer's output data
+	m_inputData = inputMatrix;
+	m_Layer1.init(m_inputData);
+
+
 }
 
-void init()
+void Network::update()
 {
-	
+	m_Layer1.step();
 }
+
+Matrix& Network::getInputData()
+{
+	return m_inputData;
+}
+

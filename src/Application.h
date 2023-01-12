@@ -41,7 +41,6 @@ private:
 
     static Application* m_Instance;
 
-    Layer m_layer1;
-    Layer m_layer2;
-    Layer m_layer3;
+    Network m_network;
+    Matrix m_firstInputMatrix;
 };

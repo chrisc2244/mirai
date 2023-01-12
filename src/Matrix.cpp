@@ -57,7 +57,7 @@ Matrix::~Matrix()
 
 void Matrix::print(const Matrix& MatrixToPrint)
 {
-	for (int i = 0; i < MatrixToPrint.m_size; i++)
+	for (uint32_t i = 0; i < MatrixToPrint.m_size; i++)
 	{
 		std::cout << "[" << MatrixToPrint[i] << "]";
 		if ((i + 1) % MatrixToPrint.m_columns == 0)
@@ -71,7 +71,7 @@ std::string Matrix::toString(const Matrix& matrix)
 {
 	std::string str = "";
 
-	for (int i = 0; i < matrix.m_size; i++)
+	for (uint32_t i = 0; i < matrix.m_size; i++)
 	{
 		str.append("[");
 		str.append(std::to_string(matrix[i]));
@@ -142,7 +142,7 @@ Matrix Matrix::operator+ (const Matrix& otherMatrix) const
 	{	
 		auto* ptrToReturn = new double[m_size];
 
-		for (int i = 0; i < otherMatrix.m_size; i++)
+		for (uint32_t i = 0; i < otherMatrix.m_size; i++)
 		{
 			ptrToReturn[i] = otherMatrix[i] + (*this)[i];
 		}
@@ -159,7 +159,7 @@ Matrix Matrix::operator-(const Matrix& otherMatrix) const
 	{
 		auto* ptrToReturn = new double[m_size];
 
-		for (int i = 0; i < otherMatrix.m_size; i++)
+		for (uint32_t i = 0; i < otherMatrix.m_size; i++)
 		{
 			ptrToReturn[i] = otherMatrix[i] - (*this)[i];
 		}

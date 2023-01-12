@@ -22,21 +22,17 @@ void Application::init()
     MIR::Log::writeInfo("Application->init()", "Log created successfully");
 
 
-    //TODO: MOVE THIS STUFF INTO NETWORK
-    //image setup, doubs is image data input ready for processing/iteration
+    //image setup, firstInputMatrix is greyscale image data input ready for processing/iteration
     uint16_t width = 0;
     uint16_t height = 0;
     std::vector<unsigned char> vec = ImageWrapper::decodeImageToRGBAVector("res/images/00000001_000.png", width, height);
     std::vector<pixel> pix = ImageWrapper::convertRGBAVectorToPixelVector(vec);
     std::vector<double> doubs = ImageWrapper::convertPixelVectorToGreyscaleVector(pix);
-	Matrix firstInputMatrix(1024, 1024, doubs);
+	Matrix firstInputMatrix(1024,1024, doubs);
 
-    //initialize layer with it's nodes vector
-    Layer layer1(firstInputMatrix);
-    layer1.init();
+    m_firstInputMatrix = firstInputMatrix;
+    m_network.init(firstInputMatrix);
 
-
-    
     // Initialize Patient Handler 
 #if LOAD_PATIENTS 
     MIR::Log::writeInfo("Application->init()", "Attempting to load patient data...");
@@ -53,12 +49,16 @@ void Application::init()
     // Start the main application loop
     m_Running = true;
 }
+
+
+
+
 	
 void Application::update()
 {
 	// Update program logic here
 
-
+    m_network.update();
 
 
 

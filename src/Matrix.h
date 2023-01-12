@@ -99,6 +99,6 @@ private:
 
 	uint16_t m_rows;
 	uint16_t m_columns;
-	uint16_t m_size;
+	uint32_t m_size;
 	double* m_ptr_double;
 };

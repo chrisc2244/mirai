@@ -8,12 +8,16 @@ public:
 
 	Network();
 
+	void init(Matrix& inputMatrix);
 
-	void init();
+	Matrix& getInputData();
 
+	void update();
 
 
 private:
-	Layer m_layer;
+	uint8_t m_batchSize;
+	Matrix m_inputData;
+	Layer m_Layer1;
 	
 };

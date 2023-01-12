@@ -8,7 +8,7 @@ class Node
 
 public:
 	Node();
-	Node(Matrix* weights, int bias);
+	Node(Matrix& weights, int bias);
 
 
 	Matrix getWeights() const;
@@ -18,11 +18,16 @@ public:
 
 	void printProcessedResults();
 
+
+	void setProcessedResult(double processedResult);
+	double getProcessedResult();
+
 private:
 
 	Matrix m_filter;
 	uint8_t m_bias;
 	std::vector<double> m_processedResults;
+	double m_processedResult;
 
 
 };

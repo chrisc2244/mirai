@@ -8,10 +8,16 @@ Node::Node()
 {
 }
 
-Node::Node(Matrix* weights, int bias)
+Node::Node(Matrix& weights, int bias)
 {
-	m_filter = *weights;
+	m_filter = weights;
 	m_bias = 0;
+
+	/*
+	std::cout << "Line 14 Node.cpp checking if Node::m_filter filled correctly. GOOD" << std::endl;
+	Matrix::print(m_filter);
+	std::cout << std::endl;
+	*/
 }
 
 Matrix Node::getWeights() const
@@ -32,7 +38,21 @@ int Node::getBias() const
 
 void Node::applyFilter(Matrix& currentWindow)
 {
+	/*
+	std::cout << "testing currentWindow line 38 Node.cpp: " << std::endl;
+	Matrix::print(currentWindow);
+	std::cout << std::endl;
+
+	std::cout << "testing m_filter line 42 Node.cpp: " << std::endl;
+	Matrix::print(m_filter);
+	std::cout << std::endl;
+	*/
+
 	double valueOfFilterAtCurrentWindow = currentWindow.mutliplyMatricesIndexByIndexThenDivideBySize(m_filter);
+
+
+
+	//std::cout << "testing valueOfFilterAtCurrentWindow: Line 49 Node.cpp: " << valueOfFilterAtCurrentWindow << std::endl;
 	m_processedResults.push_back(valueOfFilterAtCurrentWindow);
 }
 
@@ -42,4 +62,14 @@ void Node::printProcessedResults()
 	{
 		std::cout << m_processedResults.at(i) << std::endl;
 	}
+}
+
+void Node::setProcessedResult(double processedResult)
+{
+	m_processedResult = processedResult;
+}
+
+double Node::getProcessedResult()
+{
+	return m_processedResult;
 }
