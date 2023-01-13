@@ -75,8 +75,8 @@ void Layer::convolve()
 {
 
 	//to update this every frame, window starts at 0,0
-	m_inputMatrix->putSubMatrix(m_currentWindowCol, m_currentWindowRow, m_window); // We are putting a submatrix of the 
-	if(m_count >= 1000000)
+	m_inputMatrix->putSubMatrix(m_currentWindowCol, m_currentWindowRow, m_window); // We are putting a submatrix of the inputMatrix into m_window J.C.
+	if(m_count % 10000 == 0 && m_count >= 50000) // Check and see what the window looks like. FOR some reason it's full of 0s after around 60k iterations
 	{
 		std::cout << m_count << ": " << std::endl;
 		Matrix::print(m_window);
