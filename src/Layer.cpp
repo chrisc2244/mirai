@@ -76,15 +76,25 @@ void Layer::convolve()
 
 	//to update this every frame, window starts at 0,0
 	m_inputMatrix->putSubMatrix(m_currentWindowCol, m_currentWindowRow, m_window); // We are putting a submatrix of the inputMatrix into m_window J.C.
+
+	/*
 	if(m_count % 10000 == 0 && m_count >= 50000) // Check and see what the window looks like. FOR some reason it's full of 0s after around 60k iterations
 	{
 		std::cout << m_count << ": " << std::endl;
 		Matrix::print(m_window);
 	}
-	
+	*/
+
+	std::cout << "Current m_count: " << m_count << ". ";
+
 	m_node1.applyFilter(m_window);
 	m_node2.applyFilter(m_window);
 	m_node3.applyFilter(m_window);
+
+	std::cout << "Last processed result from node1: " << m_node1.getProcessedResult() << std::endl;
+	std::cout << "Total processed result vector size: ";
+	m_node1.printProcessedResultsSize();
+
 
 	//TODO: scuffed af bounds checking but it works... maybe fix it later :D
 	if (m_count != 1042440)
@@ -101,7 +111,7 @@ void Layer::convolve()
 		}
 		else
 		{
-			throw std::out_of_range("m_currentWindowCol or m_currentWindowRow attempting to go out of bounds of m_window");
+			throw std::out_of_range("m_currentWindowCol or m_currentWindowRow attempting to go out of bounds of m_inputMatrix");
 		}
 		m_count++;
 	}
@@ -115,11 +125,8 @@ void Layer::getOutputOfNodes()
 	//then initialize that and fill it index by index here 
 
 	double node1Result = m_node1.getProcessedResult();
-	//std::cout << node1Result << std::endl;
 	double node2Result = m_node2.getProcessedResult();
-	//std::cout << node2Result << std::endl;
 	double node3Result = m_node3.getProcessedResult();
-	//std::cout << node3Result << std::endl;
 }
 
 void Layer::step()

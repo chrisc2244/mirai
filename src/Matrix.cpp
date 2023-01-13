@@ -104,7 +104,7 @@ double Matrix::mutliplyMatricesIndexByIndexThenDivideBySize(const Matrix& matrix
 
 Matrix Matrix::getSubMatrix(uint16_t start_row, uint16_t start_col, uint16_t window_rows, uint16_t window_cols)
 {
-	uint16_t windowSize = window_rows * window_cols;
+	uint32_t windowSize = window_rows * window_cols;
 	auto* extractedWindowValues = new double[windowSize];
 
 	int i = 0;
@@ -213,7 +213,7 @@ void Matrix::operator=(const Matrix& otherMatrix)
 	}	
 }
 
-double& Matrix::operator[](const uint16_t index) const
+double& Matrix::operator[](const uint32_t index) const
 {
 	
 	if (index >= m_size || index < 0)

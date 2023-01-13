@@ -34,7 +34,10 @@ void Application::init()
 
     m_Network.init(&m_InputMatrix);
 
+
+
     // Check matrix at elements much higher than max 16 bit int J.C
+    /*
     for (int i = 1046576; i < 1048576; i++)
     {
         std::cout << m_InputMatrix[i] << " ";
@@ -42,6 +45,9 @@ void Application::init()
             std::cout << std::endl;
     }
     std::cout << "DONE"; // It definitely has the entire image in our input matrix! J.C. This is good
+    */
+
+
 
     // Initialize Patient Handler 
 #if LOAD_PATIENTS 

@@ -67,7 +67,7 @@ public:
 	* @param columns - The column amount (width) of the matrix
 	* @param default_value - Value to place in every element of the matrix
 	*/
-	void reset(uint16_t cols, uint16_t rows, double default_value = 0.0f);
+	void reset(uint16_t cols, uint16_t rows, double default_value = 0.0);
 	
 	// Returns number of rows (height)
 	inline uint16_t getRowAmount() const { return m_rows; }
@@ -76,7 +76,7 @@ public:
 	inline uint16_t getColumnAmount() const { return m_columns;  }
 
 	// Returns the size of the matrix in elements (columns * rows)
-	inline uint16_t getSize() const { return m_size; }
+	inline uint32_t getSize() const { return m_size; }
 	
 	//multiplies two matrices together index by index
 	//ex: (matrix[1] * matrix[1]) then divide by the total sum of pixels (sum / m_size)
@@ -110,7 +110,7 @@ public:
 	Matrix operator-(const Matrix& otherMatrix) const;
 	Matrix operator*(const Matrix& otherMatrix) const;		// Dot Product
 	void operator=(const Matrix& otherMatrix);						
-	double& operator[](uint16_t index) const;			// Access element in Matrix[index]
+	double& operator[](uint32_t index) const;			// Access element in Matrix[index]
 	double& operator() (uint16_t row, uint16_t col) const;		// Access element in Matrix in (row, col) form (y, x) starting at (0,0) for first element
 
 private:

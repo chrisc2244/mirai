@@ -18,7 +18,7 @@ public:
 	void applyFilter(Matrix& currentWindow);
 	void setFilter(Matrix* weights);
 	void printProcessedResults();
-
+	void printProcessedResultsSize();
 
 	void setProcessedResult(double processedResult);
 	double getProcessedResult();
