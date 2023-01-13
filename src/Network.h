@@ -7,8 +7,11 @@ class Network
 public:
 
 	Network();
+	~Network();
 
-	void init(Matrix& inputMatrix);
+	// Init gives the network it's input matrix, inputMatrix should be heap allocated, then this class takes ownership because
+	// It's the Network's input
+	void init(Matrix* inputMatrix);
 
 	Matrix& getInputData();
 
@@ -17,7 +20,7 @@ public:
 
 private:
 	uint8_t m_batchSize;
-	Matrix m_inputData;
+	Matrix* m_inputData;
 	Layer m_Layer1;
 	
 };

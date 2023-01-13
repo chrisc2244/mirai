@@ -250,3 +250,36 @@ void Matrix::putSubMatrix(uint16_t startcol, uint16_t startrow, Matrix& destinat
 	}
 }
 
+void Matrix::setTo(const std::vector<double>& values)
+{
+	for (uint16_t r = 0; r < m_rows; r++)
+	{
+		for (uint16_t c = 0; c < m_columns; c++)
+		{
+			(*this)[c + r * m_columns] = values.at(c + r * m_columns);
+		}
+	}
+}
+
+void Matrix::reset(uint16_t cols, uint16_t rows, double default_value)
+{
+	m_rows = rows;
+	m_columns = cols;
+	m_size = rows * cols;
+
+	if (m_ptr_double != nullptr)
+		delete[] m_ptr_double;
+
+	auto* this_Matrix = new double[m_size];
+	m_ptr_double = this_Matrix;
+
+	for (uint16_t r = 0; r < rows; r++)
+	{
+		for (uint16_t c = 0; c < cols; c++)
+		{
+			this_Matrix[c + r * cols] = default_value;
+		}
+	}
+
+}
+

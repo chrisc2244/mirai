@@ -41,6 +41,6 @@ private:
 
     static Application* m_Instance;
 
-    Network m_network;
-    Matrix m_firstInputMatrix;
+    Network m_Network;
+    Matrix m_InputMatrix;
 };

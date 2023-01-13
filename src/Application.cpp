@@ -4,7 +4,8 @@
 
 Application* Application::m_Instance = nullptr;
 
-Application::Application() : m_Running(false)
+Application::Application()
+    : m_Running(false), m_InputMatrix(1024, 1024)
 {
     Application::m_Instance = this;
 }
@@ -28,10 +29,19 @@ void Application::init()
     std::vector<unsigned char> vec = ImageWrapper::decodeImageToRGBAVector("res/images/00000001_000.png", width, height);
     std::vector<pixel> pix = ImageWrapper::convertRGBAVectorToPixelVector(vec);
     std::vector<double> doubs = ImageWrapper::convertPixelVectorToGreyscaleVector(pix);
-	Matrix firstInputMatrix(1024,1024, doubs);
+	    
+    m_InputMatrix.setTo(doubs); // Fill the input matrix with the data from the image. Assuming that they are the same size
 
-    m_firstInputMatrix = firstInputMatrix;
-    m_network.init(firstInputMatrix);
+    m_Network.init(&m_InputMatrix);
+
+    // Check matrix at elements higher than max 16 bit int
+    for (int i = 1046576; i < 1048576; i++)
+    {
+        std::cout << m_InputMatrix[i] << " ";
+        if (i % 10 == 0)
+            std::cout << std::endl;
+    }
+    std::cout << "DONE";
 
     // Initialize Patient Handler 
 #if LOAD_PATIENTS 
@@ -58,10 +68,7 @@ void Application::update()
 {
 	// Update program logic here
 
-    m_network.update();
-
-
-
+    m_Network.update();
 
     // Just set running to false to close the program for now
     //quit();

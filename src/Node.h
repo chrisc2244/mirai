@@ -8,14 +8,15 @@ class Node
 
 public:
 	Node();
-	Node(Matrix& weights, int bias);
+	Node(Matrix* weights, int bias);
+	~Node();
 
 
-	Matrix getWeights() const;
+	Matrix* getWeights() const;
 	void setBias(uint8_t bias);
 	int getBias() const;
 	void applyFilter(Matrix& currentWindow);
-	void setFilter(Matrix& weights);
+	void setFilter(Matrix* weights);
 	void printProcessedResults();
 
 
@@ -24,7 +25,7 @@ public:
 
 private:
 
-	Matrix m_filter;
+	Matrix* m_filter; // Put this on the heap, give ownership to node
 	uint8_t m_bias;
 	std::vector<double> m_processedResults;
 	double m_processedResult;

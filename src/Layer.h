@@ -11,7 +11,7 @@ public:
 	Layer();
 	Layer(const uint8_t numberOfNodes, const std::vector<Node>& nodes, Matrix& inputMatrix);
 
-	void init(Matrix& inputMatrix);
+	void init(Matrix* inputMatrix, uint8_t windowCols, uint8_t windowRows); //? Give init a pointer to the Network's input matrix J.C.
 
 	//none of this block implemented yet
 	static void forwardPropagate();
@@ -25,7 +25,8 @@ public:
 
 
 
-	void processInputMatrix(Matrix& inputMatrix);
+	//void processInputMatrix(Matrix& inputMatrix);
+
 	void setNode1(const Node& node1);
 	void setNode2(const Node& node2);
 	void setNode3(const Node& node3);
@@ -48,14 +49,17 @@ private:
 
 	uint16_t m_numberOfNodesInLayer;
 	std::vector<std::vector<Matrix>> m_fullLayerOutput;
-	std::vector<std::vector<double>> m_fullLayerInput;
+	std::vector<std::vector<double>> m_fullLayerInput; //? Why is this here
 	std::vector<Node> m_vectorOfCurrentNodes;
-	Matrix m_window;
-	double* m_windowPtr;
+	
+	double* m_windowPtr; //? Why is this here
 	uint16_t m_currentWindowCol;
 	uint16_t m_currentWindowRow;
-	Matrix m_inputMatrix;
-	Node m_node1;
+
+	Matrix* m_inputMatrix; //? Input matrix should be a pointer to the matrix that we have in Network J.C.
+	Matrix m_window; //? This will be the window for the entire layer to give a pointer to for each node JC.
+
+	Node m_node1; // If we have a vector of nodes why do we need this  J.C
 	Node m_node2;
 	Node m_node3;
 

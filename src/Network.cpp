@@ -5,14 +5,17 @@
 
 Network::Network() = default;
 
+Network::~Network()
+{
+	delete m_inputData;
+}
 
-void Network::init(Matrix& inputMatrix)
+
+void Network::init(Matrix* inputMatrix)
 {
 	//layer 1 gets the input data, later layers get the previous layer's output data
 	m_inputData = inputMatrix;
-	m_Layer1.init(m_inputData);
-
-
+	m_Layer1.init(m_inputData,4, 4);
 }
 
 void Network::update()
@@ -22,6 +25,6 @@ void Network::update()
 
 Matrix& Network::getInputData()
 {
-	return m_inputData;
+	return *m_inputData;
 }
 

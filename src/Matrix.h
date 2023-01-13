@@ -50,6 +50,24 @@ public:
 	* @throws out_of_bounds exceptions if startcol, startrow, or that index + destination columns and rows is out of bounds.
 	*/
 	void putSubMatrix(uint16_t startcol, uint16_t startrow, Matrix& destination);
+
+	/**
+	* Fills the matrix with the values in values vector
+	*
+	* It will fill the entire matrix if values is greater than or equal to the number
+	* of elements in this matrix. It will NOT resize to accomadate extra data or shrink to fit
+	* a smaller data set
+	*/
+	void setTo(const std::vector<double>& values);
+
+	/**
+	* Recreates the matrix of columns x rows size, and populates it with default_value
+	*
+	* @param rows - The row amount (height) of the matrix
+	* @param columns - The column amount (width) of the matrix
+	* @param default_value - Value to place in every element of the matrix
+	*/
+	void reset(uint16_t cols, uint16_t rows, double default_value = 0.0f);
 	
 	// Returns number of rows (height)
 	inline uint16_t getRowAmount() const { return m_rows; }
