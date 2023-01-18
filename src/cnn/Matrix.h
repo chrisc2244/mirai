@@ -51,6 +51,24 @@ public:
 	*/
 	void putSubMatrix(uint16_t startcol, uint16_t startrow, Matrix& destination);
 
+	/**
+	* Fills the matrix with the values in values vector
+	*
+	* It will fill the entire matrix if values is greater than or equal to the number
+	* of elements in this matrix. It will NOT resize to accomadate extra data or shrink to fit
+	* a smaller data set
+	*/
+	void setTo(const std::vector<double>& values);
+
+	/**
+	* Recreates the matrix of columns x rows size, and populates it with default_value
+	*
+	* @param rows - The row amount (height) of the matrix
+	* @param columns - The column amount (width) of the matrix
+	* @param default_value - Value to place in every element of the matrix
+	*/
+	void reset(uint16_t cols, uint16_t rows, double default_value = 0.0f);
+	
 	// Returns number of rows (height)
 	inline uint16_t getRowAmount() const { return m_rows; }
 
@@ -59,6 +77,22 @@ public:
 
 	// Returns the size of the matrix in elements (columns * rows)
 	inline uint16_t getSize() const { return m_size; }
+	
+	//multiplies two matrices together index by index
+	//ex: (matrix[1] * matrix[1]) then divide by the total sum of pixels (sum / m_size)
+	//essentially the result of applying the filter 
+	double mutliplyMatricesIndexByIndexThenDivideBySize(const Matrix& matrixToMultiply);
+
+	//returns matrix of specified window. Remember, (0,0) is first element
+	//so getSubMatrix(3, 3, 2, 2) returns 2x2 window starting at (kinda) 4th row, 4th column
+	
+	//same as below but returns a filled vector instead of a new matrix object
+	std::vector<double> getSubMatrixVector(uint16_t start_row, uint16_t start_col, uint16_t window_rows, uint16_t window_cols);
+
+	//returns matrix of specified window. Remember, (0,0) is first element
+	//so getSubMatrix(3, 3, 2, 2) returns 2x2 window starting at (kinda) 4th row, 4th column
+	//ignore this, I want it later
+	Matrix getSubMatrix(uint16_t start_row, uint16_t start_col, uint16_t window_rows, uint16_t window_cols);
 
 	//prints values in Matrix		[0.4213][0.4213][0.4213]
 	//3x3 example, 6 values total	[0.4213][0.4213][0.4213]
@@ -74,15 +108,15 @@ public:
 	//operators
 	Matrix operator+(const Matrix& otherMatrix) const;
 	Matrix operator-(const Matrix& otherMatrix) const;
-	Matrix operator*(const Matrix& otherMatrix) const;				// Dot Product
+	Matrix operator*(const Matrix& otherMatrix) const;		// Dot Product
 	void operator=(const Matrix& otherMatrix);						
-	double& operator[](uint16_t index) const;						// Access element in Matrix[index]
-	double& operator() (uint16_t row, uint16_t col) const;			// Access element in Matrix in (row, col) form (y, x) starting at (0,0) for first element
+	double& operator[](uint32_t index) const;			// Access element in Matrix[index]
+	double& operator() (uint16_t row, uint16_t col) const;		// Access element in Matrix in (row, col) form (y, x) starting at (0,0) for first element
 
 private:
 
 	uint16_t m_rows;
 	uint16_t m_columns;
-	uint16_t m_size;
+	uint32_t m_size;
 	double* m_ptr_double;
 };
