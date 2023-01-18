@@ -110,7 +110,7 @@ public:
 	Matrix operator-(const Matrix& otherMatrix) const;
 	Matrix operator*(const Matrix& otherMatrix) const;		// Dot Product
 	void operator=(const Matrix& otherMatrix);						
-	double& operator[](uint16_t index) const;			// Access element in Matrix[index]
+	double& operator[](uint32_t index) const;			// Access element in Matrix[index]
 	double& operator() (uint16_t row, uint16_t col) const;		// Access element in Matrix in (row, col) form (y, x) starting at (0,0) for first element
 
 private:

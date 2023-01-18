@@ -213,7 +213,7 @@ void Matrix::operator=(const Matrix& otherMatrix)
 	}	
 }
 
-double& Matrix::operator[](const uint16_t index) const
+double& Matrix::operator[](const uint32_t index) const
 {
 	
 	if (index >= m_size || index < 0)
@@ -280,6 +280,5 @@ void Matrix::reset(uint16_t cols, uint16_t rows, double default_value)
 			this_Matrix[c + r * cols] = default_value;
 		}
 	}
-
 }
 

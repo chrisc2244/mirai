@@ -1,5 +1,7 @@
 #pragma once
 #include "Layer.h"
+#include "Matrix.h"
+#include <memory>
 
 class Network
 {
@@ -17,10 +19,12 @@ public:
 
 	void update();
 
+	void addLayer(std::unique_ptr<Layer> layer);
 
 private:
 	uint8_t m_batchSize;
 	Matrix* m_inputData;
-	Layer m_Layer1;
 	
+	std::vector<std::unique_ptr<Layer>> m_Layers;
+	bool isDone; // Flag for whether or not the entire layer has finished
 };

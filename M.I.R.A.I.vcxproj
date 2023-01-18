@@ -20,13 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp" />
+    <ClCompile Include="src\cnn\ConvLayer.cpp" />
+    <ClCompile Include="src\cnn\Layer.cpp" />
+    <ClCompile Include="src\cnn\Matrix.cpp" />
+    <ClCompile Include="src\cnn\Network.cpp" />
+    <ClCompile Include="src\cnn\Node.cpp" />
     <ClCompile Include="src\Image.cpp" />
     <ClCompile Include="src\ImageWrapper.cpp" />
-    <ClCompile Include="src\Layer.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Matrix.cpp" />
-    <ClCompile Include="src\Network.cpp" />
-    <ClCompile Include="src\Node.cpp" />
     <ClCompile Include="src\Patient.cpp" />
     <ClCompile Include="src\PatientHandler.cpp" />
     <ClCompile Include="src\utils\CSV_Table.cpp" />
@@ -36,12 +37,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Application.h" />
+    <ClInclude Include="src\cnn\ConvLayer.h" />
+    <ClInclude Include="src\cnn\Layer.h" />
+    <ClInclude Include="src\cnn\Matrix.h" />
+    <ClInclude Include="src\cnn\Network.h" />
+    <ClInclude Include="src\cnn\Node.h" />
     <ClInclude Include="src\Image.h" />
     <ClInclude Include="src\ImageWrapper.h" />
-    <ClInclude Include="src\Layer.h" />
-    <ClInclude Include="src\Matrix.h" />
-    <ClInclude Include="src\Network.h" />
-    <ClInclude Include="src\Node.h" />
     <ClInclude Include="src\Patient.h" />
     <ClInclude Include="src\PatientHandler.h" />
     <ClInclude Include="src\utils\CSV_Table.h" />
@@ -111,6 +113,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>

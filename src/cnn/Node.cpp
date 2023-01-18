@@ -5,20 +5,22 @@
 
 
 Node::Node()
-	: m_filter(nullptr), m_bias(0)
+	: m_filter(nullptr), m_bias(0), m_processedResult(0)
 {
 }
 
-Node::Node(Matrix* weights, int bias)
+Node::Node(Matrix* filter, int bias = 0)
+	: m_processedResult(0)
 {
-	m_filter = weights;
-	m_bias = 0;
+	m_filter = filter;
+	std::cout << filter << std::endl << m_filter << std::endl;
+	m_bias = bias;
+}
 
-	/*
-	std::cout << "Line 14 Node.cpp checking if Node::m_filter filled correctly. GOOD" << std::endl;
-	Matrix::print(m_filter);
-	std::cout << std::endl;
-	*/
+Node::Node(Matrix* filter) 
+	: m_bias(0), m_processedResult(0)
+{
+	m_filter = filter;
 }
 
 Node::~Node()
@@ -35,11 +37,6 @@ Matrix* Node::getWeights() const
 void Node::setBias(const uint8_t bias)
 {
 	m_bias = bias;
-}
-
-int Node::getBias() const
-{
-	return m_bias;
 }
 
 void Node::applyFilter(Matrix& currentWindow)

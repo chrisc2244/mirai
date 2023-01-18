@@ -25,6 +25,12 @@
     <Filter Include="Source Files\vendor">
       <UniqueIdentifier>{2f542213-50ba-46e5-84ee-a8e7d9f5c275}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\cnn">
+      <UniqueIdentifier>{e5b30a86-e276-4c97-adc9-fe2ff7ec2831}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cnn">
+      <UniqueIdentifier>{325f8fac-d0f8-41bd-befb-1d45b468a46d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -57,17 +63,20 @@
     <ClCompile Include="src\vendor\lodepng.cpp">
       <Filter>Source Files\vendor</Filter>
     </ClCompile>
-    <ClCompile Include="src\Node.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\cnn\Layer.cpp">
+      <Filter>Source Files\cnn</Filter>
     </ClCompile>
-    <ClCompile Include="src\Layer.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\cnn\Network.cpp">
+      <Filter>Source Files\cnn</Filter>
     </ClCompile>
-    <ClCompile Include="src\Matrix.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\cnn\Node.cpp">
+      <Filter>Source Files\cnn</Filter>
     </ClCompile>
-    <ClCompile Include="src\Network.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\cnn\Matrix.cpp">
+      <Filter>Source Files\cnn</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cnn\ConvLayer.cpp">
+      <Filter>Source Files\cnn</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -98,17 +107,20 @@
     <ClInclude Include="src\vendor\lodepng.h">
       <Filter>Header Files\vendor</Filter>
     </ClInclude>
-    <ClInclude Include="src\Node.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\cnn\Layer.h">
+      <Filter>Header Files\cnn</Filter>
     </ClInclude>
-    <ClInclude Include="src\Layer.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\cnn\Network.h">
+      <Filter>Header Files\cnn</Filter>
     </ClInclude>
-    <ClInclude Include="src\Matrix.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\cnn\Node.h">
+      <Filter>Header Files\cnn</Filter>
     </ClInclude>
-    <ClInclude Include="src\Network.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\cnn\Matrix.h">
+      <Filter>Header Files\cnn</Filter>
+    </ClInclude>
+    <ClInclude Include="src\cnn\ConvLayer.h">
+      <Filter>Header Files\cnn</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

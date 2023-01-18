@@ -1,4 +1,5 @@
 Log for "V.0.1" File: "mirai_log.txt"
-0.[09:09:29] INFO @ Log::Log(): Logging initialized
-1.[09:09:29] INFO @ Application->init(): Log created successfully
-2.[09:09:31] WARNING @ Application->init(): Patient Loading disabled, to renable set LOAD_PATIENTS to 1 in Application.cpp
+0.[12:16:13] INFO @ Log::Log(): Logging initialized
+1.[12:16:13] INFO @ Application->init(): Log created successfully
+2.[12:16:15] WARNING @ Application->init(): Patient Loading disabled, to renable set LOAD_PATIENTS to 1 in Application.cpp
+3.[12:16:15] INFO @ Layer::convolve(): Layer "conv_layer_1" finished processing...

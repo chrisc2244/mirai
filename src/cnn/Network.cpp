@@ -1,5 +1,4 @@
 #include "Network.h"
-#include "Layer.h"
 
 
 
@@ -15,13 +14,26 @@ void Network::init(Matrix* inputMatrix)
 {
 	//layer 1 gets the input data, later layers get the previous layer's output data
 	m_inputData = inputMatrix;
-	m_Layer1.init(m_inputData,4, 4);
 }
 
 void Network::update()
 {
-	m_Layer1.step();
+	for (std::unique_ptr<Layer>& l : m_Layers)
+	{
+		if(!l->isDone())
+			l->step();
+	}
 }
+
+void Network::addLayer(std::unique_ptr<Layer> layer)
+{
+	m_Layers.push_back(std::move(layer));
+}
+
+//void Network::addLayer(Layer* l)
+//{
+//	m_Layers.emplace_back(l);
+//}
 
 Matrix& Network::getInputData()
 {
