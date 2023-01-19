@@ -5,20 +5,19 @@
 
 
 Node::Node()
-	: m_filter(nullptr), m_bias(0), m_processedResult(0)
+	: m_filter(nullptr), m_bias(0), m_processedResult(0), m_output(nullptr)
 {
 }
 
 Node::Node(Matrix* filter, int bias = 0)
-	: m_processedResult(0)
+	: m_processedResult(0), m_output(nullptr)
 {
 	m_filter = filter;
-	std::cout << filter << std::endl << m_filter << std::endl;
 	m_bias = bias;
 }
 
 Node::Node(Matrix* filter) 
-	: m_bias(0), m_processedResult(0)
+	: m_bias(0), m_processedResult(0), m_output(nullptr)
 {
 	m_filter = filter;
 }
@@ -26,6 +25,7 @@ Node::Node(Matrix* filter)
 Node::~Node()
 {
 	delete m_filter;
+	delete m_output;
 }
 
 Matrix* Node::getWeights() const
@@ -56,6 +56,14 @@ void Node::applyFilter(Matrix& currentWindow)
 
 	//std::cout << "testing valueOfFilterAtCurrentWindow: Line 49 Node.cpp: " << valueOfFilterAtCurrentWindow << std::endl;
 	m_processedResults.push_back(valueOfFilterAtCurrentWindow);
+}
+
+void Node::applyFilter(Matrix& currentWindow, uint16_t column, uint16_t row)
+{
+	double valueOfFilterAtCurrentWindow = currentWindow.mutliplyMatricesIndexByIndexThenDivideBySize(*m_filter);
+	m_processedResult = valueOfFilterAtCurrentWindow;
+
+	(*m_output)(column, row) = m_processedResult;
 }
 
 void Node::setFilter(Matrix* weights)

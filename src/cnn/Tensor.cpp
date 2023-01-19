@@ -1,0 +1,16 @@
+#include "Tensor.h"
+
+Tensor::Tensor(uint8_t size)
+	: m_NumElements(size)
+{
+}
+
+void Tensor::addElement(const Matrix& m)
+{
+	m_Matrices.emplace_back(m);
+}
+
+void Tensor::setElement(uint8_t index, const Matrix& m)
+{
+	m_Matrices[index] = m;
+}

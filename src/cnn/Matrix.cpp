@@ -5,20 +5,37 @@
 //should probably convert this to a template
 Matrix::Matrix() : m_rows(0), m_columns(0),m_size(0), m_ptr_double(nullptr) {}
 
+Matrix::Matrix(const Matrix& m)
+{
+	m_rows = m.m_rows;
+	m_columns = m.m_columns;
+	m_size = m.m_size;
+
+	m_ptr_double = new double[m_size];
+
+	// Copy all the elements of that other matrix into this matrix
+	for (int i = 0; i < this->m_rows; i++)
+	{
+		for (int j = 0; j < m_columns; j++)
+		{
+			m_ptr_double[i * m_columns + j] = m(i, j);
+		}
+	}
+}
+
 Matrix::Matrix(const uint16_t rows, const uint16_t columns, const std::vector<double> &values)
 {
 	m_rows = rows;
 	m_columns = columns;
 	m_size = rows * columns;
 	
-	auto* this_Matrix = new double[m_size];
-	m_ptr_double = this_Matrix;
+	m_ptr_double = new double[m_size];
 
 	for (uint16_t r = 0; r < rows; r++)
 	{
 		for (uint16_t c = 0; c < columns; c++)
 		{
-			this_Matrix[c + r * columns] = values.at(c + r * columns);
+			m_ptr_double[c + r * columns] = values.at(c + r * columns);
 		}
 	}
 }

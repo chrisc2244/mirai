@@ -10,8 +10,10 @@ public:
 	ConvLayer(std::string id);
 	ConvLayer(const uint8_t numberOfNodes, const std::vector<Node>& nodes, Matrix& inputMatrix);
 
-	void init(Matrix* inputMatrix);
-		;
+	void init(Matrix* inputMatrix); // First layer only get one input matrix
+	void init(const std::vector<Matrix*>* inputMatrices); // Subsequent layers get input matrices for each node in the previous layer
+
+
 	void init(Matrix* inputMatrix, uint8_t windowCols, uint8_t windowRows); //? Give init a pointer to the Network's input matrix J.C.
 
 	void convolve();
@@ -24,7 +26,7 @@ public:
 	void forwardPropagate();
 	void backwardPropagate();
 	void applyActivationFunction();
-	std::vector<std::vector<Matrix>> getFullLayerOutput();
+
 
 	// Set Initial Vector size
 	void setNumNodes(uint16_t size);
@@ -38,8 +40,10 @@ public:
 private:
 
 	uint16_t m_numberOfNodesInLayer;
-	std::vector<std::vector<Matrix>> m_fullLayerOutput;
+	std::vector<Matrix*> m_Outputs;
 	std::vector<Node> m_Nodes;
+
+	std::vector<Matrix*>* m_inputMatrices; // Pointer to a vector of pointers to matrices
 
 	uint16_t m_currentWindowCol;
 	uint16_t m_currentWindowRow;

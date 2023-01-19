@@ -45,6 +45,15 @@ void Application::buildNetwork()
 
     // Add Layer 1 to network
     m_Network.addLayer(std::move(l1));
+
+    // Layer 2
+    std::unique_ptr<ConvLayer> l2 = std::make_unique<ConvLayer>("conv_layer_2");
+
+    Matrix* filter4 = new Matrix(3, 3, 0.25);
+    l2->addNode(filter4);
+    // Layer.init
+    l2->init(m_InputMatrix);
+    l2->setWindowSize(4, 4);
 }
 
 

@@ -31,6 +31,10 @@ void ConvLayer::init(Matrix* inputMatrix)
 	m_inputMatrix = inputMatrix; // Copy the pointer J.C.
 }
 
+void ConvLayer::init(const std::vector<Matrix*>* inputMatrices)
+{
+}
+
 
 void ConvLayer::forwardPropagate()
 {
@@ -45,11 +49,6 @@ void ConvLayer::backwardPropagate()
 void ConvLayer::applyActivationFunction()
 {
 
-}
-
-std::vector<std::vector<Matrix>> ConvLayer::getFullLayerOutput()
-{
-	return m_fullLayerOutput;
 }
 
 void ConvLayer::setNumNodes(uint16_t size)
@@ -99,7 +98,10 @@ void ConvLayer::convolve()
 
 void ConvLayer::getOutputOfNodes()
 {
+	// Get all of the outputs for the nodes and throw them in a vector of matrices
+	for (Node& n : m_Nodes) {
 
+	}
 }
 
 void ConvLayer::setWindowSize(uint8_t windowCols, uint8_t windowRows)
