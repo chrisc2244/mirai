@@ -54,6 +54,8 @@ private:
 	Matrix* m_inputMatrix; //? Input matrix should be a pointer to the matrix that we have in Network J.C.
 	TensorPtrs* m_inputTensor;
 
+	TensorPtrs* m_outputTensor;
+
 	//Tensor m_outputTensor;
 
 	Matrix m_window; //? This will be the window for the entire layer to give a pointer to for each node JC.

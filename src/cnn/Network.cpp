@@ -7,14 +7,18 @@ Network::Network() = default;
 Network::~Network()
 {
 	m_Layers.clear();
-	delete m_inputData;
+
+	for (Matrix* m : m_inputTensor->get()) {
+		delete m;
+	}
+
+	delete m_inputTensor;
 }
 
 
-void Network::init(Matrix* inputMatrix)
+void Network::init(TensorPtrs* inputTensor)
 {
-	//layer 1 gets the input data, later layers get the previous layer's output data
-	m_inputData = inputMatrix;
+	m_inputTensor = inputTensor;
 }
 
 void Network::update()
@@ -46,9 +50,4 @@ bool Network::isDone()
 //{
 //	m_Layers.emplace_back(l);
 //}
-
-Matrix& Network::getInputData()
-{
-	return *m_inputData;
-}
 

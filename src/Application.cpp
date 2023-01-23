@@ -18,8 +18,12 @@ Application::~Application()
 }
 void Application::buildNetwork()
 {
+
+    // Create a Tensor of the input matrix
+    TensorPtrs* inputTensor = new TensorPtrs(m_InputMatrix);
+
     // Get input Data
-    m_Network.init(m_InputMatrix);
+    m_Network.init(inputTensor);
 
     // Create network
     // Layer 1
@@ -41,9 +45,8 @@ void Application::buildNetwork()
 
     // Layer.init
 
-    // Create a Tensor of the input matrix
-    TensorPtrs* inputTensor = new TensorPtrs(m_InputMatrix);
-    inputTensor->addElement(new Matrix(1024, 1024, 0.2));
+    
+    //inputTensor->addElement(new Matrix(1024, 1024, 0.2));
 
     l1->init(inputTensor, 4, 4);
 

@@ -23,7 +23,8 @@ ConvLayer::ConvLayer(const uint8_t numberOfNodes, const std::vector<Node>& nodes
 ConvLayer::~ConvLayer()
 {
 	std::cout << "Delete Conv Layer";
-	delete m_inputTensor;
+	// delete m_inputTensor; Layers do NOT own their inputs
+	delete m_outputTensor; // They do own their outputs though
 }
 
 //void ConvLayer::init(Matrix* inputMatrix, uint8_t windowCols, uint8_t windowRows) // Added window columns and rows (SIZE OF THE WINDOW MATRIX) J.C
@@ -115,11 +116,11 @@ void ConvLayer::convolve()
 			// Get all the nodes outputs,
 			// Construct a matrix for each
 			// Build a tensor for it
-			TensorPtrs output(m_Nodes.size());
+			m_outputTensor = new TensorPtrs(m_Nodes.size());
 			for (Node& node : m_Nodes)
 			{
 				node.combineOutputs();
-				output.addElement(node.getOutput());
+				m_outputTensor->addElement(node.getOutput());
 			}
 			MIR::Log::writefInfo("Layer::convolve()", "Layer \"%s\" finished processing...", m_Id.c_str());
 		}

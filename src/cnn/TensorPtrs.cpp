@@ -1,5 +1,10 @@
 #include "TensorPtrs.h"
 
+TensorPtrs::TensorPtrs()
+	: m_NumElements(0)
+{
+}
+
 TensorPtrs::TensorPtrs(uint8_t size)
 	: m_NumElements(size)
 {
