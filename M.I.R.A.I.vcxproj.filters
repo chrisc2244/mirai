@@ -78,10 +78,10 @@
     <ClCompile Include="src\cnn\ConvLayer.cpp">
       <Filter>Source Files\cnn</Filter>
     </ClCompile>
-    <ClCompile Include="src\cnn\Tensor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\cnn\TensorPtrs.cpp">
+      <Filter>Source Files\cnn</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cnn\Tensor.cpp">
       <Filter>Source Files\cnn</Filter>
     </ClCompile>
   </ItemGroup>

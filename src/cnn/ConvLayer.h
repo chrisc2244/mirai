@@ -2,6 +2,7 @@
 #include "Node.h"
 #include "Layer.h"
 #include <vector>
+#include "TensorPtrs.h"
 
 class ConvLayer : virtual public Layer
 {
@@ -10,17 +11,18 @@ public:
 	ConvLayer(std::string id);
 	ConvLayer(const uint8_t numberOfNodes, const std::vector<Node>& nodes, Matrix& inputMatrix);
 
+	~ConvLayer();
+
 	void init(Matrix* inputMatrix); // First layer only get one input matrix
-	void init(const std::vector<Matrix*>* inputMatrices); // Subsequent layers get input matrices for each node in the previous layer
+	void init(TensorPtrs* inputTensor); // Subsequent layers get input matrices for each node in the previous layer
 
 
-	void init(Matrix* inputMatrix, uint8_t windowCols, uint8_t windowRows); //? Give init a pointer to the Network's input matrix J.C.
+	void init(TensorPtrs* inputTensor, uint16_t windowCols, uint16_t windowRows); //? Give init a pointer to the Network's input matrix J.C.
 
 	void convolve();
 	void step();
 	void getOutputOfNodes();
 
-	void setWindowSize(uint8_t windowCols, uint8_t windowRows);
 
 	//none of this block implemented yet
 	void forwardPropagate();
@@ -40,7 +42,6 @@ public:
 private:
 
 	uint16_t m_numberOfNodesInLayer;
-	std::vector<Matrix*> m_Outputs;
 	std::vector<Node> m_Nodes;
 
 	std::vector<Matrix*>* m_inputMatrices; // Pointer to a vector of pointers to matrices
@@ -48,11 +49,18 @@ private:
 	uint16_t m_currentWindowCol;
 	uint16_t m_currentWindowRow;
 
+	uint8_t m_currentTensor;
+
 	Matrix* m_inputMatrix; //? Input matrix should be a pointer to the matrix that we have in Network J.C.
+	TensorPtrs* m_inputTensor;
+
+	//Tensor m_outputTensor;
 
 	Matrix m_window; //? This will be the window for the entire layer to give a pointer to for each node JC.
 
 	Layer* previous;
 
 	bool m_isDone; // Flag for whether or not the layer has finished processing
+
+	void setWindowSize(uint8_t windowCols, uint8_t windowRows);
 };

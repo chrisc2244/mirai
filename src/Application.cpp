@@ -23,11 +23,11 @@ void Application::buildNetwork()
 
     // Create network
     // Layer 1
-    std::unique_ptr<ConvLayer> l1 = std::make_unique<ConvLayer>("conv_layer_1");
+    ConvLayer* l1 = new ConvLayer("conv_layer_1");
     l1->setNumNodes(3);
 
     // Node 1
-    Matrix* filter = new Matrix(4, 4);
+    Matrix* filter = new Matrix(4, 4, 0.6);
 
     // Node 2
     Matrix* filter2 = new Matrix(4, 4, 0.1);
@@ -40,20 +40,15 @@ void Application::buildNetwork()
     l1->addNode(filter3);
 
     // Layer.init
-    l1->init(m_InputMatrix);
-    l1->setWindowSize(4, 4);
+
+    // Create a Tensor of the input matrix
+    TensorPtrs* inputTensor = new TensorPtrs(m_InputMatrix);
+    inputTensor->addElement(new Matrix(1024, 1024, 0.2));
+
+    l1->init(inputTensor, 4, 4);
 
     // Add Layer 1 to network
     m_Network.addLayer(std::move(l1));
-
-    // Layer 2
-    std::unique_ptr<ConvLayer> l2 = std::make_unique<ConvLayer>("conv_layer_2");
-
-    Matrix* filter4 = new Matrix(3, 3, 0.25);
-    l2->addNode(filter4);
-    // Layer.init
-    l2->init(m_InputMatrix);
-    l2->setWindowSize(4, 4);
 }
 
 
@@ -72,16 +67,6 @@ void Application::init()
     std::vector<double> doubs = ImageWrapper::convertPixelVectorToGreyscaleVector(pix);
 
     m_InputMatrix = new Matrix(1024, 1024, doubs);
-    
-
-    // Check matrix at elements much higher than max 16 bit int J.C
-    for (int i = 1046576; i < 1048576; i++)
-    {
-        std::cout << (*m_InputMatrix)[i] << " ";
-        if (i % 10 == 0)
-            std::cout << std::endl;
-    }
-    std::cout << "DONE"; // It definitely has the entire image in our input matrix! J.C. This is good
 
     // Initialize Patient Handler 
 #if LOAD_PATIENTS 
@@ -111,6 +96,10 @@ void Application::update()
 	// Update program logic here
 
     m_Network.update();
+    if (m_Network.isDone())
+    {
+        quit();
+    }
 
     // Just set running to false to close the program for now
     //quit();

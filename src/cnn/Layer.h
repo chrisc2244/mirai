@@ -1,6 +1,7 @@
 #pragma once
 #include "Node.h"
 #include <vector>
+#include "TensorPtrs.h"
 
 
 class Layer
@@ -8,8 +9,6 @@ class Layer
 public:
 
 	Layer(std::string id = "");
-
-	virtual void init(Matrix* inputMatrix) = 0;
 
 	virtual void step() = 0;
 

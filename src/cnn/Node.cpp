@@ -5,19 +5,19 @@
 
 
 Node::Node()
-	: m_filter(nullptr), m_bias(0), m_processedResult(0), m_output(nullptr)
+	: m_filter(nullptr), m_bias(0), m_processedResult(0), m_Outputs(nullptr)
 {
 }
 
 Node::Node(Matrix* filter, int bias = 0)
-	: m_processedResult(0), m_output(nullptr)
+	: m_processedResult(0), m_Outputs(nullptr)
 {
 	m_filter = filter;
 	m_bias = bias;
 }
 
 Node::Node(Matrix* filter) 
-	: m_bias(0), m_processedResult(0), m_output(nullptr)
+	: m_bias(0), m_processedResult(0), m_Outputs(nullptr)
 {
 	m_filter = filter;
 }
@@ -25,7 +25,8 @@ Node::Node(Matrix* filter)
 Node::~Node()
 {
 	delete m_filter;
-	delete m_output;
+	delete m_Outputs;
+	delete m_CombinedOutput;
 }
 
 Matrix* Node::getWeights() const
@@ -39,52 +40,62 @@ void Node::setBias(const uint8_t bias)
 	m_bias = bias;
 }
 
-void Node::applyFilter(Matrix& currentWindow)
-{
-	/*
-	std::cout << "testing currentWindow line 38 Node.cpp: " << std::endl;
-	Matrix::print(currentWindow);
-	std::cout << std::endl;
-
-	std::cout << "testing m_filter line 42 Node.cpp: " << std::endl;
-	Matrix::print(m_filter);
-	std::cout << std::endl;
-	*/
-
-	double valueOfFilterAtCurrentWindow = currentWindow.mutliplyMatricesIndexByIndexThenDivideBySize(*m_filter);
-	m_processedResult = valueOfFilterAtCurrentWindow;
-
-	//std::cout << "testing valueOfFilterAtCurrentWindow: Line 49 Node.cpp: " << valueOfFilterAtCurrentWindow << std::endl;
-	m_processedResults.push_back(valueOfFilterAtCurrentWindow);
-}
-
-void Node::applyFilter(Matrix& currentWindow, uint16_t column, uint16_t row)
-{
-	double valueOfFilterAtCurrentWindow = currentWindow.mutliplyMatricesIndexByIndexThenDivideBySize(*m_filter);
-	m_processedResult = valueOfFilterAtCurrentWindow;
-
-	(*m_output)(column, row) = m_processedResult;
-}
-
 void Node::setFilter(Matrix* weights)
 {
 	m_filter = weights;
 }
 
-void Node::printProcessedResults()
-{
-	for (int i = 0; i < m_processedResults.size(); i++)
-	{
-		std::cout << m_processedResults.at(i) << std::endl;
-	}
-}
-
-void Node::setProcessedResult(double processedResult)
-{
-	m_processedResult = processedResult;
-}
-
 double Node::getProcessedResult()
 {
 	return m_processedResult;
+}
+
+void Node::initOutputs(uint16_t amount, uint16_t rows, uint16_t cols)
+{
+	m_Outputs = new Tensor(amount);
+
+	// Add amount number of matrices of cols x rows size to the tensor
+	for (uint16_t i = 0; i < amount; i++)
+	{
+		m_Outputs->addElement(Matrix(rows, cols));
+	}
+}
+
+void Node::applyFilter(Matrix& currentWindow, uint16_t currentInput, uint16_t column, uint16_t row)
+{
+	double valueOfFilterAtCurrentWindow = currentWindow.mutliplyMatricesIndexByIndexThenDivideBySize(*m_filter);
+	m_processedResult = valueOfFilterAtCurrentWindow;
+	(*(*m_Outputs)[currentInput])(row, column) = m_processedResult;
+}
+
+void Node::combineOutputs()
+{
+
+	uint16_t rows = m_Outputs->getElement(0)->getRowAmount();
+	uint16_t cols = m_Outputs->getElement(0)->getColumnAmount();
+
+	uint8_t size = m_Outputs->size();
+
+	m_CombinedOutput = new Matrix(rows, cols);
+
+	// Sum of the values in each output matrix
+	double elementSum = 0.0f;
+
+	// Loop through every element in matrix 
+	for (uint16_t r = 0; r < rows; r++)
+	{
+		for (uint16_t c = 0; c < cols; c++)
+		{
+			elementSum = 0.0f;
+			// Loop through each vector and keep track of
+			for (Matrix& m : m_Outputs->get())
+			{
+				elementSum += m(r, c);
+			}
+			elementSum /= size;
+
+			(*m_CombinedOutput)(r, c) = elementSum;
+		}
+	}
+
 }
