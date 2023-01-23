@@ -19,14 +19,16 @@ Network::~Network()
 void Network::init(TensorPtrs* inputTensor)
 {
 	m_inputTensor = inputTensor;
+	m_currentLayerIndex = 0;
 }
 
 void Network::update()
 {
-	for (Layer* l : m_Layers)
+	if (m_currentLayerIndex < m_Layers.size())
 	{
-		if(!l->isDone())
-			l->step();
+		m_Layers[m_currentLayerIndex]->step();
+		if (m_Layers[m_currentLayerIndex]->isDone())
+			m_currentLayerIndex++;
 	}
 }
 

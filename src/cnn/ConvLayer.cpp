@@ -43,12 +43,13 @@ void ConvLayer::init(TensorPtrs* inputTensor, uint16_t windowCols, uint16_t wind
 	m_inputTensor = inputTensor; // Copy the pointer J.C.
 	setWindowSize(windowCols, windowRows);
 	// Initialize all de nodes to the proper output matrix size
-	uint16_t outCols = inputTensor->getElement(0)->getColumnAmount() - windowCols + 1;
-	uint16_t outRows = inputTensor->getElement(0)->getRowAmount() - windowRows + 1;
+	uint16_t outCols = inputTensor->getMatrixColumns() - windowCols + 1;
+	uint16_t outRows = inputTensor->getMatrixRows() - windowRows + 1;
 	for (Node& n : m_Nodes)
 	{
 		n.initOutputs(inputTensor->size(), outRows, outCols);
 	}
+	m_outputTensor->setMatrixSize(outRows, outCols);
 }
 
 
@@ -70,11 +71,29 @@ void ConvLayer::applyActivationFunction()
 void ConvLayer::setNumNodes(uint16_t size)
 {
 	m_Nodes.reserve(size);
+	m_outputTensor = new TensorPtrs(size);
+	// Temporarily fill the Tensor with matrices of the correct size
+	
 }
 
 void ConvLayer::addNode(Matrix* filter, int bias)
 {
 	m_Nodes.emplace_back(filter, bias); // This will add a COPY of the node
+}
+
+void ConvLayer::finishUp()
+{
+	m_isDone = true;
+	// Get all the nodes outputs,
+	// Construct a matrix for each
+	// Build a tensor for it
+	m_outputTensor->resetSize(0);
+	for (Node& node : m_Nodes)
+	{
+		node.combineOutputs();
+		m_outputTensor->addElement(node.getOutput());
+	}
+	MIR::Log::writefInfo("Layer::convolve()", "Layer \"%s\" finished processing...", m_Id.c_str());
 }
 
 
@@ -104,34 +123,17 @@ void ConvLayer::convolve()
 			m_currentWindowCol = 0;
 			m_currentWindowRow++;
 		}
-		else if (m_currentTensor < (*m_inputTensor).size()-1)
+		else if (m_currentTensor < (*m_inputTensor).size())
 		{
 			m_currentTensor++;
 			m_currentWindowCol = 0;
 			m_currentWindowRow = 0;
-		}
-		else
-		{
-			m_isDone = true;
-			// Get all the nodes outputs,
-			// Construct a matrix for each
-			// Build a tensor for it
-			m_outputTensor = new TensorPtrs(m_Nodes.size());
-			for (Node& node : m_Nodes)
+
+			if (m_currentTensor == (*m_inputTensor).size())
 			{
-				node.combineOutputs();
-				m_outputTensor->addElement(node.getOutput());
+				finishUp();
 			}
-			MIR::Log::writefInfo("Layer::convolve()", "Layer \"%s\" finished processing...", m_Id.c_str());
 		}
-	}
-}
-
-void ConvLayer::getOutputOfNodes()
-{
-	// Get all of the outputs for the nodes and throw them in a vector of matrices
-	for (Node& n : m_Nodes) {
-
 	}
 }
 
@@ -143,5 +145,4 @@ void ConvLayer::setWindowSize(uint8_t windowCols, uint8_t windowRows)
 void ConvLayer::step()
 {
 	convolve();
-	getOutputOfNodes();
 }

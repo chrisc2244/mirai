@@ -21,8 +21,8 @@ public:
 
 	void convolve();
 	void step();
-	void getOutputOfNodes();
-
+	
+	inline TensorPtrs* getOutput() const { return m_outputTensor; }
 
 	//none of this block implemented yet
 	void forwardPropagate();
@@ -35,6 +35,8 @@ public:
 
 	// Add Node
 	void addNode(Matrix* filter, int bias = 0);
+
+	void finishUp();
 
 	// Returns trus if layer is done processing
 	inline bool isDone() { return m_isDone; }

@@ -23,6 +23,8 @@ public:
 	bool isDone();
 
 private:
+	uint8_t m_currentLayerIndex;
+
 	uint8_t m_batchSize;
 	TensorPtrs* m_inputTensor;
 	

@@ -52,6 +52,26 @@ void Application::buildNetwork()
 
     // Add Layer 1 to network
     m_Network.addLayer(std::move(l1));
+
+    // Layer 2
+    ConvLayer* l2 = new ConvLayer("conv_layer_2");
+    l2->setNumNodes(2);
+
+    // Node 1
+    Matrix* filter4 = new Matrix(3, 3, 1.5);
+
+    // Node 2
+    Matrix* filter5 = new Matrix(3, 3, 1.2);
+
+
+    l2->addNode(filter4);
+    l2->addNode(filter5);
+
+
+    l2->init(l1->getOutput(), 3, 3);
+
+    // Add Layer 2 to network
+    m_Network.addLayer(std::move(l2));
 }
 
 
