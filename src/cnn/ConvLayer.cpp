@@ -5,46 +5,35 @@
 #include "../utils/Log.h"
 
 ConvLayer::ConvLayer(std::string id)
-	: m_numberOfNodesInLayer(0), m_currentWindowCol(0), m_currentWindowRow(0), m_inputMatrix(nullptr), m_isDone(false), Layer(id)
+	: m_numberOfNodesInLayer(0), m_currentWindowCol(0), m_currentWindowRow(0), m_inputMatrix(nullptr), m_isDone(false), Layer(id),
+	  m_currentTensor(0), m_inputMatrices(nullptr), m_inputTensor(nullptr), m_outputTensor(nullptr)
 {
+
 };
-
-//not using this yet, dunno how I wanna set this up yet, need more research
-ConvLayer::ConvLayer(const uint8_t numberOfNodes, const std::vector<Node>& nodes, Matrix& inputMatrix)
-{
-	m_Nodes = nodes;
-	m_numberOfNodesInLayer = numberOfNodes;
-	m_inputMatrix = &inputMatrix; // Changed this to address of input matrix J.C.
-	m_currentWindowCol = 0;
-	m_currentWindowRow = 0;
-
-}
 
 ConvLayer::~ConvLayer()
 {
-	std::cout << "Delete Conv Layer";
-	// delete m_inputTensor; Layers do NOT own their inputs
+	/*
+		delete m_inputTensor; 
+		Layers do NOT own their inputs 
+		(Network owns initial input, and previous layer owns every subsequent layer's input)
+	*/
+
 	delete m_outputTensor; // They do own their outputs though
 }
 
-//void ConvLayer::init(Matrix* inputMatrix, uint8_t windowCols, uint8_t windowRows) // Added window columns and rows (SIZE OF THE WINDOW MATRIX) J.C
-//{
-//	m_inputMatrix = inputMatrix; // Copy the pointer J.C.
-//	m_window.reset(windowCols, windowRows);
-//}
-
 void ConvLayer::init(Matrix* inputMatrix)
 {
-	m_inputMatrix = inputMatrix; // Copy the pointer J.C.
+	m_inputMatrix = inputMatrix;
 }
 
-void ConvLayer::init(TensorPtrs* inputTensor, uint16_t windowCols, uint16_t windowRows)
+void ConvLayer::init(TensorPtrs* inputTensor, uint8_t windowCols, uint8_t windowRows)
 {
-	m_inputTensor = inputTensor; // Copy the pointer J.C.
+	m_inputTensor = inputTensor;
 	setWindowSize(windowCols, windowRows);
 	// Initialize all de nodes to the proper output matrix size
-	uint16_t outCols = inputTensor->getMatrixColumns() - windowCols + 1;
-	uint16_t outRows = inputTensor->getMatrixRows() - windowRows + 1;
+	uint16_t outCols = inputTensor->getMatrixColumns() - windowCols;
+	uint16_t outRows = inputTensor->getMatrixRows() - windowRows;
 	for (Node& n : m_Nodes)
 	{
 		n.initOutputs(inputTensor->size(), outRows, outCols);
@@ -68,7 +57,7 @@ void ConvLayer::applyActivationFunction()
 
 }
 
-void ConvLayer::setNumNodes(uint16_t size)
+void ConvLayer::setNumNodes(uint8_t size)
 {
 	m_Nodes.reserve(size);
 	m_outputTensor = new TensorPtrs(size);
@@ -104,21 +93,17 @@ void ConvLayer::convolve()
 	{
 		//to update this every frame, window starts at 0,0
 		(*m_inputTensor)[m_currentTensor]->putSubMatrix(m_currentWindowCol, m_currentWindowRow, m_window); // We are putting a submatrix of the inputMatrix into m_window J.C.
-		//Matrix::print(m_window);
 
 		for (Node& node : m_Nodes)
 		{
 			node.applyFilter(m_window, m_currentTensor, m_currentWindowCol, m_currentWindowRow);
 		}
 
-		//TODO: scuffed af bounds checking but it works... maybe fix it later :D
-
-		if (m_currentWindowCol < (*m_inputTensor)[m_currentTensor]->getColumnAmount() - m_window.getColumnAmount())
+		if (m_currentWindowCol < (*m_inputTensor)[m_currentTensor]->getColumnAmount() - m_window.getColumnAmount()-1)
 		{
 			m_currentWindowCol++;
-
 		}
-		else if (m_currentWindowRow < (*m_inputTensor)[m_currentTensor]->getRowAmount() - m_window.getRowAmount())
+		else if (m_currentWindowRow < (*m_inputTensor)[m_currentTensor]->getRowAmount() - m_window.getRowAmount()-1)
 		{
 			m_currentWindowCol = 0;
 			m_currentWindowRow++;

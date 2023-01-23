@@ -30,4 +30,5 @@ private:
 	
 	std::vector<Layer*> m_Layers;
 	bool m_isDone; // Flag for whether or not the entire layer has finished
+	bool m_Started;
 };

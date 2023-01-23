@@ -6,7 +6,7 @@
 Application* Application::m_Instance = nullptr;
 
 Application::Application()
-    : m_Running(false)
+    : m_Running(false), m_InputMatrix(nullptr)
 {
     Application::m_Instance = this;
 }
@@ -44,10 +44,6 @@ void Application::buildNetwork()
     l1->addNode(filter3);
 
     // Layer.init
-
-    
-    //inputTensor->addElement(new Matrix(1024, 1024, 0.2));
-
     l1->init(inputTensor, 4, 4);
 
     // Add Layer 1 to network
@@ -62,16 +58,26 @@ void Application::buildNetwork()
 
     // Node 2
     Matrix* filter5 = new Matrix(3, 3, 1.2);
-
-
     l2->addNode(filter4);
     l2->addNode(filter5);
-
 
     l2->init(l1->getOutput(), 3, 3);
 
     // Add Layer 2 to network
     m_Network.addLayer(std::move(l2));
+
+    // Layer 3
+    ConvLayer* l3 = new ConvLayer("conv_layer_3");
+    l3->setNumNodes(1);
+
+    // Node 1
+    Matrix* filter6 = new Matrix(3, 3, 2.0);
+    l3->addNode(filter6);
+
+    l3->init(l2->getOutput(), 3, 3);
+
+    // Add Layer 3 to network
+    m_Network.addLayer(std::move(l3));
 }
 
 

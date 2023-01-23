@@ -15,10 +15,9 @@ public:
 	// Returns trus if layer is done processing
 	virtual bool isDone() = 0;
 
-protected:
+	inline const char* getId() const { return m_Id.c_str(); }
 
-	std::vector<Node> m_Nodes;
-	Layer* m_Previous;
+protected:
 	bool m_isDone; // Flag for whether or not the layer has finished processing
 
 	std::string m_Id;

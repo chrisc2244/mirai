@@ -9,7 +9,6 @@ class ConvLayer : virtual public Layer
 public:
 
 	ConvLayer(std::string id);
-	ConvLayer(const uint8_t numberOfNodes, const std::vector<Node>& nodes, Matrix& inputMatrix);
 
 	~ConvLayer();
 
@@ -17,7 +16,7 @@ public:
 	void init(TensorPtrs* inputTensor); // Subsequent layers get input matrices for each node in the previous layer
 
 
-	void init(TensorPtrs* inputTensor, uint16_t windowCols, uint16_t windowRows); //? Give init a pointer to the Network's input matrix J.C.
+	void init(TensorPtrs* inputTensor, uint8_t windowCols, uint8_t windowRows); //? Give init a pointer to the Network's input matrix J.C.
 
 	void convolve();
 	void step();
@@ -31,7 +30,7 @@ public:
 
 
 	// Set Initial Vector size
-	void setNumNodes(uint16_t size);
+	void setNumNodes(uint8_t size);
 
 	// Add Node
 	void addNode(Matrix* filter, int bias = 0);
@@ -61,8 +60,6 @@ private:
 	//Tensor m_outputTensor;
 
 	Matrix m_window; //? This will be the window for the entire layer to give a pointer to for each node JC.
-
-	Layer* previous;
 
 	bool m_isDone; // Flag for whether or not the layer has finished processing
 
