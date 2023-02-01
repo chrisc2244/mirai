@@ -40,6 +40,18 @@ public:
 	*/
 	Matrix(const uint16_t rows, const uint16_t columns, double default_value = 0);
 
+
+	/**
+	* Creates a matrix of columns x rows size, and populates it with default_value
+	* If random is set to false, it will populate the matrix with the low bound value
+	* @param rows - The row amount (height) of the matrix
+	* @param columns - The column amount (width) of the matrix
+	* @param random - Flag to populate the with random values between low and high
+	* @param low - Minimum value for the random value  (INCLUSIVE)
+	* @param high - Maximum value for the random value (INCLUSIVE)
+	*/
+	Matrix(const uint16_t rows, const uint16_t columns, bool random, float low = 0.0f, float high = 1.0f);
+
 	~Matrix();
 
 	/**

@@ -1,6 +1,6 @@
 #include "Matrix.h"
 #include <iostream>
-
+#include <random>
 
 //should probably convert this to a template
 Matrix::Matrix() : m_rows(0), m_columns(0),m_size(0), m_ptr_double(nullptr) {}
@@ -66,6 +66,34 @@ Matrix::Matrix(const uint16_t rows, const uint16_t columns, double default_value
 	}
 }
 
+
+Matrix::Matrix(const uint16_t rows, const uint16_t columns, bool random, float low, float high)
+{
+	m_rows = rows;
+	m_columns = columns;
+	m_size = rows * columns;
+
+	auto* this_Matrix = new double[m_size];
+	m_ptr_double = this_Matrix;
+
+	std::random_device rd;
+	std::mt19937 mt(rd());
+	std::uniform_real_distribution<float> dist(low, high + 0.0000001); // + 0.00000001 for inclusive upper bound
+	bool one_hit = false;
+	for (uint16_t r = 0; r < rows; r++)
+	{
+		for (uint16_t c = 0; c < columns; c++)
+		{
+			if(!random)
+				this_Matrix[c + r * columns] = low;
+			else
+			{
+				// Give it a random
+				this_Matrix[c + r * columns] = dist(rd);
+			}
+		}
+	}
+}
 
 Matrix::~Matrix()
 {

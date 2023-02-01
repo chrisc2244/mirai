@@ -30,14 +30,17 @@ void Application::buildNetwork()
     ConvLayer* l1 = new ConvLayer("conv_layer_1");
     l1->setNumNodes(3);
 
-    // Node 1
-    Matrix* filter = new Matrix(4, 4, 0.6);
+    // Node 1 random values between 0.0f and 1.0f
+    Matrix* filter = new Matrix(4, 4, true, 0.0f, 1.0f);
+    MIR::Log::writefInfo("Application:buildNetwork()", "Node 1 Random Weights: \n\n%s", Matrix::toString(*filter).c_str());
 
-    // Node 2
-    Matrix* filter2 = new Matrix(4, 4, 0.1);
+    // Node 2 random values between 0.0f and 1.0f
+    Matrix* filter2 = new Matrix(4, 4, true, 0.0f, 1.0f);
+    MIR::Log::writefInfo("Application:buildNetwork()", "Node 2 Random Weights: \n\n%s", Matrix::toString(*filter).c_str());
 
-    // Node 3
-    Matrix* filter3 = new Matrix(4, 4, 0.4);
+    // Node 3 random values between 0.0f and 1.0f
+    Matrix* filter3 = new Matrix(4, 4, true, 0.0f, 1.0f);
+    MIR::Log::writefInfo("Application:buildNetwork()", "Node 3 Random Weights: \n\n%s", Matrix::toString(*filter).c_str());
 
     l1->addNode(filter);
     l1->addNode(filter2);
