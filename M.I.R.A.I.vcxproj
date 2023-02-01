@@ -25,6 +25,8 @@
     <ClCompile Include="src\cnn\Matrix.cpp" />
     <ClCompile Include="src\cnn\Network.cpp" />
     <ClCompile Include="src\cnn\Node.cpp" />
+    <ClCompile Include="src\cnn\Tensor.cpp" />
+    <ClCompile Include="src\cnn\TensorPtrs.cpp" />
     <ClCompile Include="src\Image.cpp" />
     <ClCompile Include="src\ImageWrapper.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -42,6 +44,8 @@
     <ClInclude Include="src\cnn\Matrix.h" />
     <ClInclude Include="src\cnn\Network.h" />
     <ClInclude Include="src\cnn\Node.h" />
+    <ClInclude Include="src\cnn\Tensor.h" />
+    <ClInclude Include="src\cnn\TensorPtrs.h" />
     <ClInclude Include="src\Image.h" />
     <ClInclude Include="src\ImageWrapper.h" />
     <ClInclude Include="src\Patient.h" />

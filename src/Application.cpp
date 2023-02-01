@@ -6,7 +6,7 @@
 Application* Application::m_Instance = nullptr;
 
 Application::Application()
-    : m_Running(false)
+    : m_Running(false), m_InputMatrix(nullptr)
 {
     Application::m_Instance = this;
 }
@@ -18,16 +18,20 @@ Application::~Application()
 }
 void Application::buildNetwork()
 {
+
+    // Create a Tensor of the input matrix
+    TensorPtrs* inputTensor = new TensorPtrs(m_InputMatrix);
+
     // Get input Data
-    m_Network.init(m_InputMatrix);
+    m_Network.init(inputTensor);
 
     // Create network
     // Layer 1
-    std::unique_ptr<ConvLayer> l1 = std::make_unique<ConvLayer>("conv_layer_1");
+    ConvLayer* l1 = new ConvLayer("conv_layer_1");
     l1->setNumNodes(3);
 
     // Node 1
-    Matrix* filter = new Matrix(4, 4);
+    Matrix* filter = new Matrix(4, 4, 0.6);
 
     // Node 2
     Matrix* filter2 = new Matrix(4, 4, 0.1);
@@ -40,11 +44,40 @@ void Application::buildNetwork()
     l1->addNode(filter3);
 
     // Layer.init
-    l1->init(m_InputMatrix);
-    l1->setWindowSize(4, 4);
+    l1->init(inputTensor, 4, 4);
 
     // Add Layer 1 to network
     m_Network.addLayer(std::move(l1));
+
+    // Layer 2
+    ConvLayer* l2 = new ConvLayer("conv_layer_2");
+    l2->setNumNodes(2);
+
+    // Node 1
+    Matrix* filter4 = new Matrix(3, 3, 1.5);
+
+    // Node 2
+    Matrix* filter5 = new Matrix(3, 3, 1.2);
+    l2->addNode(filter4);
+    l2->addNode(filter5);
+
+    l2->init(l1->getOutput(), 3, 3);
+
+    // Add Layer 2 to network
+    m_Network.addLayer(std::move(l2));
+
+    // Layer 3
+    ConvLayer* l3 = new ConvLayer("conv_layer_3");
+    l3->setNumNodes(1);
+
+    // Node 1
+    Matrix* filter6 = new Matrix(3, 3, 2.0);
+    l3->addNode(filter6);
+
+    l3->init(l2->getOutput(), 3, 3);
+
+    // Add Layer 3 to network
+    m_Network.addLayer(std::move(l3));
 }
 
 
@@ -63,16 +96,6 @@ void Application::init()
     std::vector<double> doubs = ImageWrapper::convertPixelVectorToGreyscaleVector(pix);
 
     m_InputMatrix = new Matrix(1024, 1024, doubs);
-    
-
-    // Check matrix at elements much higher than max 16 bit int J.C
-    for (int i = 1046576; i < 1048576; i++)
-    {
-        std::cout << (*m_InputMatrix)[i] << " ";
-        if (i % 10 == 0)
-            std::cout << std::endl;
-    }
-    std::cout << "DONE"; // It definitely has the entire image in our input matrix! J.C. This is good
 
     // Initialize Patient Handler 
 #if LOAD_PATIENTS 
@@ -102,6 +125,10 @@ void Application::update()
 	// Update program logic here
 
     m_Network.update();
+    if (m_Network.isDone())
+    {
+        quit();
+    }
 
     // Just set running to false to close the program for now
     //quit();

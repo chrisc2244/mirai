@@ -10,6 +10,9 @@ public:
 	//constructors
 	Matrix();
 
+	// Copy Constructor
+	Matrix(const Matrix& m);
+
 	/**
 	* Creates a matrix of columns x rows size, and populates it with values from a vector
 	*
