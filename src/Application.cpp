@@ -32,15 +32,15 @@ void Application::buildNetwork()
 
     // Node 1 random values between 0.0f and 1.0f
     Matrix* filter = new Matrix(4, 4, true, 0.0f, 1.0f);
-    MIR::Log::writefInfo("Application:buildNetwork()", "Node 1 Random Weights: \n\n%s", Matrix::toString(*filter).c_str());
+    MIR::Log::writefInfo("Application::buildNetwork()", "Node 1 Random Weights: \n\n%s", Matrix::toString(*filter).c_str());
 
     // Node 2 random values between 0.0f and 1.0f
     Matrix* filter2 = new Matrix(4, 4, true, 0.0f, 1.0f);
-    MIR::Log::writefInfo("Application:buildNetwork()", "Node 2 Random Weights: \n\n%s", Matrix::toString(*filter).c_str());
+    MIR::Log::writefInfo("Application::buildNetwork()", "Node 2 Random Weights: \n\n%s", Matrix::toString(*filter).c_str());
 
     // Node 3 random values between 0.0f and 1.0f
     Matrix* filter3 = new Matrix(4, 4, true, 0.0f, 1.0f);
-    MIR::Log::writefInfo("Application:buildNetwork()", "Node 3 Random Weights: \n\n%s", Matrix::toString(*filter).c_str());
+    MIR::Log::writefInfo("Application::buildNetwork()", "Node 3 Random Weights: \n\n%s", Matrix::toString(*filter).c_str());
 
     l1->addNode(filter);
     l1->addNode(filter2);
@@ -88,7 +88,7 @@ void Application::init()
 {
     // Create a Log
     MIR::Log::create("V.0.1", "mirai_log.txt");
-    MIR::Log::writeInfo("Application->init()", "Log created successfully");
+    MIR::Log::writeInfo("Application::init()", "Log created successfully");
 
 
     //image setup, firstInputMatrix is greyscale image data input ready for processing/iteration
@@ -102,15 +102,15 @@ void Application::init()
 
     // Initialize Patient Handler 
 #if LOAD_PATIENTS 
-    MIR::Log::writeInfo("Application->init()", "Attempting to load patient data...");
+    MIR::Log::writeInfo("Application::init()", "Attempting to load patient data...");
     // Load and Construct Patient Population:
     if (!m_PatientHandler.load("res/test-data/test.csv"))
     {
-        MIR::Log::writeEr("Application->init()", "Patient Loading failed, terminating program...");
+        MIR::Log::writeEr("Application::init()", "Patient Loading failed, terminating program...");
         exitFailure();
     }
 #else
-    MIR::Log::writeWarn("Application->init()", "Patient Loading disabled, to renable set LOAD_PATIENTS to 1 in Application.cpp");
+    MIR::Log::writeWarn("Application::init()", "Patient Loading disabled, to renable set LOAD_PATIENTS to 1 in Application.cpp");
 #endif
 
     // Start the main application loop
