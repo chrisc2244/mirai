@@ -42,7 +42,7 @@ public:
 
 
 	/**
-	* Creates a matrix of columns x rows size, and populates it with default_value
+	* Creates a matrix of columns x rows size, and populates it with random value
 	* If random is set to false, it will populate the matrix with the low bound value
 	* @param rows - The row amount (height) of the matrix
 	* @param columns - The column amount (width) of the matrix
