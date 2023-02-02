@@ -59,6 +59,7 @@ double ConvLayer::reLU(double value)
 }
 
 //fast sigmoid very close approximation. 24.1ns per calculation down to 5.5ns
+//takes values from (-oo, oo) and returns them between (-1, 1)
 double ConvLayer::sigmoid(double value)
 {
 	return value / (1 + abs(value));
