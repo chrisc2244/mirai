@@ -52,6 +52,16 @@ void ConvLayer::backwardPropagate()
 
 }
 
+double ConvLayer::reLU(double value)
+{
+	return std::max(0.0, value);
+}
+
+double ConvLayer::sigmoid()
+{
+	return 0.0;
+}
+
 void ConvLayer::applyActivationFunction()
 {
 
