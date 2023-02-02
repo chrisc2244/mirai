@@ -58,15 +58,31 @@ double ConvLayer::reLU(double value)
 	return std::max(0.0, value);
 }
 
-//fast sigmoid very close approximation. 24.1ns per calculation 5.5ns
+//fast sigmoid very close approximation. 24.1ns per calculation down to 5.5ns
 double ConvLayer::sigmoid(double value)
 {
 	return value / (1 + abs(value));
 }
 
-void ConvLayer::applyActivationFunction()
+//iterates through a matrix and reassigns each index with the new activated value
+//if no function specifies, logs an error.
+void ConvLayer::applyActivationFunction(Matrix& matrixToActivate, std::string functionType)
 {
-
+	if (functionType == "ReLU")
+	{
+		for (uint32_t i = 0; i < matrixToActivate.getSize(); i++)
+		{
+			matrixToActivate[i] = reLU(matrixToActivate[i]);
+		}
+	} else if (functionType == "Sigmoid")
+	{
+		for (uint32_t i = 0; i < matrixToActivate.getSize(); i++)
+		{
+			matrixToActivate[i] = sigmoid(matrixToActivate[i]);
+		}
+	} else {
+		MIR::Log::writeEr("applyActivationFunction()", "Activation function not specified.");
+	}
 }
 
 void ConvLayer::setNumNodes(uint8_t size)

@@ -30,7 +30,7 @@ public:
 	//activation function things
 	double static reLU(double value);
 	double static sigmoid(double value);
-	void applyActivationFunction();
+	void static applyActivationFunction(Matrix& matrixToActivate, std::string functionType);
 
 	// Set Initial Vector size
 	void setNumNodes(uint8_t size);
