@@ -52,14 +52,16 @@ void ConvLayer::backwardPropagate()
 
 }
 
+//if value is less than 0, take 0. if value greater than 0, take that value. 
 double ConvLayer::reLU(double value)
 {
 	return std::max(0.0, value);
 }
 
-double ConvLayer::sigmoid()
+//fast sigmoid very close approximation. 24.1ns per calculation 5.5ns
+double ConvLayer::sigmoid(double value)
 {
-	return 0.0;
+	return value / (1 + abs(value));
 }
 
 void ConvLayer::applyActivationFunction()

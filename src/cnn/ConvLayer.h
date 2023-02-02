@@ -29,7 +29,7 @@ public:
 
 	//activation function things
 	double static reLU(double value);
-	double static sigmoid();
+	double static sigmoid(double value);
 	void applyActivationFunction();
 
 	// Set Initial Vector size
