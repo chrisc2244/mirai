@@ -26,8 +26,11 @@ public:
 	//none of this block implemented yet
 	void forwardPropagate();
 	void backwardPropagate();
-	void applyActivationFunction();
 
+	//activation function things
+	double static reLU(double value);
+	double static sigmoid(double value);
+	void static applyActivationFunction(Matrix& matrixToActivate, std::string functionType);
 
 	// Set Initial Vector size
 	void setNumNodes(uint8_t size);
