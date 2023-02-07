@@ -81,7 +81,7 @@ void ConvLayer::applyActivationFunction(Matrix* matrixToActivate, std::string& f
 		{
 			(*matrixToActivate)[i] = sigmoid((*matrixToActivate)[i]);
 		}
-	} else {
+	} else if (functionType != "none"){
 		MIR::Log::writeEr("applyActivationFunction()", "Activation function not specified.");
 	}
 }
