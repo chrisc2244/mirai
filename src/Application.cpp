@@ -27,7 +27,7 @@ void Application::buildNetwork()
 
     // Create network
     // Layer 1
-    ConvLayer* l1 = new ConvLayer("conv_layer_1");
+    ConvLayer* l1 = new ConvLayer("conv_layer_1", "sigmoid");
     l1->setNumNodes(3);
 
     // Node 1 random values between 0.0f and 1.0f
@@ -53,7 +53,7 @@ void Application::buildNetwork()
     m_Network.addLayer(std::move(l1));
 
     // Layer 2
-    ConvLayer* l2 = new ConvLayer("conv_layer_2");
+    ConvLayer* l2 = new ConvLayer("conv_layer_2", "sigmoid");
     l2->setNumNodes(2);
 
     // Node 1
@@ -70,7 +70,7 @@ void Application::buildNetwork()
     m_Network.addLayer(std::move(l2));
 
     // Layer 3
-    ConvLayer* l3 = new ConvLayer("conv_layer_3");
+    ConvLayer* l3 = new ConvLayer("conv_layer_3", "relu");
     l3->setNumNodes(1);
 
     // Node 1
