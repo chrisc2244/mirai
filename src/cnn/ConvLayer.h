@@ -38,6 +38,8 @@ public:
 	// Add Node
 	void addNode(Matrix* filter, int bias = 0);
 
+
+	// Combines all the node's outputs into a single tensor of ptrs -> m_outputTensor
 	void finishUp();
 
 	// Returns trus if layer is done processing
