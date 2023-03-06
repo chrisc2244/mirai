@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "cnn/ConvLayer.h"
+#include "cnn/MaxPoolLayer.h"
 
 #define LOAD_PATIENTS 0 // Flag to enable (1) or disable (0) loading patient data for debugging
 
@@ -81,6 +82,12 @@ void Application::buildNetwork()
 
     // Add Layer 3 to network
     m_Network.addLayer(std::move(l3));
+
+    // Max Pooling layer
+    MaxPoolLayer* m1 = new MaxPoolLayer("max_pool_1", 2, false);
+    m1->init(l3->getOutput());
+
+    m_Network.addLayer(std::move(m1));
 }
 
 
