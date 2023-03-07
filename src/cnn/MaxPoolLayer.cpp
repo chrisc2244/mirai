@@ -53,10 +53,10 @@ void MaxPoolLayer::step()
 		{
 			uint16_t out_i = 0;
 			uint16_t out_j = 0;
-			for (uint16_t i = startC; i < outCols; i += m_stride)
+			for (uint16_t i = startC; i < cols; i += m_stride)
 			{
 				out_j = 0;
-				for (uint16_t j = startR; j < outRows; j += m_stride)
+				for (uint16_t j = startR; j < rows; j += m_stride)
 				{
 					// Get max element
 					double max = 0.0f;
@@ -82,10 +82,10 @@ void MaxPoolLayer::step()
 
 			uint16_t out_i = 0;
 			uint16_t out_j = 0;
-			for (uint16_t i = startC; i < outCols; i += m_stride)
+			for (uint16_t i = startC; i < cols; i += m_stride)
 			{
 				out_j = 0;
-				for (uint16_t j = startR; j < outRows; j += m_stride)
+				for (uint16_t j = startR; j < rows; j += m_stride)
 				{
 					// Get max element
 					double max = 0.0f;
