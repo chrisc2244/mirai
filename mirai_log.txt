@@ -1,0 +1,37 @@
+Log for "V.0.1" File: "mirai_log.txt"
+0.[20:27:05] INFO @ Log::Log(): Logging initialized
+1.[20:27:05] INFO @ Application::init(): Log created successfully
+2.[20:27:05] WARNING @ Application::init(): Patient Loading disabled, to renable set LOAD_PATIENTS to 1 in Application.cpp
+3.[20:27:05] INFO @ Application::buildNetwork(): Node 1 Random Weights: 
+
+[0.332009][0.198182][0.238339][0.976411]
+[0.122707][0.212226][0.747725][0.015200]
+[0.313568][0.080084][0.898192][0.733156]
+[0.008780][0.363272][0.364292][0.788765]
+
+4.[20:27:05] INFO @ Application::buildNetwork(): Node 2 Random Weights: 
+
+[0.332009][0.198182][0.238339][0.976411]
+[0.122707][0.212226][0.747725][0.015200]
+[0.313568][0.080084][0.898192][0.733156]
+[0.008780][0.363272][0.364292][0.788765]
+
+5.[20:27:05] INFO @ Application::buildNetwork(): Node 3 Random Weights: 
+
+[0.332009][0.198182][0.238339][0.976411]
+[0.122707][0.212226][0.747725][0.015200]
+[0.313568][0.080084][0.898192][0.733156]
+[0.008780][0.363272][0.364292][0.788765]
+
+6.[20:27:05] INFO @ Network::update(): Layer 'conv_layer_1' started processing...
+7.[20:27:07] INFO @ Layer::convolve(): Layer "conv_layer_1" finished processing...
+8.[20:27:07] INFO @ Network::update(): Layer 'conv_layer_2' started processing...
+9.[20:27:09] INFO @ Layer::convolve(): Layer "conv_layer_2" finished processing...
+10.[20:27:09] INFO @ Network::update(): Layer 'conv_layer_3' started processing...
+11.[20:27:10] INFO @ Layer::convolve(): Layer "conv_layer_3" finished processing...
+12.[20:27:10] INFO @ Network::update(): Layer 'max_pool_1' started processing...
+13.[20:27:11] INFO @ MaxPoolLayer::step(): Layer "max_pool_1" finished processing...
+Program executed with 1 warnings and 0 errors
+Warnings:
+	1: Patient Loading disabled, to renable set LOAD_PATIENTS to 1 in Application.cpp @ Application::init()
+		 See Log Line #: 2

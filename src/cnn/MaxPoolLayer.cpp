@@ -1,5 +1,6 @@
 #include "MaxPoolLayer.h"
 #include <iostream>
+#include "../utils/Log.h"
 
 MaxPoolLayer::MaxPoolLayer(const std::string& label, uint8_t stride, bool rightLoss)
 	: Layer(label), m_stride(stride), m_inputTensor(nullptr), m_outputTensor(nullptr), m_rightLoss(rightLoss), m_currentTensor(0)
@@ -93,4 +94,7 @@ void MaxPoolLayer::step()
 		}
 	}
 	m_isDone = true;
+	// #DEBUG dumps the first matrix in the output tensor to file in project root directory with name of the layer
+	Matrix::dumpToFile(m_Id+".txt", *m_outputTensor->getElement(0));
+	MIR::Log::writefInfo("MaxPoolLayer::step()", "Layer \"%s\" finished processing...", m_Id.c_str());
 }

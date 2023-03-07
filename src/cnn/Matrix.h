@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include <stdexcept>
+#include <fstream>
 class Matrix
 {
 
@@ -119,6 +120,8 @@ public:
 	* @param matrix - A reference to the matrix you want a string representation of
 	*/
 	static std::string toString(const Matrix& matrix);
+
+	static bool dumpToFile(std::string filename, const Matrix& mat);
 
 	//operators
 	Matrix operator+(const Matrix& otherMatrix) const;

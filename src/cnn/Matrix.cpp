@@ -129,6 +129,16 @@ std::string Matrix::toString(const Matrix& matrix)
 	return str;
 }
 
+bool Matrix::dumpToFile(std::string filename, const Matrix& mat)
+{
+	std::ofstream outfile(filename);
+
+	outfile << toString(mat);
+
+	outfile.close();
+	return false;
+}
+
 double Matrix::mutliplyMatricesIndexByIndexThenDivideBySize(const Matrix& matrixToMultiply)
 {
 	if (this->m_columns == matrixToMultiply.m_columns && this->m_rows == matrixToMultiply.m_rows)
