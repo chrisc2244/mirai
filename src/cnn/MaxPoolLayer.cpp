@@ -51,8 +51,11 @@ void MaxPoolLayer::step()
 		// Loop through every stride size element in the matrix
 		if (m_rightLoss) // If the data loss should be stride amount on right/bottom
 		{
+			uint16_t out_i = 0;
+			uint16_t out_j = 0;
 			for (uint16_t i = startC; i < outCols; i += m_stride)
 			{
+				out_j = 0;
 				for (uint16_t j = startR; j < outRows; j += m_stride)
 				{
 					// Get max element
@@ -65,8 +68,10 @@ void MaxPoolLayer::step()
 								max = (*m_inputTensor->getElement(m_currentTensor))(i + x, j + y);
 						}
 					}
-					(*m_outputTensor->getElement(m_currentTensor))(i, j) = max;
+					(*m_outputTensor->getElement(m_currentTensor))(out_i, out_j) = max;
+					out_j++;
 				}
+				out_i++;
 			}
 		}
 		else // If the data loss should be stride amount on left/top
@@ -74,8 +79,12 @@ void MaxPoolLayer::step()
 			// Get the starting point
 			startC = cols % m_stride;
 			startR = rows % m_stride;
+
+			uint16_t out_i = 0;
+			uint16_t out_j = 0;
 			for (uint16_t i = startC; i < outCols; i += m_stride)
 			{
+				out_j = 0;
 				for (uint16_t j = startR; j < outRows; j += m_stride)
 				{
 					// Get max element
@@ -88,8 +97,10 @@ void MaxPoolLayer::step()
 								max = (*m_inputTensor->getElement(m_currentTensor))(i + x, j + y);
 						}
 					}
-					(*m_outputTensor->getElement(m_currentTensor))(i, j) = max;
+					(*m_outputTensor->getElement(m_currentTensor))(out_i, out_j) = max;
+					out_j++;
 				}
+				out_i++;
 			}
 		}
 	}
